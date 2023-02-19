@@ -18,7 +18,6 @@ local Backpack = localplayer.Backpack
 
 --// Libraries
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Loco-CTO/UI-Library/main/VisionLibV2/source.lua'))()
---NotificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMinisterq/Notification-Library/Main/Library.lua"))()
 
 --// Supported Games
 local supportedGames = {
@@ -361,5 +360,3 @@ local Button = Section:Button({
         Library:Destroy()
     end
 })
-
-
