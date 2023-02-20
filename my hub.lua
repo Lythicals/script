@@ -127,6 +127,7 @@ if gameId == 3601201039 then --autofarm not done
     local crop = "Wheat"
     local cropPrice = 5
     local cropRenewable = false
+    local treeType = "Basic"
     local egg = "Small"
     local eggPrice = 1000
     local eggAmount = 1
@@ -295,6 +296,10 @@ if gameId == 3601201039 then --autofarm not done
         end
     end
 
+    function castRod(CFrame)
+        game:GetService("ReplicatedStorage").Items.CastFishingRodRequest:InvokeServer(CFrame)
+    end
+
     function sellAll()
         teleportTo(plotDir.Bin.SellTitle.CFrame)
         for i, v in pairs(Backpack:GetDescendants()) do
@@ -360,13 +365,16 @@ if gameId == 3601201039 then --autofarm not done
                             for i, v in pairs(v:GetDescendants()) do
                                 if v:IsA("ClickDetector") then
                                     if ForagingFarm == true then
-                                        v.Parent.CanCollide = false
-                                        v.Parent.CFrame = pCFrame
+                                        teleportTo(v.Parent.CFrame)
                                         fireclickdetector(v)
                                     end
                                 end
                             end
                         end
+                    end
+                    wait(0.1)
+                    if ForagingFarm == false then
+                        goHome()
                     end
                 end
             end
@@ -486,35 +494,67 @@ if gameId == 3601201039 then --autofarm not done
                     print("Please get a wooden axe first!")
                     FarmTrees = false
                 end
-
+                if FarmTrees == true then
+                    Humanoid:EquipTool(Backpack:FindFirstChild("Wooden Axe"))
+                end
                 while FarmTrees == true do
                     for i, v in pairs(game:GetService("Workspace").Forest.SpawnPoints:GetDescendants()) do
                         if FarmTrees then
-                            teleportTo(v.Basic.Trunk.CFrame)
-                            wait(0.1)
-                            for i = 1,5 do
-                                local args = {
-                                    [1] = v.Basic.Trunk,
-                                    [2] = {
-                                        ["description"] = "Chop Trees",
-                                        ["axe"] = true,
-                                        ["id"] = "Wooden Axe",
-                                        ["storeCategory"] = "Tools",
-                                        ["stackTag"] = "axe",
-                                        ["textureId"] = "rbxassetid://3637797344",
-                                        ["singleOnly"] = true,
-                                        ["chopStrength"] = 1,
-                                        ["buyPrice"] = 500,
-                                        ["cooldownWaitTime"] = 0.8,
-                                        ["stackable"] = false,
-                                        ["damage"] = 20
-                                    }
+                            if v:FindFirstChild(treeType) then
+                                -- This one is hard so I'm using a Hydroxide generated remote
+                                local ohInstance1 = v[treeType].Trunk
+                                local ohTable2 = {
+                                    ["description"] = "Chop Trees",
+                                    ["axe"] = true,
+                                    ["id"] = "Wooden Axe",
+                                    ["storeCategory"] = "Tools",
+                                    ["stackTag"] = "axe",
+                                    ["textureId"] = "rbxassetid://3637797344",
+                                    ["damage"] = 20,
+                                    ["chopStrength"] = 1,
+                                    ["stackable"] = false,
+                                    ["cooldownWaitTime"] = 0.8,
+                                    ["buyPrice"] = 500,
+                                    ["singleOnly"] = true
                                 }
-                                game:GetService("ReplicatedStorage"):WaitForChild("Trees"):WaitForChild("TreeHitRequest"):InvokeServer(unpack(args))
-                                wait(2)
+
+                                game:GetService("ReplicatedStorage").Trees.TreeHitRequest:InvokeServer(ohInstance1, ohTable2)
+                                wait(0.1)
                             end
                         end
                     end
+                end
+            end
+        end
+    })
+
+    local Dropdown = Section:Dropdown({
+        Name = "Tree Type", -- String
+        Items = {"Basic", "Aspen"}, -- Table
+        Callback = function(item)
+            treeType = item
+        end
+    })
+
+    local Toggle = Section:Toggle({
+        Name = "Auto Fish", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            AutoFish = Bool
+    
+            if AutoFish then
+                Humanoid:UnequipTools()
+                if Backpack:FindFirstChild("Bamboo Rod") then
+                    Humanoid:EquipTool(Backpack["Bamboo Rod"])
+                    while AutoFish == true do
+                        if char["Bamboo Rod"].Casting.Value == false then
+                            castRod(plotDir.WaterSource.CFrame)
+                        end
+                        wait(0.1)
+                    end
+                end
+                if Backpack:FindFirstChild("Bamboo Rod") == nil then
+                    print("Please get a bamboo rod first!")
                 end
             end
         end
