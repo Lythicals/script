@@ -673,7 +673,7 @@ if gameId == 3601201039 then --autofarm not done
 
 end
 
-if gameId == 10198661638 then --unfinishes
+if gameId == 10198661638 then --unfinished
     local tycoonDir = nil
     local hasTycoon = false
     for i, v in pairs(game:GetService("Workspace").Tycoon:GetChildren()) do
