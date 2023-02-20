@@ -596,7 +596,7 @@ if gameId == 3601201039 then --autofarm not done
 
     local Dropdown = Section:Dropdown({
         Name = "Tree Type", -- String
-        Items = {"Basic", "Maple", "Aspen"}, -- Table
+        Items = {"Basic", "Maple", "Aspen", "Enchanted"}, -- Table
         Callback = function(item)
             treeType = item
             if treeType == "Basic" then
