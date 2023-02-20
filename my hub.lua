@@ -28,7 +28,6 @@ local supportedGames = {
 
 --// Main 
 for i = 1, #supportedGames do
-    --if the gameId is equal to the current value in the table
     if gameId == supportedGames[i] then
         print("Game Supported!")
     end
@@ -163,6 +162,7 @@ if gameId == 3601201039 then --autofarm not done
         if amountPossible > emptySlots then
             amountPossible = emptySlots
         end
+        print("Buying " .. amountPossible .. " " .. string.lower(crop) .. " seeds")
         for i = 1, amountPossible do
             if cropPrice < gold then
                 game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
@@ -180,10 +180,12 @@ if gameId == 3601201039 then --autofarm not done
         for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
             if v:IsA("Part") then
                 if v.Occupied.Value == false then
-                    if char[crop .. " Seeds"].Amount.Value > 0 then
-                        teleportTo(v.CFrame)
-                        local cropSeeds = string.lower(crop .. "_seeds")
-                        game:GetService("ReplicatedStorage").Crops.PlantSeedRequest:InvokeServer(v, cropSeeds)
+                    if char:FindFirstChild(crop .. " Seeds") then
+                        if char[crop .. " Seeds"].Amount.Value > 0 then
+                            teleportTo(v.CFrame)
+                            local cropSeeds = string.lower(crop .. "_seeds")
+                            game:GetService("ReplicatedStorage").Crops.PlantSeedRequest:InvokeServer(v, cropSeeds)
+                        end
                     end
                 end
             end
@@ -320,17 +322,16 @@ if gameId == 3601201039 then --autofarm not done
     
             if ForagingFarm then
                 while ForagingFarm == true do
-                    for i, v in pairs(game:GetService("Workspace").Foraging.SpawnPoints:GetDescendants()) do
-                        if v:IsA("ClickDetector") then
-                            if ForagingFarm then
-                                teleportTo(v.Parent.CFrame)
-                                wait(0.1)
-                                fireclickdetector(v)
-                                wait(0.1)
-                            end
-                            if ForagingFarm == false then
-                                goHome()
-                                break
+                    for i, v in pairs(game:GetService("Workspace").Foraging.SpawnPoints:GetChildren()) do
+                        if v.Occupied.Value == true then
+                            for i, v in pairs(v:GetDescendants()) do
+                                if v:IsA("ClickDetector") then
+                                    if ForagingFarm == true then
+                                        v.Parent.CanCollide = false
+                                        v.Parent.CFrame = pCFrame
+                                        fireclickdetector(v)
+                                    end
+                                end
                             end
                         end
                     end
