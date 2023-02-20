@@ -21,10 +21,9 @@ local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Loco-
 
 --// Supported Games
 local supportedGames = {
-    10894722579, --Feed The Noob Tycoon
-    10347946161, --Rat Washing Tycoon
     6767503821, --Underground Bunker Tycoon
-    3601201039 -- Farm Life
+    3601201039, -- Farm Life
+    10198661638 -- Farm Factory Tycoon
 }
 
 --// Main 
@@ -66,73 +65,7 @@ local Section = Tab:Section({
     Name = "Main" -- String
 })
 
-if gameId == 10894722579 then
-    print("Start")
-    local tycoonDir = nil
-    local function getTycoon()
-        for i, v in pairs(game:GetService("Workspace").Tycoons:GetChildren()) do
-            if tostring(v.TycoonInfo.Owner.Value) == pName then
-                tycoonDir = v
-                print("You own tycoon " .. v.Name)
-            end
-        end
-    end
-
-    local LoopGrabFood = false
-
-    local Toggle = Section:Toggle({
-    Name = "Loop Grab Food", -- String
-    Default = false, -- Boolean
-    Callback = function(Bool)
-        LoopGrabFood = Bool
-
-        if Tycoon == nil then
-            getTycoon()
-        end
-
-        if LoopGrabFood then
-            while LoopGrabFood == true do
-                for i, v in pairs(tycoonDir.ItemDebris:GetChildren()) do
-                    v.CanCollide = false
-                    v.Position = localplayer.Character.HumanoidRootPart.Position
-                end
-                wait(1)
-            end
-        end
-    end
-    })
-end
-
-if gameId == 10347946161 then
-    TycoonName = game:GetService("ReplicatedStorage").Knit.Services.TycoonService.RF.getTycoon:InvokeServer()
-    Tycoon = game:GetService("Workspace").Tycoons[tostring(TycoonName)]
-    
-    local Toggle = Section:Toggle({
-        Name = "Loop Grab Rats",
-        Default = false,
-        Callback = function(Bool)
-            LoopGrabRats = Bool
-            if LoopGrabRats then
-                while LoopGrabRats == true do
-                    Tycoon.Rats.ChildAdded:Connect(function(child)
-                        child.Part.Position = localplayer.Character.HumanoidRootPart.Position
-                    end)
-                end
-            end
-        end
-    })
-    
-    local Button = Section:Button({
-        Name = "Grab Rats", -- String
-        Callback = function()
-            for i, v in pairs(Tycoon.Rats:GetChildren()) do
-                v.Part.Position = localplayer.Character.HumanoidRootPart.Position
-            end
-        end
-    })
-end
-
-if gameId == 6767503821 then
+if gameId == 6767503821 then --not really much tbh but works anyway
     local tycoonDir = nil
     local function getTycoon()
         if tostring(Workspace.Tycoon.Bunker1.Properties.Owner.Value) == pName then
@@ -340,6 +273,65 @@ if gameId == 3601201039 then --autofarm not done
             if equipped == false then
                 Humanoid:UnequipTools()
             end
+        end
+    })
+end
+
+if gameId == 10198661638 then
+    local tycoonDir = nil
+    local hasTycoon = false
+    for i, v in pairs(game:GetService("Workspace").Tycoon:GetChildren()) do
+        if tostring(v.Onwer.Value) == pName then
+            tycoonDir = v
+            hasTycoon = true
+            print("You own tycoon " .. tostring(tycoonDir))
+        end
+    end
+
+    if hasTycoon == false then
+        for i, v in pairs(game:GetService("Workspace").Tycoon:GetChildren()) do
+            if v.Onwer.Value == nil then
+                if hasTycoon == false then
+                    teleportTo(v.Base.Touch.CFrame)
+                    tycoonDir = v
+                    hasTycoon = true
+                end
+            end
+        end
+    end
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Offline"):WaitForChild("[S-C]TryGetFreeReward"):FireServer()
+    
+    local Toggle = Section:Toggle({
+        Name = "Spam Offline Reward (Inf Cash)", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            SpamOffline = Bool
+    
+            if SpamOffline then
+                while SpamOffline == true do
+                    game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Offline"):WaitForChild("[S-C]TryGetFreeReward"):FireServer()
+                    wait(0.1)
+                end
+            end
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Get Free Stuff", -- String
+        Callback = function()
+            for i, v in pairs(game:GetService("ReplicatedStorage").Remote.Event.RandomGift:GetDescendants()) do
+                if v:IsA("RemoteEvent") then
+                    v:FireServer()
+                end
+            end
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Teleport To Tycoon", -- String
+        Callback = function()
+            teleportTo(tycoonDir.Base.Teleport.CFrame)
         end
     })
 end
