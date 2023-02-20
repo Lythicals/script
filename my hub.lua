@@ -537,7 +537,7 @@ if gameId == 3601201039 then --autofarm not done
     })
 
     local Toggle = Section:Toggle({
-        Name = "Auto Fish", -- String
+        Name = "Auto Fish (Go Near Your Pond)", -- String
         Default = false, -- Boolean
         Callback = function(Bool)
             AutoFish = Bool
