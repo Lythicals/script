@@ -127,7 +127,9 @@ if gameId == 3601201039 then --autofarm not done
     local crop = "Wheat"
     local cropPrice = 5
     local cropRenewable = false
-    local gold = localplayer.leaderstats.Gold.Value
+    local egg = "Small"
+    local eggPrice = 1000
+    local eggAmount = 1
     local animalDir = Workspace.SpawnedAnimals[userid]
     
     function equipWateringCan()
@@ -149,7 +151,9 @@ if gameId == 3601201039 then --autofarm not done
 
     function buyPlantCrops()
         local emptySlots = 0
+        local gold = localplayer.leaderstats.Gold.Value
         local amountPossible = math.floor(gold/cropPrice)
+        local temp = false
         Humanoid:UnequipTools()
         for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
             if v:IsA("Part") then
@@ -159,6 +163,7 @@ if gameId == 3601201039 then --autofarm not done
             end
         end
         print("Found " .. emptySlots .. " empty slots")
+        print("You can afford " .. amountPossible .. " " .. string.lower(crop) .. " seeds")
         if amountPossible > emptySlots then
             amountPossible = emptySlots
         end
@@ -168,11 +173,16 @@ if gameId == 3601201039 then --autofarm not done
                 game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
             end
         end
-        Humanoid:EquipTool(Backpack[crop .. " Seeds"])
+        if amountPossible > 0 then
+            Humanoid:EquipTool(Backpack[crop .. " Seeds"])
+        end
         for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
             if v:IsA("Part") then
-                if v.Index.Value == 3 then
-                    teleportTo(v.CFrame)
+                if v.Occupied.Value == false then
+                    if temp == false then
+                        teleportTo(v.CFrame)
+                        temp = true
+                    end
                 end
             end
         end
@@ -251,9 +261,8 @@ if gameId == 3601201039 then --autofarm not done
 
     function animalStuff()
         for i, v in pairs(animalDir:GetChildren()) do
-            print(v.Name)
-            print(v.Data.PettingTimer.Value)
             if v.Data.PettingTimer.Value == 0 then
+                print("Petting " .. v.Name)
                 if v:FindFirstChild("ClickDetector") then
                     fireclickdetector(v.ClickDetector)
                     fireclickdetector(v.ClickDetector)
@@ -264,11 +273,16 @@ if gameId == 3601201039 then --autofarm not done
                 end
             end
         end
+        local temp = 0
         for i, v in pairs(plotDir.AnimalPen.DroppedProducts:GetChildren()) do
             if v.Hitbox:FindFirstChild("TouchInterest") then
                 firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 0)
                 firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 1)
+                temp = temp + 1
             end
+        end
+        if temp > 0 then
+            print("Picked up " .. temp .. " products")
         end
     end
 
@@ -277,7 +291,7 @@ if gameId == 3601201039 then --autofarm not done
         for i, v in pairs(Backpack:GetDescendants()) do
             if v:IsA("Tool") then
                 if v.Name ~= ("Watering Can" or "Shovel" or "Bamboo Rod" or "Wheat Seeds" or "Wooden Axe") then
-                    print(v.Name)
+                    print("Selling " .. v.Amount.Value .. " " .. v.Name)
                     Humanoid:EquipTool(v)
                     local itemAmount = Workspace[pName][v.Name].Amount.Value
                     for i = 1, itemAmount do
@@ -287,6 +301,14 @@ if gameId == 3601201039 then --autofarm not done
             end
         end
         Humanoid:UnequipTools()
+    end
+
+    function fastRoll()
+        local gold = localplayer.leaderstats.Gold.Value
+        for i = 1, eggAmount do
+            local eggName = string.lower(egg) .. "Pen"
+            game:GetService("ReplicatedStorage").Roll.RollCrateRequest:InvokeServer("smallPen")
+        end
     end
 
     local Toggle = Section:Toggle({
@@ -304,8 +326,6 @@ if gameId == 3601201039 then --autofarm not done
                     waterCrops()
                     wait(0.1)
                     harvestCrops()
-                    wait(0.1)
-                    animalStuff()
                     wait(0.1)
                     sellAll()
                     wait(0.1)
@@ -425,10 +445,18 @@ if gameId == 3601201039 then --autofarm not done
         end
     })
 
-    local Button = Section:Button({
+    local Toggle = Section:Toggle({
         Name = "Animal Stuff", -- String
-        Callback = function()
-            animalStuff()
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            AnimalStuff = Bool
+    
+            if AnimalStuff then
+                while AnimalStuff == true do
+                    animalStuff()
+                    wait(1)
+                end
+            end
         end
     })
 
@@ -439,6 +467,13 @@ if gameId == 3601201039 then --autofarm not done
             FarmTrees = Bool
     
             if FarmTrees then
+
+                Humanoid:UnequipTools()
+                if Backpack:FindFirstChild("Wooden Axe") == nil then
+                    print("Please get a wooden axe first!")
+                    FarmTrees = false
+                end
+
                 while FarmTrees == true do
                     for i, v in pairs(game:GetService("Workspace").Forest.SpawnPoints:GetDescendants()) do
                         if FarmTrees then
@@ -478,6 +513,41 @@ if gameId == 3601201039 then --autofarm not done
             sellAll()
         end
     })
+
+    local Button = Section:Button({
+        Name = "Fast Roll", -- String
+        Callback = function()
+            fastRoll()
+        end
+    })
+
+    local Dropdown = Section:Dropdown({
+        Name = "Roll Type", -- String
+        Items = {"Small", "Large"}, -- Table
+        Callback = function(item)
+            egg = item
+            if egg == "Small" then
+                eggPrice = 1000
+            end
+            if egg == "Large" then
+                eggPrice = 10000
+            end
+        end
+    })
+
+    local Slider = Section:Slider({
+        Name = "Roll Amount", -- String
+        Max = 10, -- Integer
+        Min = 1, -- Integer
+        Default = 1, -- Integer
+        Callback = function(Value)
+                eggAmount = Value
+          end
+    })
+
+    wait(0.1)
+    Slider:SetValue(1) -- Integer
+
 end
 
 if gameId == 10198661638 then --unfinishes
