@@ -148,95 +148,164 @@ if gameId == 3601201039 then --autofarm not done
         game:GetService("ReplicatedStorage").TeleportRequest.TeleportHomeRequest:FireServer()
     end
 
+    function buyPlantCrops()
+        local emptySlots = 0
+        local amountPossible = math.floor(gold/cropPrice)
+        Humanoid:UnequipTools()
+        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
+            if v:IsA("Part") then
+                if v.Occupied.Value == false then
+                    emptySlots = emptySlots + 1
+                end
+            end
+        end
+        print("Found " .. emptySlots .. " empty slots")
+        if amountPossible > emptySlots then
+            amountPossible = emptySlots
+        end
+        for i = 1, amountPossible do
+            if cropPrice < gold then
+                game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
+            end
+        end
+        Humanoid:EquipTool(Backpack[crop .. " Seeds"])
+        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
+            if v:IsA("Part") then
+                if v.Index.Value == 3 then
+                    teleportTo(v.CFrame)
+                end
+            end
+        end
+        wait(1)
+        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
+            if v:IsA("Part") then
+                if v.Occupied.Value == false then
+                    if char[crop .. " Seeds"].Amount.Value > 0 then
+                        teleportTo(v.CFrame)
+                        local cropSeeds = string.lower(crop .. "_seeds")
+                        game:GetService("ReplicatedStorage").Crops.PlantSeedRequest:InvokeServer(v, cropSeeds)
+                    end
+                end
+            end
+        end
+    end
+
+    function waterCrops()
+        local temp = false
+        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
+            if v:IsA("Part") then
+                if v.Watered.Value == false then
+                    if temp == false then
+                        teleportTo(v.CFrame)
+                        temp = true
+                    end
+                end
+            end
+        end
+        wait(1)
+        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
+            if v:IsA("Part") then
+                if v.Watered.Value == false then
+                    print(v.Index.Value .. " is not watered")
+                    equipWateringCan()
+                    teleportTo(v.CFrame)
+                    if char["Watering Can"].WaterLevel.Value == 0 then
+                        getWater()
+                    end
+                    game:GetService("ReplicatedStorage").Crops.PlaceWaterRequest:InvokeServer(v)
+                end
+            end
+        end
+    end
+
+    function harvestCrops()
+        Humanoid:UnequipTools()
+        local temp = false
+        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
+            if v:IsA("Part") then
+                if v:FindFirstChild("Crop") then
+                    if v.Crop.Harvestable.Value == true then
+                        if temp == false then
+                            teleportTo(v.CFrame)
+                            temp = true
+                        end
+                    end
+                end
+            end
+        end
+        wait(1)
+        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
+            if v:IsA("Part") then
+                if v:FindFirstChild("Crop") then
+                    if v.Crop.Harvestable.Value == true then
+                        print(v.Index.Value .. " is harvestable")
+                        teleportTo(v.CFrame)
+                        game:GetService("ReplicatedStorage").Crops.HarvestCropRequest:InvokeServer(v, false)
+                    end
+                end
+            end
+        end
+    end
+
+    function animalStuff()
+        for i, v in pairs(animalDir:GetChildren()) do
+            print(v.Name)
+            print(v.Data.PettingTimer.Value)
+            if v.Data.PettingTimer.Value == 0 then
+                if v:FindFirstChild("ClickDetector") then
+                    fireclickdetector(v.ClickDetector)
+                    fireclickdetector(v.ClickDetector)
+                end
+                if v:FindFirstChild("ClickDetector") == nil then
+                    fireclickdetector(v.HumanoidRootPart.Hitbox.ClickDetector)
+                    fireclickdetector(v.HumanoidRootPart.Hitbox.ClickDetector)
+                end
+            end
+        end
+        for i, v in pairs(plotDir.AnimalPen.DroppedProducts:GetChildren()) do
+            if v.Hitbox:FindFirstChild("TouchInterest") then
+                firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 0)
+                firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 1)
+            end
+        end
+    end
+
+    function sellAll()
+        teleportTo(plotDir.Bin.SellTitle.CFrame)
+        for i, v in pairs(Backpack:GetDescendants()) do
+            if v:IsA("Tool") then
+                if v.Name ~= ("Watering Can" or "Shovel" or "Bamboo Rod" or "Wheat Seeds" or "Wooden Axe") then
+                    print(v.Name)
+                    Humanoid:EquipTool(v)
+                    local itemAmount = Workspace[pName][v.Name].Amount.Value
+                    for i = 1, itemAmount do
+                        game:GetService("ReplicatedStorage").Items.SellItemRequest:InvokeServer(plotDir:WaitForChild("Bin"))
+                    end
+                end
+            end
+        end
+        Humanoid:UnequipTools()
+    end
+
     local Toggle = Section:Toggle({
-        Name = "Autofarm", -- String
+        Name = "Autofarm Crops", -- String
         Default = false, -- Boolean
         Callback = function(Bool)
             Autofarm = Bool
     
             if Autofarm then
                 while Autofarm == true do
-                    local emptySlots = 0
-                    Humanoid:UnequipTools()
-                    for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                        if v:IsA("Part") then
-                            if v.Occupied.Value == false then
-                                emptySlots = emptySlots + 1
-                            end
-                        end
-                    end
-                    for i = 1, emptySlots do
-                        if cropPrice < gold then
-                            game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
-                        end
-                    end
-                    Humanoid:EquipTool(Backpack[crop .. " Seeds"])
-                    for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                        if v:IsA("Part") then
-                            if v.Occupied.Value == false then
-                                if char[crop .. " Seeds"].Amount.Value > 0 then
-                                    teleportTo(v.CFrame) 
-                                    local cropSeeds = string.lower(crop .. "_seeds")
-                                    game:GetService("ReplicatedStorage").Crops.PlantSeedRequest:InvokeServer(v, cropSeeds)
-                                end
-                            end
-                        end
-                    end
-                    Humanoid:UnequipTools()
-                    for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                        if v:IsA("Part") then
-                            if v.Watered.Value == false then
-                                print(v.Index.Value .. " is not watered")
-                                equipWateringCan()
-                                teleportTo(v.CFrame)
-                                if char["Watering Can"].WaterLevel.Value == 0 then
-                                    getWater()
-                                end
-                                game:GetService("ReplicatedStorage").Crops.PlaceWaterRequest:InvokeServer(v)
-                            end
-                        end
-                    end
-                    Humanoid:UnequipTools()
-                    for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                        if v:IsA("Part") then
-                            if v.Index.Value == 3 then
-                                teleportTo(v.CFrame)
-                            end
-                        end
-                    end
+                    buyPlantCrops()
                     wait(0.1)
-                    for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                        if v:IsA("Part") then
-                            if v:FindFirstChild("Crop") then
-                                if v.Crop.Harvestable.Value == true then
-                                    print(v.Index.Value .. " is harvestable")
-                                    teleportTo(v.CFrame)
-                                    game:GetService("ReplicatedStorage").Crops.HarvestCropRequest:InvokeServer(v, false)
-                                end
-                            end
-                        end
-                    end
-                    for i, v in pairs(animalDir:GetChildren()) do
-                        print(v.Name)
-                        print(v.Data.PettingTimer.Value)
-                        if v.Data.PettingTimer.Value == 0 then
-                            if v:FindFirstChild("ClickDetector") then
-                                fireclickdetector(v.ClickDetector)
-                                fireclickdetector(v.ClickDetector)
-                            end
-                            if v:FindFirstChild("ClickDetector") == nil then
-                                fireclickdetector(v.HumanoidRootPart.Hitbox.ClickDetector)
-                                fireclickdetector(v.HumanoidRootPart.Hitbox.ClickDetector)
-                            end
-                        end
-                    end
-                    for i, v in pairs(plotDir.AnimalPen.DroppedProducts:GetChildren()) do
-                        if v.Hitbox:FindFirstChild("TouchInterest") then
-                            firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 0)
-                            firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 1)
-                        end
-                    end
-                    goHome()
+                    equipWateringCan()
+                    wait(0.1)
+                    waterCrops()
+                    wait(0.1)
+                    harvestCrops()
+                    wait(0.1)
+                    animalStuff()
+                    wait(0.1)
+                    sellAll()
                     wait(0.1)
                 end
             end
@@ -273,33 +342,7 @@ if gameId == 3601201039 then --autofarm not done
     local Button = Section:Button({
         Name = "Buy & Plant Crop", -- String
         Callback = function()
-            local emptySlots = 0
-            Humanoid:UnequipTools()
-            for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                if v:IsA("Part") then
-                    if v.Occupied.Value == false then
-                        emptySlots = emptySlots + 1
-                    end
-                end
-            end
-            for i = 1, emptySlots do
-                if cropPrice < gold then
-                    game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
-                end
-            end
-            Humanoid:EquipTool(Backpack[crop .. " Seeds"])
-            for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                if v:IsA("Part") then
-                    if v.Occupied.Value == false then
-                        if char[crop .. " Seeds"].Amount.Value > 0 then
-                            teleportTo(v.CFrame)
-                            wait(0.1)
-                            local cropSeeds = string.lower(crop .. "_seeds")
-                            game:GetService("ReplicatedStorage").Crops.PlantSeedRequest:InvokeServer(v, cropSeeds)
-                        end
-                    end
-                end
-            end
+            buyPlantCrops()
         end
     })
 
@@ -370,111 +413,68 @@ if gameId == 3601201039 then --autofarm not done
     local Button = Section:Button({
         Name = "Water Crops", -- String
         Callback = function()
-            for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                if v:IsA("Part") then
-                    if v.Index.Value == 3 then
-                        teleportTo(v.CFrame)
-                    end
-                end
-            end
-            for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                if v:IsA("Part") then
-                    if v.Watered.Value == false then
-                        print(v.Index.Value .. " is not watered")
-                        equipWateringCan()
-                        teleportTo(v.CFrame)
-                        if char["Watering Can"].WaterLevel.Value == 0 then
-                            getWater()
-                        end
-                        game:GetService("ReplicatedStorage").Crops.PlaceWaterRequest:InvokeServer(v)
-                    end
-                end
-            end
+            waterCrops()
         end
     })
 
     local Button = Section:Button({
         Name = "Harvest Crops", -- String
         Callback = function()
-            Humanoid:UnequipTools()
-            for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                if v:IsA("Part") then
-                    if v.Index.Value == 3 then
-                        teleportTo(v.CFrame)
-                    end
-                end
-            end
-            wait(0.1)
-            for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-                if v:IsA("Part") then
-                    if v:FindFirstChild("Crop") then
-                        if v.Crop.Harvestable.Value == true then
-                            print(v.Index.Value .. " is harvestable")
-                            teleportTo(v.CFrame)
-                            wait(0.1)
-                            game:GetService("ReplicatedStorage").Crops.HarvestCropRequest:InvokeServer(v, false)
-                        end
-                    end
-                end
-            end
-        goHome()
+            harvestCrops()
         end
     })
 
     local Button = Section:Button({
         Name = "Animal Stuff", -- String
         Callback = function()
-            for i, v in pairs(animalDir:GetChildren()) do
-                print(v.Name)
-                print(v.Data.PettingTimer.Value)
-                if v.Data.PettingTimer.Value == 0 then
-                    if v:FindFirstChild("ClickDetector") then
-                        fireclickdetector(v.ClickDetector)
-                        fireclickdetector(v.ClickDetector)
-                    end
-                    if v:FindFirstChild("ClickDetector") == nil then
-                        fireclickdetector(v.HumanoidRootPart.Hitbox.ClickDetector)
-                        fireclickdetector(v.HumanoidRootPart.Hitbox.ClickDetector)
-                    end
-                end
-            end
-            for i, v in pairs(plotDir.AnimalPen.DroppedProducts:GetChildren()) do
-                if v.Hitbox:FindFirstChild("TouchInterest") then
-                    firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 0)
-                    firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 1)
-                end
-            end
+            animalStuff()
         end
     })
 
-    local Button = Section:Button({
-        Name = "Get Water", -- String
-        Callback = function()
-            local equipped = true
-            if game:GetService("Workspace")[pName]:FindFirstChild("Watering Can") == nil then
-                Humanoid:EquipTool(localplayer.Backpack:WaitForChild("Watering Can"))
+    local Toggle = Section:Toggle({
+        Name = "Farm Trees", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            FarmTrees = Bool
+    
+            if FarmTrees then
+                while FarmTrees == true do
+                    for i, v in pairs(game:GetService("Workspace").Forest.SpawnPoints:GetDescendants()) do
+                        if FarmTrees then
+                            teleportTo(v.Basic.Trunk.CFrame)
+                            wait(0.1)
+                            for i = 1,5 do
+                                local args = {
+                                    [1] = v.Basic.Trunk,
+                                    [2] = {
+                                        ["description"] = "Chop Trees",
+                                        ["axe"] = true,
+                                        ["id"] = "Wooden Axe",
+                                        ["storeCategory"] = "Tools",
+                                        ["stackTag"] = "axe",
+                                        ["textureId"] = "rbxassetid://3637797344",
+                                        ["singleOnly"] = true,
+                                        ["chopStrength"] = 1,
+                                        ["buyPrice"] = 500,
+                                        ["cooldownWaitTime"] = 0.8,
+                                        ["stackable"] = false,
+                                        ["damage"] = 20
+                                    }
+                                }
+                                game:GetService("ReplicatedStorage"):WaitForChild("Trees"):WaitForChild("TreeHitRequest"):InvokeServer(unpack(args))
+                                wait(2)
+                            end
+                        end
+                    end
+                end
             end
-            getWater()
         end
     })
 
     local Button = Section:Button({
         Name = "Sell All", -- String
         Callback = function()
-            teleportTo(plotDir.Bin.SellTitle.CFrame)
-            for i, v in pairs(Backpack:GetDescendants()) do
-                if v:IsA("Tool") then
-                    if v.Name ~= "Watering Can" or "Shovel" or "Bamboo Rod" or "Wheat Seeds" or "Wooden Axe" then
-                        print(v.Name)
-                        Humanoid:EquipTool(v)
-                        local itemAmount = Workspace[pName][v.Name].Amount.Value
-                        for i = 1, itemAmount do
-                            game:GetService("ReplicatedStorage").Items.SellItemRequest:InvokeServer(plotDir:WaitForChild("Bin"))
-                        end
-                    end
-                end
-            end
-            Humanoid:UnequipTools()
+            sellAll()
         end
     })
 end
