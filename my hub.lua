@@ -151,11 +151,7 @@ if gameId == 3601201039 then --autofarm not done
                         if v:IsA("Part") then
                             if v.Watered == false then
                                 equipWateringCan()
-                                if Workspace[pName]["Watering Can"].WaterLevel.Value == 0 then
-                                    teleportTo(WaterSource.CFrame)
-                                    wait(0.1)
-                                    getWater()
-                                end
+                                getWater()
                                 teleportTo(v.CFrame)
                                 game:GetService("ReplicatedStorage").Crops.PlaceWaterRequest:InvokeServer(v)
                                 Humanoid:UnequipTools()
@@ -295,12 +291,11 @@ if gameId == 10198661638 then
                     teleportTo(v.Base.Touch.CFrame)
                     tycoonDir = v
                     hasTycoon = true
+                    print("Claimed tycoon " .. tostring(tycoonDir))
                 end
             end
         end
     end
-
-    game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Offline"):WaitForChild("[S-C]TryGetFreeReward"):FireServer()
     
     local Toggle = Section:Toggle({
         Name = "Spam Offline Reward (Inf Cash)", -- String
@@ -317,14 +312,63 @@ if gameId == 10198661638 then
         end
     })
 
+    local Toggle = Section:Toggle({ -- Crashes
+        Name = "Loop Buy Buttons", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            BuyButtons = Bool
+    
+            if BuyButtons then
+                while BuyButtons == true do
+                    local cash = localplayer.Eco.cash.Value
+                    print(cash)
+                    for i, v in pairs (tycoonDir.Buttons:GetChildren()) do
+                        print(v.Name, v.Price.Value)
+                        if v.Price.Value < cash then
+                            print("Bought " .. v.Name)
+                            firetouchinterest(Humanoid, v.Head, 0)
+                            firetouchinterest(Humanoid, v.Head, 1)
+                        end
+                    end
+                    wait(0.1)
+                end
+            end
+        end
+    })
+
+    local Toggle = Section:Toggle({
+        Name = "Complete Obbies", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            CompleteObbies = Bool
+    
+            if CompleteObbies then
+                while CompleteObbies == true do
+                    if game:GetService("Workspace").Obby.Wall:FindFirstChild("Obby1Wall") == nil then
+                        teleportTo(game:GetService("Workspace").Obby.Obby1.End.CFrame)
+                        wait(0.1)
+                    end
+                    if game:GetService("Workspace").Obby.Wall:FindFirstChild("Obby2Wall") == nil then
+                        teleportTo(game:GetService("Workspace").Obby.Obby2.End.CFrame)
+                        wait(0.1)
+                    end
+                    if game:GetService("Workspace").Obby.Wall:FindFirstChild("Obby3Wall") == nil then
+                        teleportTo(game:GetService("Workspace").Obby.Obby3.End.CFrame)
+                        wait(0.1)
+                    end
+                    wait(1)
+                end
+            end
+        end
+    })
+
     local Button = Section:Button({
         Name = "Get Free Stuff", -- String
         Callback = function()
-            for i, v in pairs(game:GetService("ReplicatedStorage").Remote.Event.RandomGift:GetDescendants()) do
-                if v:IsA("RemoteEvent") then
-                    v:FireServer()
-                end
-            end
+            game:GetService("ReplicatedStorage").Remote.Event.RandomGift["[C-S]GetFreeGoldEgg"]:FireServer()
+            game:GetService("ReplicatedStorage").Remote.Event.RandomGift["[C-S]GetFreeGoldMilk"]:FireServer()
+            game:GetService("ReplicatedStorage").Remote.Event.RandomGift["[C-S]GetFreeGoldWool"]:FireServer()
+            game:GetService("ReplicatedStorage").Remote.Function.Spin["[C-S]TryUseFreeSpin"]:InvokeServer()
         end
     })
 
