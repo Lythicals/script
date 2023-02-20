@@ -176,7 +176,7 @@ if gameId == 3601201039 then --autofarm not done
         amountNeeded = amountPossible - amountOwned
         print("Buying " .. amountNeeded .. " " .. string.lower(crop) .. " seeds")
         if amountNeeded > 0 then
-            for i = 1, amountPossible do
+            for i = 1, amountNeeded do
                 if cropPrice < gold then
                     game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
                 end
