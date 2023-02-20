@@ -128,6 +128,8 @@ if gameId == 3601201039 then --autofarm not done
     local cropPrice = 5
     local cropRenewable = false
     local treeType = "Basic"
+    local axeNeeded = "Wooden Axe"
+    local axeUsing = "Wooden Axe"
     local egg = "Small"
     local eggPrice = 1000
     local eggAmount = 1
@@ -490,12 +492,49 @@ if gameId == 3601201039 then --autofarm not done
             if FarmTrees then
 
                 Humanoid:UnequipTools()
-                if Backpack:FindFirstChild("Wooden Axe") == nil then
-                    print("Please get a wooden axe first!")
-                    FarmTrees = false
+                if treeType == "Basic" then
+                    if Backpack:FindFirstChild("Wooden Axe") == nil then
+                        if Backpack:FindFirstChild("Iron Axe") == nil then
+                            if Backpack:FindFirstChild("Gold Axe") == nil then
+                                print("Please get a wooden axe first!")
+                                FarmTrees = false
+                            end
+                        end
+                    end
+                end
+                if treeType == "Maple" then
+                    if Backpack:FindFirstChild("Gold Axe") == nil then
+                        if Backpack:FindFirstChild("Iron Axe") == nil then
+                            print("Please get a iron axe via donating to the Elder first!")
+                            FarmTrees = false
+                        end
+                    end
+                end
+                if treeType == "Aspen" then
+                    if Backpack:FindFirstChild("Gold Axe") == nil then
+                        print("Please get a gold axe via donating to the Elder first!")
+                        FarmTrees = false
+                    end
                 end
                 if FarmTrees == true then
-                    Humanoid:EquipTool(Backpack:FindFirstChild("Wooden Axe"))
+                    if Backpack:FindFirstChild("Gold Axe") then
+                        Humanoid:EquipTool(Backpack["Gold Axe"])
+                        axeUsing = "Gold Axe"
+                    end
+                    if Backpack:FindFirstChild("Gold Axe") == nil then
+                        if Backpack:FindFirstChild("Iron Axe") then
+                            Humanoid:EquipTool(Backpack["Iron Axe"])
+                            axeUsing = "Iron Axe"
+                        end
+                    end
+                    if Backpack:FindFirstChild("Gold Axe") == nil then
+                        if Backpack:FindFirstChild("Iron Axe") == nil then
+                            if Backpack:FindFirstChild("Wooden Axe") then
+                                Humanoid:EquipTool(Backpack["Wooden Axe"])
+                                axeUsing = "Wooden Axe"
+                            end
+                        end
+                    end
                 end
                 while FarmTrees == true do
                     for i, v in pairs(game:GetService("Workspace").Forest.SpawnPoints:GetDescendants()) do
@@ -503,20 +542,47 @@ if gameId == 3601201039 then --autofarm not done
                             if v:FindFirstChild(treeType) then
                                 -- This one is hard so I'm using a Hydroxide generated remote
                                 local ohInstance1 = v[treeType].Trunk
-                                local ohTable2 = {
-                                    ["description"] = "Chop Trees",
-                                    ["axe"] = true,
-                                    ["id"] = "Wooden Axe",
-                                    ["storeCategory"] = "Tools",
-                                    ["stackTag"] = "axe",
-                                    ["textureId"] = "rbxassetid://3637797344",
-                                    ["damage"] = 20,
-                                    ["chopStrength"] = 1,
-                                    ["stackable"] = false,
-                                    ["cooldownWaitTime"] = 0.8,
-                                    ["buyPrice"] = 500,
-                                    ["singleOnly"] = true
-                                }
+                                if axeUsing == "Wooden Axe" then
+                                    local ohTable2 = {
+                                        ["description"] = "Chop Trees",
+                                        ["axe"] = true,
+                                        ["id"] = "Wooden Axe",
+                                        ["storeCategory"] = "Tools",
+                                        ["stackTag"] = "axe",
+                                        ["textureId"] = "rbxassetid://3637797344",
+                                        ["damage"] = 20,
+                                        ["chopStrength"] = 1,
+                                        ["stackable"] = false,
+                                        ["cooldownWaitTime"] = 0.8,
+                                        ["buyPrice"] = 500,
+                                        ["singleOnly"] = true
+                                    }
+                                end
+                                if axeUsing == "Iron Axe" then
+                                    local ohTable2 = {
+                                        ["axe"] = true,
+                                        ["id"] = "Iron Axe",
+                                        ["stackTag"] = "axe",
+                                        ["textureId"] = "rbxassetid://3603588083",
+                                        ["chopStrength"] = 2,
+                                        ["buyPrice"] = 1,
+                                        ["cooldownWaitTime"] = 0.8,
+                                        ["stackable"] = false,
+                                        ["damage"] = 30
+                                    }
+                                end
+                                if axeUsing == "Gold Axe" then
+                                    local ohTable2 = {
+                                        ["axe"] = true,
+                                        ["cooldownWaitTime"] = 0.8,
+                                        ["damage"] = 40,
+                                        ["chopStrength"] = 3,
+                                        ["id"] = "Gold Axe",
+                                        ["stackable"] = false,
+                                        ["stackTag"] = "axe",
+                                        ["textureId"] = "rbxassetid://3655229878"
+                                    }
+                                end
 
                                 game:GetService("ReplicatedStorage").Trees.TreeHitRequest:InvokeServer(ohInstance1, ohTable2)
                                 wait(0.1)
@@ -530,9 +596,18 @@ if gameId == 3601201039 then --autofarm not done
 
     local Dropdown = Section:Dropdown({
         Name = "Tree Type", -- String
-        Items = {"Basic", "Aspen"}, -- Table
+        Items = {"Basic", "Maple", "Aspen"}, -- Table
         Callback = function(item)
             treeType = item
+            if treeType == "Basic" then
+                axeNeeded = "Wooden Axe"
+            end
+            if treeType == "Maple" then
+                axeNeeded = "Iron Axe"
+            end
+            if treeType == "Aspen" then
+                axeNeeded = "Gold Axe"
+            end
         end
     })
 
