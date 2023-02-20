@@ -1,4 +1,4 @@
---Please dont read this my coding is gonna be shit
+--Please dont read this my coding is gonna be shit (FYI: First time coding in lua soo yeah)
 
 --// Variables
 local Workspace = game:GetService("Workspace")
