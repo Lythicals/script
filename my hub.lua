@@ -271,7 +271,7 @@ if gameId == 3601201039 then --autofarm not done
 
     function animalStuff()
         for i, v in pairs(animalDir:GetChildren()) do
-            if v.Data.PettingTimer.Value == 0 then
+            if v.Data.PettingTimer.Value == 0 and v.Data.Happiness.Value < 100 then
                 print("Petting " .. v.Name)
                 if v:FindFirstChild("ClickDetector") then
                     fireclickdetector(v.ClickDetector)
