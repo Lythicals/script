@@ -663,18 +663,13 @@ if gameId == 3601201039 then --autofarm not done
         end
     })
 
-    local Slider = Section:Slider({
+    local SmallTextbox = Section:SmallTextbox({
         Name = "Roll Amount", -- String
-        Max = 10, -- Integer
-        Min = 1, -- Integer
-        Default = 1, -- Integer
-        Callback = function(Value)
-                eggAmount = Value
-          end
+        Default = "Number", -- String
+        Callback = function(Text)
+            eggAmount = tonumber(Text)
+        end
     })
-
-    wait(0.1)
-    Slider:SetValue(1) -- Integer
 
 end
 
