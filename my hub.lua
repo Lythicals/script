@@ -153,6 +153,8 @@ if gameId == 3601201039 then --autofarm not done
         local emptySlots = 0
         local gold = localplayer.leaderstats.Gold.Value
         local amountPossible = math.floor(gold/cropPrice)
+        local amountOwned = 0
+        local amountNeeded = 0
         local temp = false
         Humanoid:UnequipTools()
         for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
@@ -167,10 +169,17 @@ if gameId == 3601201039 then --autofarm not done
         if amountPossible > emptySlots then
             amountPossible = emptySlots
         end
-        print("Buying " .. amountPossible .. " " .. string.lower(crop) .. " seeds")
-        for i = 1, amountPossible do
-            if cropPrice < gold then
-                game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
+        if Backpack:FindFirstChild(crop .. " Seeds") then
+            amountOwned = Backpack[crop .. " Seeds"].Amount.Value
+        end
+        print("You own " .. amountOwned .. " " .. string.lower(crop) .. " seeds")
+        amountNeeded = amountPossible - amountOwned
+        print("Buying " .. amountNeeded .. " " .. string.lower(crop) .. " seeds")
+        if amountNeeded > 0 then
+            for i = 1, amountPossible do
+                if cropPrice < gold then
+                    game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
+                end
             end
         end
         if amountPossible > 0 then
@@ -319,6 +328,8 @@ if gameId == 3601201039 then --autofarm not done
     
             if Autofarm then
                 while Autofarm == true do
+                    print("---")
+                    print("Starting Loop")
                     buyPlantCrops()
                     wait(0.1)
                     equipWateringCan()
@@ -328,6 +339,8 @@ if gameId == 3601201039 then --autofarm not done
                     harvestCrops()
                     wait(0.1)
                     sellAll()
+                    print("Finished Loop")
+                    print("---")
                     wait(0.1)
                 end
             end
