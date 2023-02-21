@@ -1,889 +1,899 @@
--- Decompiled with the Synapse X Luau decompiler.
+--Please dont read this my coding is gonna be shit (FYI: First time coding in lua soo yeah)
 
+--// Variables
+local Workspace = game:GetService("Workspace")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local localplayer = game.Players.LocalPlayer
+local char = localplayer.Character
+local Humanoid = char.Humanoid
+local HumanoidRootPart = char.HumanoidRootPart
+local userid = localplayer.UserId
+local pPosition = localplayer.Character.HumanoidRootPart.Position
+local pCFrame = localplayer.Character.HumanoidRootPart.CFrame
+local pHead = localplayer.Character.Head
+local pName = localplayer.Name
+local gameId = game.PlaceId
+local pTeam = localplayer.Team
+local Backpack = localplayer.Backpack
 
+--// Libraries
+local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Loco-CTO/UI-Library/main/VisionLibV2/source.lua'))()
 
-return {
-	Wheat = {
-		id = "Wheat", 
-		troughValue = 50, 
-		troughType = "small", 
-		sellPrice = 12, 
-		textureId = "rbxassetid://3677593946", 
-		qualityVariants = true
-	}, 
-	["Quality Wheat"] = {
-		id = "Quality Wheat", 
-		troughValue = 60, 
-		troughType = "small", 
-		sellPrice = 19, 
-		textureId = "rbxassetid://3677593946", 
-		quality = true
-	}, 
-	["High Quality Wheat"] = {
-		id = "High Quality Wheat", 
-		troughValue = 70, 
-		troughType = "small", 
-		sellPrice = 26, 
-		textureId = "rbxassetid://3677593946", 
-		highQuality = true
-	}, 
-	["Wheat Seeds"] = {
-		id = "Wheat Seeds", 
-		buyPrice = 5, 
-		storeCategory = "Seeds", 
-		cropType = "Wheat", 
-		plantable = true, 
-		textureId = "rbxassetid://3677594537", 
-		description = "Fast Growth"
-	}, 
-	Onion = {
-		id = "Onion", 
-		sellPrice = 31, 
-		textureId = "rbxassetid://3677700364", 
-		qualityVariants = true
-	}, 
-	["Quality Onion"] = {
-		id = "Quality Onion", 
-		sellPrice = 44, 
-		textureId = "rbxassetid://3677700364", 
-		quality = true
-	}, 
-	["High Quality Onion"] = {
-		id = "High Quality Onion", 
-		sellPrice = 57, 
-		textureId = "rbxassetid://3677700364", 
-		highQuality = true
-	}, 
-	["Onion Seeds"] = {
-		id = "Onion Seeds", 
-		buyPrice = 18, 
-		sellPrice = 7, 
-		storeCategory = "Seeds", 
-		cropType = "Onion", 
-		plantable = true, 
-		textureId = "rbxassetid://3677699211", 
-		description = "Fast Growth"
-	}, 
-	Carrot = {
-		id = "Carrot", 
-		sellPrice = 28, 
-		troughValue = 50, 
-		troughType = "large", 
-		textureId = "rbxassetid://3677674439", 
-		qualityVariants = true
-	}, 
-	["Quality Carrot"] = {
-		id = "Quality Carrot", 
-		sellPrice = 40, 
-		troughValue = 60, 
-		troughType = "large", 
-		textureId = "rbxassetid://3677674439", 
-		quality = true
-	}, 
-	["High Quality Carrot"] = {
-		id = "High Quality Carrot", 
-		sellPrice = 52, 
-		troughValue = 50, 
-		troughType = "large", 
-		textureId = "rbxassetid://3677674439", 
-		highQuality = true
-	}, 
-	["Carrot Seeds"] = {
-		id = "Carrot Seeds", 
-		buyPrice = 16, 
-		sellPrice = 9, 
-		storeCategory = "Seeds", 
-		cropType = "Carrot", 
-		plantable = true, 
-		textureId = "rbxassetid://3677675255", 
-		description = "Fast Growth"
-	}, 
-	Tomato = {
-		id = "Tomato", 
-		sellPrice = 2075, 
-		textureId = "rbxassetid://3706888299", 
-		qualityVariants = true
-	}, 
-	["Quality Tomato"] = {
-		id = "Quality Tomato", 
-		sellPrice = 2150, 
-		textureId = "rbxassetid://3706888299", 
-		quality = true
-	}, 
-	["High Quality Tomato"] = {
-		id = "High Quality Tomato", 
-		sellPrice = 2225, 
-		textureId = "rbxassetid://3706888299", 
-		highQuality = true
-	}, 
-	["Tomato Seeds"] = {
-		id = "Tomato Seeds", 
-		buyPrice = 2000, 
-		sellPrice = 12, 
-		storeCategory = "Seeds", 
-		cropType = "Tomato", 
-		plantable = true, 
-		textureId = "rbxassetid://3706887787", 
-		description = "Very Slow Growth"
-	}, 
-	Potato = {
-		id = "Potato", 
-		sellPrice = 924, 
-		textureId = "rbxassetid://3677510674", 
-		qualityVariants = true
-	}, 
-	["Quality Potato"] = {
-		id = "Quality Potato", 
-		sellPrice = 948, 
-		textureId = "rbxassetid://3677510674", 
-		quality = true
-	}, 
-	["High Quality Potato"] = {
-		id = "High Quality Potato", 
-		sellPrice = 972, 
-		textureId = "rbxassetid://3677510674", 
-		highQuality = true
-	}, 
-	["Potato Seeds"] = {
-		id = "Potato Seeds", 
-		buyPrice = 900, 
-		sellPrice = 12, 
-		storeCategory = "Seeds", 
-		cropType = "Potato", 
-		plantable = true, 
-		textureId = "rbxassetid://3677509215", 
-		description = "Medium Growth"
-	}, 
-	Pumpkin = {
-		id = "Pumpkin", 
-		sellPrice = 283, 
-		textureId = "rbxassetid://3677641693", 
-		qualityVariants = true
-	}, 
-	["Quality Pumpkin"] = {
-		id = "Quality Pumpkin", 
-		sellPrice = 316, 
-		textureId = "rbxassetid://3677641693", 
-		quality = true
-	}, 
-	["High Quality Pumpkin"] = {
-		id = "High Quality Pumpkin", 
-		sellPrice = 349, 
-		textureId = "rbxassetid://3677641693", 
-		highQuality = true
-	}, 
-	["Pumpkin Seeds"] = {
-		id = "Pumpkin Seeds", 
-		buyPrice = 250, 
-		sellPrice = 50, 
-		storeCategory = "Seeds", 
-		cropType = "Pumpkin", 
-		plantable = true, 
-		textureId = "rbxassetid://3677641065", 
-		description = "Slow Growth"
-	}, 
-	Watermelon = {
-		id = "Watermelon", 
-		sellPrice = 440, 
-		textureId = "rbxassetid://3677347532", 
-		qualityVariants = true
-	}, 
-	["Quality Watermelon"] = {
-		id = "Quality Watermelon", 
-		sellPrice = 480, 
-		textureId = "rbxassetid://3677347532", 
-		quality = true
-	}, 
-	["High Quality Watermelon"] = {
-		id = "High Quality Watermelon", 
-		sellPrice = 520, 
-		textureId = "rbxassetid://3677347532", 
-		highQuality = true
-	}, 
-	["Watermelon Seeds"] = {
-		id = "Watermelon Seeds", 
-		buyPrice = 400, 
-		sellPrice = 100, 
-		storeCategory = "Seeds", 
-		cropType = "Watermelon", 
-		plantable = true, 
-		textureId = "rbxassetid://3677416858", 
-		description = "Slow Growth"
-	}, 
-	Pineapple = {
-		id = "Pineapple", 
-		sellPrice = 3725, 
-		textureId = "rbxassetid://3684226173", 
-		qualityVariants = true
-	}, 
-	["Quality Pineapple"] = {
-		id = "Quality Pineapple", 
-		sellPrice = 3850, 
-		textureId = "rbxassetid://3684226173", 
-		quality = true
-	}, 
-	["High Quality Pineapple"] = {
-		id = "High Quality Pineapple", 
-		sellPrice = 3975, 
-		textureId = "rbxassetid://3684226173", 
-		highQuality = true
-	}, 
-	["Pineapple Seeds"] = {
-		id = "Pineapple Seeds", 
-		buyPrice = 3600, 
-		sellPrice = 500, 
-		storeCategory = "Seeds", 
-		cropType = "Pineapple", 
-		plantable = true, 
-		textureId = "rbxassetid://3684227062", 
-		description = "Very Slow Growth"
-	}, 
-	Turnip = {
-		id = "Turnip", 
-		sellPrice = 6305, 
-		textureId = "rbxassetid://3842016939", 
-		qualityVariants = true
-	}, 
-	["Quality Turnip"] = {
-		id = "Quality Turnip", 
-		sellPrice = 6410, 
-		textureId = "rbxassetid://3842016939", 
-		quality = true
-	}, 
-	["High Quality Turnip"] = {
-		id = "High Quality Turnip", 
-		sellPrice = 6515, 
-		textureId = "rbxassetid://3842016939", 
-		highQuality = true
-	}, 
-	["Turnip Seeds"] = {
-		id = "Turnip Seeds", 
-		buyPrice = 6200, 
-		sellPrice = 3200, 
-		storeCategory = "Seeds", 
-		cropType = "Turnip", 
-		plantable = true, 
-		textureId = "rbxassetid://3842018273", 
-		description = "Slow Growth"
-	}, 
-	Cucumber = {
-		id = "Cucumber", 
-		sellPrice = 12112, 
-		textureId = "rbxassetid://3879136029", 
-		qualityVariants = true
-	}, 
-	["Quality Cucumber"] = {
-		id = "Quality Cucumber", 
-		sellPrice = 12224, 
-		textureId = "rbxassetid://3879136029", 
-		quality = true
-	}, 
-	["High Quality Cucumber"] = {
-		id = "High Quality Cucumber", 
-		sellPrice = 12336, 
-		textureId = "rbxassetid://3879136029", 
-		highQuality = true
-	}, 
-	["Cucumber Seeds"] = {
-		id = "Cucumber Seeds", 
-		buyPrice = 12000, 
-		sellPrice = 6500, 
-		storeCategory = "Seeds", 
-		cropType = "Cucumber", 
-		plantable = true, 
-		textureId = "rbxassetid://3879136683", 
-		description = "Slow Growth"
-	}, 
-	["Strawberry Seeds"] = {
-		id = "Strawberry Seeds", 
-		buyPrice = 400, 
-		sellPrice = 200, 
-		storeCategory = "Seeds", 
-		cropType = "Strawberry", 
-		plantable = true, 
-		textureId = "rbxassetid://3607817637", 
-		description = "Renewable, Slow Growth"
-	}, 
-	Strawberry = {
-		id = "Strawberry", 
-		textureId = "rbxassetid://3607816991", 
-		sellPrice = 18, 
-		qualityVariants = true
-	}, 
-	["Quality Strawberry"] = {
-		id = "Quality Strawberry", 
-		textureId = "rbxassetid://3607816991", 
-		sellPrice = 23, 
-		quality = true
-	}, 
-	["High Quality Strawberry"] = {
-		id = "High Quality Strawberry", 
-		textureId = "rbxassetid://3607816991", 
-		sellPrice = 29, 
-		highQuality = true
-	}, 
-	["Corn Seeds"] = {
-		id = "Corn Seeds", 
-		buyPrice = 300, 
-		sellPrice = 100, 
-		storeCategory = "Seeds", 
-		cropType = "Corn", 
-		plantable = true, 
-		textureId = "rbxassetid://3607816140", 
-		description = "Renewable, Slow Growth"
-	}, 
-	Corn = {
-		id = "Corn", 
-		textureId = "rbxassetid://3607814819", 
-		sellPrice = 16, 
-		qualityVariants = true
-	}, 
-	["Quality Corn"] = {
-		id = "Quality Corn", 
-		textureId = "rbxassetid://3607814819", 
-		sellPrice = 21, 
-		quality = true
-	}, 
-	["High Quality Corn"] = {
-		id = "High Quality Corn", 
-		textureId = "rbxassetid://3607814819", 
-		sellPrice = 26, 
-		highQuality = true
-	}, 
-	["Corn Seeds"] = {
-		id = "Corn Seeds", 
-		buyPrice = 300, 
-		sellPrice = 100, 
-		storeCategory = "Seeds", 
-		cropType = "Corn", 
-		plantable = true, 
-		textureId = "rbxassetid://3607816140", 
-		description = "Renewable, Slow Growth"
-	}, 
-	Grapes = {
-		id = "Grapes", 
-		textureId = "rbxassetid://3879433512", 
-		sellPrice = 66, 
-		qualityVariants = true
-	}, 
-	["Quality Grapes"] = {
-		id = "Quality Grapes", 
-		textureId = "rbxassetid://3879433512", 
-		sellPrice = 86, 
-		quality = true
-	}, 
-	["High Quality Grapes"] = {
-		id = "High Quality Grapes", 
-		textureId = "rbxassetid://3879433512", 
-		sellPrice = 106, 
-		highQuality = true
-	}, 
-	["Grape Seeds"] = {
-		id = "Grape Seeds", 
-		buyPrice = 3000, 
-		sellPrice = 1250, 
-		storeCategory = "Seeds", 
-		cropType = "Grapes", 
-		plantable = true, 
-		textureId = "rbxassetid://3879432743", 
-		description = "Renewable, Slow Growth"
-	}, 
-	Chilli = {
-		id = "Chilli", 
-		textureId = "rbxassetid://3935933186", 
-		sellPrice = 20, 
-		qualityVariants = true
-	}, 
-	["Quality Chilli"] = {
-		id = "Quality Chilli", 
-		textureId = "rbxassetid://3935933186", 
-		sellPrice = 26, 
-		quality = true
-	}, 
-	["High Quality Chilli"] = {
-		id = "High Quality Chilli", 
-		textureId = "rbxassetid://3935933186", 
-		sellPrice = 32, 
-		highQuality = true
-	}, 
-	["Chilli Seeds"] = {
-		id = "Chilli Seeds", 
-		buyPrice = 3750, 
-		sellPrice = 1500, 
-		storeCategory = "Seeds", 
-		cropType = "Chilli", 
-		plantable = true, 
-		textureId = "rbxassetid://3935934112", 
-		description = "Renewable, Slow Growth"
-	}, 
-	["Milk Bucket"] = {
-		id = "Milk Bucket", 
-		sellPrice = 385, 
-		textureId = "rbxassetid://3603594628"
-	}, 
-	Egg = {
-		id = "Egg", 
-		sellPrice = 125, 
-		textureId = "rbxassetid://3603592253"
-	}, 
-	Mayonnaise = {
-		id = "Mayonnaise", 
-		sellPrice = 1145, 
-		textureId = "rbxassetid://3710545044"
-	}, 
-	Truffle = {
-		id = "Truffle", 
-		sellPrice = 335, 
-		textureId = "rbxassetid://3603600291"
-	}, 
-	Wool = {
-		id = "Wool", 
-		textureId = "rbxassetid://3603673896", 
-		canShear = true, 
-		sellPrice = 640
-	}, 
-	["Watering Can"] = {
-		id = "Watering Can", 
-		textureId = "rbxassetid://3607845665", 
-		waterStrength = 1, 
-		waterMax = 10, 
-		singleOnly = true, 
-		waterCan = true
-	}, 
-	["Iron Watering Can"] = {
-		id = "Iron Watering Can", 
-		stackable = false, 
-		textureId = "rbxassetid://3603600756", 
-		waterStrength = 1, 
-		waterMax = 20, 
-		buyPrice = 3000, 
-		storeCategory = "Tools", 
-		description = "More Storage", 
-		requiredItem = "Watering Can", 
-		singleOnly = true, 
-		waterCan = true
-	}, 
-	["Gold Watering Can"] = {
-		id = "Gold Watering Can", 
-		displayName = "Gold Watering Can", 
-		textureId = "rbxassetid://3620772131", 
-		waterStrength = 1, 
-		waterMax = 30, 
-		buyPrice = 30000, 
-		storeCategory = "Tools", 
-		description = "More Storage", 
-		requiredItem = "Iron Watering Can", 
-		singleOnly = true, 
-		waterCan = true
-	}, 
-	["Diamond Can"] = {
-		id = "Diamond Can", 
-		displayName = "Diamond Watering Can", 
-		textureId = "rbxassetid://3620771287", 
-		waterStrength = 1, 
-		waterMax = 50, 
-		buyPrice = 100000, 
-		storeCategory = "Tools", 
-		description = "More Storage", 
-		requiredItem = "Gold Watering Can", 
-		singleOnly = true, 
-		waterCan = true
-	}, 
-	["Enchanted Can"] = {
-		id = "Enchanted Can", 
-		displayName = "Enchanted Watering Can", 
-		textureId = "rbxassetid://3661964275", 
-		waterStrength = 1, 
-		waterMax = 100, 
-		infinite = true, 
-		waterCan = true
-	}, 
-	Scythe = {
-		id = "Scythe", 
-		textureId = "rbxassetid://3608471295"
-	}, 
-	["Enchanted Axe"] = {
-		id = "Enchanted Axe", 
-		stackable = false, 
-		textureId = "rbxassetid://3659044384", 
-		cooldownWaitTime = 0.8, 
-		damage = 80, 
-		chopStrength = 100, 
-		axe = true
-	}, 
-	["Diamond Axe"] = {
-		id = "Diamond Axe", 
-		stackable = false, 
-		stackTag = "axe", 
-		textureId = "rbxassetid://3659044314", 
-		cooldownWaitTime = 0.8, 
-		damage = 50, 
-		chopStrength = 4, 
-		axe = true, 
-		description = "Testing"
-	}, 
-	["Gold Axe"] = {
-		id = "Gold Axe", 
-		stackable = false, 
-		stackTag = "axe", 
-		textureId = "rbxassetid://3655229878", 
-		cooldownWaitTime = 0.8, 
-		damage = 40, 
-		chopStrength = 3, 
-		axe = true
-	}, 
-	["Iron Axe"] = {
-		id = "Iron Axe", 
-		textureId = "rbxassetid://3603588083", 
-		cooldownWaitTime = 0.8, 
-		damage = 30, 
-		stackable = false, 
-		stackTag = "axe", 
-		chopStrength = 2, 
-		buyPrice = 1, 
-		axe = true
-	}, 
-	["Wooden Axe"] = {
-		id = "Wooden Axe", 
-		textureId = "rbxassetid://3637797344", 
-		cooldownWaitTime = 0.8, 
-		damage = 20, 
-		stackable = false, 
-		stackTag = "axe", 
-		chopStrength = 1, 
-		axe = true, 
-		buyPrice = 500, 
-		storeCategory = "Tools", 
-		description = "Chop Trees", 
-		singleOnly = true
-	}, 
-	Shovel = {
-		id = "Shovel", 
-		stackable = false, 
-		textureId = "rbxassetid://3608610217", 
-		cooldownWaitTime = 0.75, 
-		buyPrice = 500, 
-		storeCategory = "Tools", 
-		shovel = true, 
-		description = "Destroy Crops", 
-		singleOnly = true
-	}, 
-	Wood = {
-		id = "Wood", 
-		sellPrice = 4, 
-		textureId = "rbxassetid://3603603106"
-	}, 
-	["Maple Wood"] = {
-		id = "Maple Wood", 
-		sellPrice = 8, 
-		textureId = "rbxassetid://3637795108"
-	}, 
-	["Aspen Wood"] = {
-		id = "Aspen Wood", 
-		sellPrice = 12, 
-		textureId = "rbxassetid://3655228306"
-	}, 
-	["Enchanted Wood"] = {
-		id = "Enchanted Wood", 
-		sellPrice = 16, 
-		textureId = "rbxassetid://3662357023"
-	}, 
-	["Wood Plank"] = {
-		id = "Wood Plank", 
-		sellPrice = 3, 
-		textureId = "rbxassetid://3692916195"
-	}, 
-	["Maple Plank"] = {
-		id = "Maple Plank", 
-		sellPrice = 6, 
-		textureId = "rbxassetid://3692916107"
-	}, 
-	["Aspen Plank"] = {
-		id = "Aspen Plank", 
-		sellPrice = 9, 
-		textureId = "rbxassetid://3692924602"
-	}, 
-	["Enchanted Plank"] = {
-		id = "Enchanted Plank", 
-		sellPrice = 12, 
-		textureId = "rbxassetid://3692916043"
-	}, 
-	["Bamboo Rod"] = {
-		id = "Bamboo Rod", 
-		textureId = "rbxassetid://3603593156", 
-		fishingStrength = 1, 
-		fishingLuck = 1, 
-		stackable = false, 
-		buyPrice = 100, 
-		storeCategory = "Tools", 
-		description = "Catch Fish", 
-		singleOnly = true
-	}, 
-	["Fiberglass Rod"] = {
-		id = "Fiberglass Rod", 
-		textureId = "rbxassetid://3624234057", 
-		fishingStrength = 1, 
-		fishingLuck = 2, 
-		stackable = false
-	}, 
-	["Gold Rod"] = {
-		id = "Gold Rod", 
-		textureId = "rbxassetid://3662769437", 
-		fishingStrength = 1, 
-		fishingLuck = 3, 
-		stackable = false
-	}, 
-	["Diamond Rod"] = {
-		id = "Diamond Rod", 
-		stackable = false, 
-		textureId = "rbxassetid://3624235760", 
-		fishingStrength = 1, 
-		fishingLuck = 4, 
-		stackable = false
-	}, 
-	["Enchanted Rod"] = {
-		id = "Enchanted Rod", 
-		textureId = "rbxassetid://3661964163", 
-		fishingStrength = 1, 
-		fishingLuck = 5, 
-		stackable = false
-	}, 
-	Catfish = {
-		id = "Catfish", 
-		textureId = "rbxassetid://3603590998", 
-		sellPrice = 20
-	}, 
-	["Red Crab"] = {
-		id = "Red Crab", 
-		textureId = "rbxassetid://3624268651", 
-		sellPrice = 30
-	}, 
-	Clam = {
-		id = "Clam", 
-		textureId = "rbxassetid://3716510699", 
-		sellPrice = 35
-	}, 
-	Squid = {
-		id = "Squid", 
-		textureId = "rbxassetid://3716793767", 
-		sellPrice = 60
-	}, 
-	Flatfish = {
-		id = "Flatfish", 
-		textureId = "rbxassetid://3624267930", 
-		sellPrice = 80
-	}, 
-	["Blue Crab"] = {
-		id = "Blue Crab", 
-		textureId = "rbxassetid://3624269422", 
-		sellPrice = 100
-	}, 
-	["Red Snapper"] = {
-		id = "Red Snapper", 
-		textureId = "rbxassetid://3603597584", 
-		sellPrice = 200
-	}, 
-	Shark = {
-		id = "Shark", 
-		textureId = "rbxassetid://3657011555", 
-		sellPrice = 1500
-	}, 
-	["Giant Squid"] = {
-		id = "Giant Squid", 
-		textureId = "rbxassetid://3716792626", 
-		sellPrice = 2000
-	}, 
-	Sprinkler = {
-		id = "Sprinkler", 
-		textureId = "rbxassetid://3603599726", 
-		buyPrice = 12500, 
-		sellPrice = 10000, 
-		storeCategory = "Tools", 
-		sprinkler = true, 
-		strength = 1, 
-		description = "Automate Watering"
-	}, 
-	["Gold Sprinkler"] = {
-		id = "Gold Sprinkler", 
-		textureId = "rbxassetid://3620833986", 
-		buyPrice = 30000, 
-		sellPrice = 27500, 
-		storeCategory = "Tools", 
-		sprinkler = true, 
-		strength = 2, 
-		description = "Automate Watering"
-	}, 
-	Shears = {
-		id = "Shears", 
-		textureId = "rbxassetid://3603598495", 
-		canShear = true, 
-		buyPrice = 1500, 
-		storeCategory = "Tools", 
-		stackable = false, 
-		description = "Trim Sheep", 
-		singleOnly = true
-	}, 
-	["Pickled Carrots"] = {
-		id = "Pickled Carrots", 
-		sellPrice = 185, 
-		textureId = "rbxassetid://3686449859"
-	}, 
-	["Strawberry Jam"] = {
-		id = "Strawberry Jam", 
-		sellPrice = 130, 
-		textureId = "rbxassetid://3686367266"
-	}, 
-	Cheese = {
-		id = "Cheese", 
-		sellPrice = 1950, 
-		textureId = "rbxassetid://3710544948"
-	}, 
-	Flour = {
-		id = "Flour", 
-		sellPrice = 160, 
-		textureId = "rbxassetid://3686245955"
-	}, 
-	["Cooking Oil"] = {
-		id = "Cooking Oil", 
-		sellPrice = 110, 
-		textureId = "rbxassetid://3686298355"
-	}, 
-	["Truffle Oil"] = {
-		id = "Truffle Oil", 
-		sellPrice = 2050, 
-		textureId = "rbxassetid://3686333714"
-	}, 
-	["Low Grade Fuel"] = {
-		id = "Low Grade Fuel", 
-		sellPrice = 42, 
-		textureId = "rbxassetid://3878843752"
-	}, 
-	Ketchup = {
-		id = "Ketchup", 
-		sellPrice = 6500, 
-		textureId = "rbxassetid://3712405363"
-	}, 
-	["Alligator Scale"] = {
-		id = "Alligator Scale", 
-		sellPrice = 465, 
-		textureId = "rbxassetid://3763972241"
-	}, 
-	["Goat Milk"] = {
-		id = "Goat Milk", 
-		sellPrice = 450, 
-		textureId = "rbxassetid://3763971823"
-	}, 
-	["Alpaca Wool"] = {
-		id = "Alpaca Wool", 
-		sellPrice = 640, 
-		textureId = "rbxassetid://3763971392"
-	}, 
-	["Bear Claw"] = {
-		id = "Bear Claw", 
-		sellPrice = 1440, 
-		textureId = "rbxassetid://3763971513"
-	}, 
-	["Rabbit Fur"] = {
-		id = "Rabbit Fur", 
-		sellPrice = 295, 
-		textureId = "rbxassetid://3763972069"
-	}, 
-	["Deer Antler"] = {
-		id = "Deer Antler", 
-		sellPrice = 360, 
-		textureId = "rbxassetid://3777728100"
-	}, 
-	["Fox Tooth"] = {
-		id = "Fox Tooth", 
-		sellPrice = 435, 
-		textureId = "rbxassetid://3763971758"
-	}, 
-	["Moose Antler"] = {
-		id = "Moose Antler", 
-		sellPrice = 700, 
-		textureId = "rbxassetid://3777284800"
-	}, 
-	["Brown Mushroom"] = {
-		id = "Brown Mushroom", 
-		sellPrice = 5, 
-		textureId = "rbxassetid://3763971996", 
-		qualityVariants = true
-	}, 
-	["Quality Brown Mushroom"] = {
-		id = "Red Mushroom", 
-		sellPrice = 10, 
-		textureId = "rbxassetid://3763971996", 
-		quality = true
-	}, 
-	["High Quality Brown Mushroom"] = {
-		id = "Red Mushroom", 
-		sellPrice = 15, 
-		textureId = "rbxassetid://3763971996", 
-		highQuality = true
-	}, 
-	["Red Mushroom"] = {
-		id = "Red Mushroom", 
-		sellPrice = 7, 
-		textureId = "rbxassetid://3763972145", 
-		qualityVariants = true
-	}, 
-	["Quality Red Mushroom"] = {
-		id = "Red Mushroom", 
-		sellPrice = 12, 
-		textureId = "rbxassetid://3763972145", 
-		quality = true
-	}, 
-	["High Quality Red Mushroom"] = {
-		id = "Red Mushroom", 
-		sellPrice = 18, 
-		textureId = "rbxassetid://3763972145", 
-		highQuality = true
-	}, 
-	Blackberry = {
-		id = "Blackberry", 
-		sellPrice = 18, 
-		textureId = "rbxassetid://3763971598", 
-		qualityVariants = true
-	}, 
-	["Quality Blackberry"] = {
-		id = "Red Mushroom", 
-		sellPrice = 23, 
-		textureId = "rbxassetid://3763971598", 
-		quality = true
-	}, 
-	["High Quality Blackberry"] = {
-		id = "Red Mushroom", 
-		sellPrice = 30, 
-		textureId = "rbxassetid://3763971598", 
-		highQuality = true
-	}, 
-	["Wild Berry"] = {
-		id = "Wild Berry", 
-		sellPrice = 12, 
-		textureId = "rbxassetid://3763972333", 
-		qualityVariants = true
-	}, 
-	["Quality Wild Berry"] = {
-		id = "Red Mushroom", 
-		sellPrice = 17, 
-		textureId = "rbxassetid://3763972333", 
-		quality = true
-	}, 
-	["High Quality Wild Berry"] = {
-		id = "Red Mushroom", 
-		sellPrice = 22, 
-		textureId = "rbxassetid://3763972333", 
-		highQuality = true
-	}, 
-	["Turtle Shell"] = {
-		id = "Turtle Shell", 
-		sellPrice = 650, 
-		textureId = "rbxassetid://3777214336"
-	}, 
-	["Duck Egg"] = {
-		id = "Duck Egg", 
-		sellPrice = 170, 
-		textureId = "rbxassetid://3763971685"
-	}
-};
+--// Supported Games
+local supportedGames = {
+    6767503821, --Underground Bunker Tycoon
+    3601201039, -- Farm Life
+    10198661638 -- Farm Factory Tycoon
+}
 
+--// Main 
+for i = 1, #supportedGames do
+    if gameId == supportedGames[i] then
+        print("Game Supported!")
+    end
+end
+
+function teleportTo(position)
+    if localplayer.Character then
+        localplayer.Character.HumanoidRootPart.CFrame = position
+    end
+end
+
+local Window = Library:Create({
+    Name = "AAAAAH!!!", -- String
+    Footer = "I HATE LUA!!!", -- String
+    ToggleKey = Enum.KeyCode.RightShift, -- Enum.KeyCode
+    LoadedCallback = function()
+        -- Function
+    end,
+    
+    KeySystem = false, -- Boolean
+    Key = "keyabc123", -- String
+    MaxAttempts = 5, -- Integer
+    DiscordLink = "https://discord.gg/Bp7wFcZeUn", -- String (Set it to nil if you do not have one, the button will not pop out)
+    ToggledRelativeYOffset = 5 -- Number (Y Offset from bottom of your screen. Set it to nil if you want it to be centred)
+})
+
+local Tab = Window:Tab({
+    Name = "Main", -- String
+    Icon = "rbxassetid://11396131982", -- String
+    Color = Color3.new(1, 0, 0) -- Color3
+})
+
+local Section = Tab:Section({
+    Name = "Main" -- String
+})
+
+if gameId == 6767503821 then --not really much tbh but works anyway
+    local tycoonDir = nil
+    local function getTycoon()
+        if tostring(Workspace.Tycoon.Bunker1.Properties.Owner.Value) == pName then
+            tycoonDir = game:GetService("Workspace").Tycoon.Bunker1
+        end
+        if tostring(Workspace.Tycoon.Bunker2.Properties.Owner.Value) == pName then
+            tycoonDir = game:GetService("Workspace").Tycoon.Bunker2
+        end
+        if tostring(Workspace.Tycoon.Bunker3.Properties.Owner.Value) == pName then
+            tycoonDir = game:GetService("Workspace").Tycoon.Bunker3
+        end
+        if tostring(Workspace.Tycoon.Bunker4.Properties.Owner.Value) == pName then
+            tycoonDir = game:GetService("Workspace").Tycoon.Bunker4
+        end
+    end
+
+    local Toggle = Section:Toggle({
+        Name = "Loop Click Dropper", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            LoopClickDropper = Bool
+    
+            if Tycoon == nil then
+                getTycoon()
+            end
+    
+            if LoopClickDropper then
+                while LoopClickDropper == true do
+                    fireclickdetector(tycoonDir.Buildings.Mine.Button.ClickDetector)
+                    wait(0.2)
+                end
+            end
+        end
+    })
+
+    local Toggle = Section:Toggle({
+        Name = "Loop Collect Cash", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            LoopCollectCash = Bool
+    
+            if Tycoon == nil then
+                getTycoon()
+            end
+    
+            if LoopCollectCash then
+                while LoopCollectCash == true do
+                    firetouchinterest(pHead, tycoonDir.tycoonThings.CollectorParts.cashCollector.CollectCash, 0)
+                    firetouchinterest(pHead, tycoonDir.tycoonThings.CollectorParts.cashCollector.CollectCash, 1)
+                    wait(1)
+                end
+            end
+        end
+    })
+end
+
+if gameId == 3601201039 then --autofarm not done
+    local plot = ("FarmPlot-" .. userid)
+    local plotDir = Workspace[plot]
+    local cropSquare = "CropSquares-1"
+    local crop = "Wheat"
+    local cropPrice = 5
+    local cropRenewable = false
+    local treeType = "Basic"
+    local axeLevel = 0
+    local axeMinLevel = 1
+    local axeUsing = "Wooden Axe"
+    local rollItem = "smallPen"
+    local rollPrice = 1000
+    local rollAmount
+    local animalDir = Workspace.SpawnedAnimals[userid]
+    local wateringCan = "Watering Can"
+    local unsellables = {
+        "Bamboo Rod",
+        "Fiberglass Rod",
+        "Gold Rod",
+        "Diamond Rod",
+        "Enchanted Rod",
+        "Wooden Axe",
+        "Iron Axe",
+        "Gold Axe",
+        "Diamond Axe",
+        "Enchanted Axe",
+        "Watering Can",
+        "Iron Watering Can",
+        "Gold Watering Can",
+        "Diamond Can",
+        "Enchanted Can",
+        "Shovel",
+        "Wheat Seeds",
+        "Shears",
+        "Sprinkler",
+        "Gold Sprinkler"
+    }
+    
+    function equipWateringCan()
+        if Backpack:FindFirstChild("Watering Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Watering Can"))
+            wateringCan = "Watering Can"
+        elseif Backpack:FindFirstChild("Iron Watering Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Iron Watering Can"))
+            wateringCan = "Iron Watering Can"
+        elseif Backpack:FindFirstChild("Gold Watering Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Gold Watering Can"))
+            wateringCan = "Gold Watering Can"
+        elseif Backpack:FindFirstChild("Diamond Watering Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Diamond Watering Can"))
+            wateringCan = "Diamond Watering Can"
+        elseif Backpack:FindFirstChild("Enchanted Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Enchanted Can"))
+            wateringCan = "Enchanted Can"
+        end
+    end
+
+    function getWater()
+        local pHead = localplayer.Character.Head
+        local pCFrame = localplayer.Character.HumanoidRootPart.CFrame
+        plotDir.WellLocation.CFrame = pHead.CFrame
+        game:GetService("ReplicatedStorage").Crops.FillWateringCanRequest:InvokeServer(pCFrame)
+    end
+
+    function goHome()
+        game:GetService("ReplicatedStorage").TeleportRequest.TeleportHomeRequest:FireServer()
+    end
+
+    function buyPlantCrops()
+        local emptySlots = 0
+        local gold = localplayer.leaderstats.Gold.Value
+        local amountPossible = math.floor(gold/cropPrice)
+        local amountOwned = 0
+        local amountNeeded = 0
+        Humanoid:UnequipTools()
+        for i = 1, 3 do
+            if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Occupied.Value == false then
+                            emptySlots = emptySlots + 1
+                        end
+                    end
+                end
+            end
+        end
+        print("Found " .. emptySlots .. " empty slots")
+        print("You can afford " .. amountPossible .. " " .. string.lower(crop) .. " seeds")
+        if amountPossible > emptySlots then
+            amountPossible = emptySlots
+        end
+        if Backpack:FindFirstChild(crop .. " Seeds") then
+            amountOwned = Backpack[crop .. " Seeds"].Amount.Value
+        end
+        print("You own " .. amountOwned .. " " .. string.lower(crop) .. " seeds")
+        amountNeeded = amountPossible - amountOwned
+        print("Buying " .. amountNeeded .. " " .. string.lower(crop) .. " seeds")
+        if amountNeeded > 0 then
+            for i = 1, amountNeeded do
+                if cropPrice < gold then
+                    game:GetService("ReplicatedStorage").Items.BuyItemRequest:InvokeServer(crop .. " Seeds")
+                end
+            end
+        end
+        if amountPossible > 0 then
+            Humanoid:EquipTool(Backpack[crop .. " Seeds"])
+        end
+        for i = 1, 3 do
+            local temp = false
+            if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
+                print("Planting CropSquares-" .. tostring(i))
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Occupied.Value == false then
+                            if temp == false then
+                                teleportTo(v.CFrame)
+                                temp = true
+                            end
+                        end
+                    end
+                end
+                wait(1)
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Occupied.Value == false then
+                            if char:FindFirstChild(crop .. " Seeds") then
+                                if char[crop .. " Seeds"].Amount.Value > 0 then
+                                    teleportTo(v.CFrame)
+                                    local cropSeeds = string.lower(crop .. "_seeds")
+                                    game:GetService("ReplicatedStorage").Crops.PlantSeedRequest:InvokeServer(v, cropSeeds)
+                                end
+                            end
+                        end
+                    end
+                end
+                print("CropSquares-" .. tostring(i)  .. " Done")
+            end
+        end
+    end
+
+    function waterCrops()
+        Humanoid:UnequipTools()
+        for i = 1, 3 do
+            local temp = false
+            if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
+                print("Watering CropSquares-" .. tostring(i))
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Watered.Value == false then
+                            if temp == false then
+                                teleportTo(v.CFrame)
+                                temp = true
+                            end
+                        end
+                    end
+                end
+                wait(1)
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Watered.Value == false then
+                            print(v.Index.Value .. " is not watered")
+                            equipWateringCan()
+                            teleportTo(v.CFrame)
+                            if char[wateringCan].WaterLevel.Value == 0 then
+                                getWater()
+                            end
+                            game:GetService("ReplicatedStorage").Crops.PlaceWaterRequest:InvokeServer(v)
+                        end
+                    end
+                end
+                print("CropSquares-" .. tostring(i) .. " Done")
+            end
+        end
+    end
+
+    function harvestCrops()
+        Humanoid:UnequipTools()
+        for i = 1, 3 do
+            local temp = false
+            if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
+                print("CropSquares-" .. tostring(i))
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v:FindFirstChild("Crop") then
+                            if v.Crop.Harvestable.Value == true then
+                                if temp == false then
+                                    teleportTo(v.CFrame)
+                                    temp = true
+                                end
+                            end
+                        end
+                    end
+                end
+                wait(1)
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v:FindFirstChild("Crop") then
+                            if v.Crop.Harvestable.Value == true then
+                                print(v.Index.Value .. " is harvestable")
+                                teleportTo(v.CFrame)
+                                game:GetService("ReplicatedStorage").Crops.HarvestCropRequest:InvokeServer(v, false)
+                            end
+                        end
+                    end
+                end
+                print("CropSquares-1 Done")
+            end
+        end
+    end
+
+    function animalStuff()
+        for i, v in pairs(animalDir:GetChildren()) do
+            if v.Data.PettingTimer.Value == 0 and v.Data.Happiness.Value < 100 then
+                print("Petting " .. v.Name)
+                if v:FindFirstChild("ClickDetector") then
+                    fireclickdetector(v.ClickDetector)
+                    fireclickdetector(v.ClickDetector)
+                end
+                if v:FindFirstChild("ClickDetector") == nil then
+                    fireclickdetector(v.HumanoidRootPart.Hitbox.ClickDetector)
+                    fireclickdetector(v.HumanoidRootPart.Hitbox.ClickDetector)
+                end
+            end
+        end
+        local temp = 0
+        for i, v in pairs(plotDir.AnimalPen.DroppedProducts:GetChildren()) do
+            if v.Hitbox:FindFirstChild("TouchInterest") then
+                firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 0)
+                firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 1)
+                temp = temp + 1
+            end
+        end
+        if temp > 0 then
+            print("Picked up " .. temp .. " products")
+        end
+    end
+
+    function castRod(CFrame)
+        game:GetService("ReplicatedStorage").Items.CastFishingRodRequest:InvokeServer(CFrame)
+    end
+
+    function sellAll()
+        teleportTo(plotDir.Bin.SellTitle.CFrame)
+        for i, v in pairs(Backpack:GetChildren()) do
+            if table.find(unsellables, v.Name) == nil then
+                print("Selling " .. v.Amount.Value .. " " .. v.Name)
+                Humanoid:EquipTool(v)
+                local itemAmount = Workspace[pName][v.Name].Amount.Value
+                for i = 1, itemAmount do
+                    game:GetService("ReplicatedStorage").Items.SellItemRequest:InvokeServer(plotDir:WaitForChild("Bin"))
+                end
+            end
+        end
+        Humanoid:UnequipTools()
+    end
+
+    function fastRoll()
+        local gold = localplayer.leaderstats.Gold.Value
+        if rollAmount ~= nil then
+            totalPrice = rollPrice * rollAmount
+            print("Price of rolls is " .. totalPrice)
+            if totalPrice < gold then
+                for i = 1, rollAmount do
+                    game:GetService("ReplicatedStorage").Roll.RollCrateRequest:InvokeServer(rollItem)
+                end
+            else
+                print("Not enough gold")
+            end
+        else
+            print("Enter a roll amount")
+        end
+    end
+
+    local Toggle = Section:Toggle({
+        Name = "Autofarm Crops", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            Autofarm = Bool
+    
+            if Autofarm then
+                while Autofarm == true do
+                    print("---")
+                    print("Starting Loop")
+                    buyPlantCrops()
+                    wait(0.1)
+                    equipWateringCan()
+                    wait(0.1)
+                    waterCrops()
+                    wait(0.1)
+                    harvestCrops()
+                    wait(0.1)
+                    sellAll()
+                    print("Finished Loop")
+                    print("---")
+                    wait(0.1)
+                end
+            end
+        end
+    })
+
+    local Toggle = Section:Toggle({
+        Name = "Farm Berries & Mushrooms", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            ForagingFarm = Bool
+    
+            if ForagingFarm then
+                while ForagingFarm == true do
+                    for i, v in pairs(game:GetService("Workspace").Foraging.SpawnPoints:GetChildren()) do
+                        if v.Occupied.Value == true then
+                            for i, v in pairs(v:GetDescendants()) do
+                                if v:IsA("ClickDetector") then
+                                    if ForagingFarm == true then
+                                        teleportTo(v.Parent.CFrame)
+                                        fireclickdetector(v)
+                                        wait(0.1)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    wait(0.1)
+                    if ForagingFarm == false then
+                        goHome()
+                    end
+                end
+            end
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Buy & Plant Crop", -- String
+        Callback = function()
+            buyPlantCrops()
+        end
+    })
+
+    local Dropdown = Section:Dropdown({
+        Name = "Crop To Farm", -- String
+        Items = {"Wheat", "Carrot", "Onion", "Pumpkin", "Corn", "Watermelon", "Strawberry", "Potato", "Tomato", "Grape", "Pineapple", "Chilli", "Turnip", "Cucumber"}, -- Table
+        Callback = function(item)
+            crop = item
+            if crop == "Wheat" then
+                cropPrice = 5
+                cropRenewable = false
+            end
+            if crop == "Carrot" then
+                cropPrice = 16
+                cropRenewable = false
+            end
+            if crop == "Onion" then
+                cropPrice = 18
+                cropRenewable = false
+            end
+            if crop == "Pumpkin" then
+                cropPrice = 250
+                cropRenewable = false
+            end
+            if crop == "Corn" then
+                cropPrice = 300
+                cropRenewable = true
+            end
+            if crop == "Watermelon" then
+                cropPrice = 400
+                cropRenewable = false
+            end
+            if crop == "Strawberry" then
+                cropPrice = 400
+                cropRenewable = true
+            end
+            if crop == "Potato" then
+                cropPrice = 900
+                cropRenewable = false
+            end
+            if crop == "Tomato" then
+                cropPrice = 2000
+                cropRenewable = false
+            end
+            if crop == "Grape" then
+                cropPrice = 3000
+                cropRenewable = true
+            end
+            if crop == "Pineapple" then
+                cropPrice = 3600
+                cropRenewable = false
+            end
+            if crop == "Chilli" then
+                cropPrice = 3750
+                cropRenewable = true
+            end
+            if crop == "Turnip" then
+                cropPrice = 6200
+                cropRenewable = false
+            end
+            if crop == "Cucumber" then
+                cropPrice = 12000
+                cropRenewable = false
+            end
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Water Crops", -- String
+        Callback = function()
+            waterCrops()
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Harvest Crops", -- String
+        Callback = function()
+            harvestCrops()
+        end
+    })
+
+    local Toggle = Section:Toggle({
+        Name = "Animal Stuff", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            AnimalStuff = Bool
+    
+            if AnimalStuff then
+                while AnimalStuff == true do
+                    animalStuff()
+                    wait(1)
+                end
+            end
+        end
+    })
+
+    local Toggle = Section:Toggle({
+        Name = "Farm Trees", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            FarmTrees = Bool
+            if FarmTrees then
+                print("Farming Trees")
+                axeLevel = 0
+                Humanoid:UnequipTools()
+                if Backpack:FindFirstChild("Wooden Axe") then
+                    Humanoid:EquipTool(Backpack["Wooden Axe"])
+                    axeLevel = 1
+                    axeUsing = "Wooden Axe"
+                end
+                if Backpack:FindFirstChild("Iron Axe") then
+                    Humanoid:EquipTool(Backpack["Iron Axe"])
+                    axeLevel = 2
+                    axeUsing = "Iron Axe"
+                end
+                if Backpack:FindFirstChild("Gold Axe") then
+                    Humanoid:EquipTool(Backpack["Gold Axe"])
+                    axeLevel = 3
+                    axeUsing = "Gold Axe"
+                end
+                if Backpack:FindFirstChild("Diamond Axe") then
+                    Humanoid:EquipTool(Backpack["Diamond Axe"])
+                    axeLevel = 4
+                    axeUsing = "Diamond Axe"
+                end
+                if Backpack:FindFirstChild("Enchanted Axe") then
+                    Humanoid:EquipTool(Backpack["Enchanted Axe"])
+                    axeLevel = 5
+                    axeUsing = "Enchanted Axe"
+                end
+                if axeLevel == 0 then
+                    print("You need an axe to farm trees")
+                    FarmTrees = false
+                end
+                if axeLevel < axeMinLevel then
+                    print("You need a higher level axe to farm these trees")
+                    FarmTrees = false
+                end
+                if FarmTrees then
+                    print(axeUsing, axeLevel, treeType)
+                    while FarmTrees == true do
+                        for i, v in pairs(game:GetService("Workspace").Forest.SpawnPoints:GetDescendants()) do
+                            if FarmTrees then
+                                if v:FindFirstChild(treeType) then
+                                    -- This one is hard so I'm using a Hydroxide generated remote
+                                    local ohInstance1 = v[treeType].Trunk
+                                    if axeUsing == "Wooden Axe" then
+                                        local ohTable2 = {
+                                            ["description"] = "Chop Trees",
+                                            ["axe"] = true,
+                                            ["id"] = "Wooden Axe",
+                                            ["storeCategory"] = "Tools",
+                                            ["stackTag"] = "axe",
+                                            ["textureId"] = "rbxassetid://3637797344",
+                                            ["damage"] = 20,
+                                            ["chopStrength"] = 1,
+                                            ["stackable"] = false,
+                                            ["cooldownWaitTime"] = 0.8,
+                                            ["buyPrice"] = 500,
+                                            ["singleOnly"] = true
+                                        }
+                                    end
+                                    if axeUsing == "Iron Axe" then
+                                        local ohTable2 = {
+                                            ["axe"] = true,
+                                            ["id"] = "Iron Axe",
+                                            ["stackTag"] = "axe",
+                                            ["textureId"] = "rbxassetid://3603588083",
+                                            ["chopStrength"] = 2,
+                                            ["buyPrice"] = 1,
+                                            ["cooldownWaitTime"] = 0.8,
+                                            ["stackable"] = false,
+                                            ["damage"] = 30
+                                        }
+                                    end
+                                    if axeUsing == "Gold Axe" then
+                                        local ohTable2 = {
+                                            ["axe"] = true,
+                                            ["cooldownWaitTime"] = 0.8,
+                                            ["damage"] = 40,
+                                            ["chopStrength"] = 3,
+                                            ["id"] = "Gold Axe",
+                                            ["stackable"] = false,
+                                            ["stackTag"] = "axe",
+                                            ["textureId"] = "rbxassetid://3655229878"
+                                        }
+                                    end
+                                    if axeUsing == "Diamond Axe" then
+                                        local ohTable2 = {
+                                            ["description"] = "Testing",
+                                            ["axe"] = true,
+                                            ["id"] = "Diamond Axe",
+                                            ["stackTag"] = "axe",
+                                            ["textureId"] = "rbxassetid://3659044314",
+                                            ["chopStrength"] = 4,
+                                            ["stackable"] = false,
+                                            ["cooldownWaitTime"] = 0.8,
+                                            ["damage"] = 50
+                                        }
+                                    end
+                                    game:GetService("ReplicatedStorage").Trees.TreeHitRequest:InvokeServer(ohInstance1, ohTable2)
+                                    wait(0.1)
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    })
+
+    local Dropdown = Section:Dropdown({
+        Name = "Tree Type", -- String
+        Items = {"Basic", "Maple", "Aspen", "Enchanted"}, -- Table
+        Callback = function(item)
+            treeType = item
+            if treeType == "Basic" then
+                axeMinLevel = 1
+            end
+            if treeType == "Maple" then
+                axeMinLevel = 2
+            end
+            if treeType == "Aspen" then
+                axeMinLevel = 3
+            end
+            if treeType == "Enchanted" then
+                axeMinLevel = 4
+            end
+        end
+    })
+
+    local Toggle = Section:Toggle({
+        Name = "Auto Fish (Go Near Your Pond)", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            AutoFish = Bool
+    
+            if AutoFish then
+                Humanoid:UnequipTools()
+                local found = false
+                if Backpack:FindFirstChild("Bamboo Rod") then
+                    Humanoid:EquipTool(Backpack["Bamboo Rod"])
+                    found = true
+                end
+                if Backpack:FindFirstChild("Fiberglass Rod") then
+                    Humanoid:EquipTool(Backpack["Fiberglass Rod"])
+                    found = true
+                end
+                if Backpack:FindFirstChild("Gold Rod") then
+                    Humanoid:EquipTool(Backpack["Gold Rod"])
+                    found = true
+                end
+                if Backpack:FindFirstChild("Diamond Rod") then
+                    Humanoid:EquipTool(Backpack["Diamond Rod"])
+                    found = true
+                end
+                if Backpack:FindFirstChild("Enchanted Rod") then
+                    Humanoid:EquipTool(Backpack["Enchanted Rod"])
+                    found = true
+                end
+                if found == false then
+                    print("Please purchase a wooden rod from the shop")
+                    AutoFish = false
+                end
+                while AutoFish == true do
+                    game:GetService("ReplicatedStorage").Items.CastFishingRodRequest:InvokeServer(plotDir.WaterSource.CFrame)
+                end
+            end
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Sell All", -- String
+        Callback = function()
+            sellAll()
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Fast Roll", -- String
+        Callback = function()
+            fastRoll()
+        end
+    })
+
+    local Dropdown = Section:Dropdown({
+        Name = "Roll Item", -- String
+        Items = {"Small Egg", "Large Egg", "Cheap Furniture Box", "Quality Furniture Box"}, -- Table
+        Callback = function(item)
+            rollItem = item
+            if rollItem == "Small Egg" then
+                rollItem = "smallPen"
+                rollPrice = 1000
+            end
+            if rollItem == "Large Egg" then
+                rollItem = "largePen"
+                rollPrice = 10000
+            end
+            if rollItem == "Cheap Furniture Box" then
+                rollItem = "cheapFurniture"
+                rollPrice = 800
+            end
+            if rollItem == "Quality Furniture Box" then
+                rollItem = "qualityFurniture"
+                rollPrice = 5000
+            end
+        end
+        })
+
+    local SmallTextbox = Section:SmallTextbox({
+        Name = "Roll Amount", -- String
+        Default = "Number", -- String
+        Callback = function(Text)
+            rollAmount = tonumber(Text)
+        end
+    })
+end
+
+if gameId == 10198661638 then --unfinished
+    local tycoonDir = nil
+    local hasTycoon = false
+    for i, v in pairs(game:GetService("Workspace").Tycoon:GetChildren()) do
+        if tostring(v.Onwer.Value) == pName then
+            tycoonDir = v
+            hasTycoon = true
+            print("You own tycoon " .. tostring(tycoonDir))
+        end
+    end
+
+    if hasTycoon == false then
+        for i, v in pairs(game:GetService("Workspace").Tycoon:GetChildren()) do
+            if v.Onwer.Value == nil then
+                if hasTycoon == false then
+                    teleportTo(v.Base.Touch.CFrame)
+                    tycoonDir = v
+                    hasTycoon = true
+                    print("Claimed tycoon " .. tostring(tycoonDir))
+                end
+            end
+        end
+    end
+    
+    local Toggle = Section:Toggle({
+        Name = "Spam Offline Reward (Inf Cash)", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            SpamOffline = Bool
+    
+            if SpamOffline then
+                while SpamOffline == true do
+                    game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Offline"):WaitForChild("[S-C]TryGetFreeReward"):FireServer()
+                    wait(0.1)
+                end
+            end
+        end
+    })
+
+    local Toggle = Section:Toggle({ -- Crashes
+        Name = "Loop Buy Buttons", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            BuyButtons = Bool
+    
+            if BuyButtons then
+                while BuyButtons == true do
+                    local cash = localplayer.Eco.cash.Value
+                    print(cash)
+                    for i, v in pairs (tycoonDir.Buttons:GetChildren()) do
+                        print(v.Name, v.Price.Value)
+                        if v.Price.Value < cash then
+                            print("Bought " .. v.Name)
+                            firetouchinterest(Humanoid, v.Head, 0)
+                            firetouchinterest(Humanoid, v.Head, 1)
+                        end
+                    end
+                    wait(0.1)
+                end
+            end
+        end
+    })
+
+    local Toggle = Section:Toggle({
+        Name = "Complete Obbies", -- String
+        Default = false, -- Boolean
+        Callback = function(Bool)
+            CompleteObbies = Bool
+    
+            if CompleteObbies then
+                while CompleteObbies == true do
+                    if game:GetService("Workspace").Obby.Wall:FindFirstChild("Obby1Wall") == nil then
+                        teleportTo(game:GetService("Workspace").Obby.Obby1.End.CFrame)
+                        wait(0.1)
+                    end
+                    if game:GetService("Workspace").Obby.Wall:FindFirstChild("Obby2Wall") == nil then
+                        teleportTo(game:GetService("Workspace").Obby.Obby2.End.CFrame)
+                        wait(0.1)
+                    end
+                    if game:GetService("Workspace").Obby.Wall:FindFirstChild("Obby3Wall") == nil then
+                        teleportTo(game:GetService("Workspace").Obby.Obby3.End.CFrame)
+                        wait(0.1)
+                    end
+                    wait(1)
+                end
+            end
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Get Free Stuff", -- String
+        Callback = function()
+            game:GetService("ReplicatedStorage").Remote.Event.RandomGift["[C-S]GetFreeGoldEgg"]:FireServer()
+            game:GetService("ReplicatedStorage").Remote.Event.RandomGift["[C-S]GetFreeGoldMilk"]:FireServer()
+            game:GetService("ReplicatedStorage").Remote.Event.RandomGift["[C-S]GetFreeGoldWool"]:FireServer()
+            game:GetService("ReplicatedStorage").Remote.Function.Spin["[C-S]TryUseFreeSpin"]:InvokeServer()
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Teleport To Tycoon", -- String
+        Callback = function()
+            teleportTo(tycoonDir.Base.Teleport.CFrame)
+        end
+    })
+end
+
+local Tab = Window:Tab({
+    Name = "Settings", -- String
+    Icon = "rbxassetid://7059346373", -- String
+    Color = Color3.new(1, 0, 0) -- Color3
+})
+
+local Section = Tab:Section({
+    Name = "Settings" -- String
+})
+
+local Button = Section:Button({
+    Name = "Unload", -- String
+    Callback = function()
+        Library:Destroy()
+    end
+})
