@@ -130,14 +130,35 @@ if gameId == 3601201039 then --autofarm not done
     local treeType = "Basic"
     local axeNeeded = "Wooden Axe"
     local axeUsing = "Wooden Axe"
+    local rodEquipped = "Bamboo Rod"
     local egg = "Small"
     local eggPrice = 1000
     local eggAmount = 1
     local animalDir = Workspace.SpawnedAnimals[userid]
+    local wateringCan = "Watering Can"
+    local unsellables = {
+        "Bamboo Rod",
+        "Fiberglass Rod",
+        "Gold Rod",
+        "Wooden Axe",
+        "Gold Axe",
+        "Diamond Axe",
+        "Watering Can",
+        "Iron Watering Can",
+        "Shovel",
+        "Wheat Seeds",
+        "Shears",
+        "Sprinkler",
+        "Gold Sprinkler"
+    }
     
     function equipWateringCan()
-        if game:GetService("Workspace")[pName]:FindFirstChild("Watering Can") == nil then
-            Humanoid:EquipTool(localplayer.Backpack["Watering Can"])
+        if Backpack:FindFirstChild("Watering Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Watering Can"))
+            wateringCan = "Watering Can"
+        elseif Backpack:FindFirstChild("Iron Watering Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Iron Watering Can"))
+            wateringCan = "Iron Watering Can"
         end
     end
 
@@ -216,6 +237,7 @@ if gameId == 3601201039 then --autofarm not done
 
     function waterCrops()
         local temp = false
+        Humanoid:UnequipTools()
         for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
             if v:IsA("Part") then
                 if v.Watered.Value == false then
@@ -233,7 +255,7 @@ if gameId == 3601201039 then --autofarm not done
                     print(v.Index.Value .. " is not watered")
                     equipWateringCan()
                     teleportTo(v.CFrame)
-                    if char["Watering Can"].WaterLevel.Value == 0 then
+                    if char[wateringCan].WaterLevel.Value == 0 then
                         getWater()
                     end
                     game:GetService("ReplicatedStorage").Crops.PlaceWaterRequest:InvokeServer(v)
@@ -304,15 +326,13 @@ if gameId == 3601201039 then --autofarm not done
 
     function sellAll()
         teleportTo(plotDir.Bin.SellTitle.CFrame)
-        for i, v in pairs(Backpack:GetDescendants()) do
-            if v:IsA("Tool") then
-                if v.Name ~= ("Watering Can" or "Shovel" or "Bamboo Rod" or "Wheat Seeds" or "Wooden Axe") then
-                    print("Selling " .. v.Amount.Value .. " " .. v.Name)
-                    Humanoid:EquipTool(v)
-                    local itemAmount = Workspace[pName][v.Name].Amount.Value
-                    for i = 1, itemAmount do
-                        game:GetService("ReplicatedStorage").Items.SellItemRequest:InvokeServer(plotDir:WaitForChild("Bin"))
-                    end
+        for i, v in pairs(Backpack:GetChildren()) do
+            if table.find(unsellables, v.Name) == nil then
+                print("Selling " .. v.Amount.Value .. " " .. v.Name)
+                Humanoid:EquipTool(v)
+                local itemAmount = Workspace[pName][v.Name].Amount.Value
+                for i = 1, itemAmount do
+                    game:GetService("ReplicatedStorage").Items.SellItemRequest:InvokeServer(plotDir:WaitForChild("Bin"))
                 end
             end
         end
@@ -369,6 +389,7 @@ if gameId == 3601201039 then --autofarm not done
                                     if ForagingFarm == true then
                                         teleportTo(v.Parent.CFrame)
                                         fireclickdetector(v)
+                                        wait(0.1)
                                     end
                                 end
                             end
@@ -496,42 +517,64 @@ if gameId == 3601201039 then --autofarm not done
                     if Backpack:FindFirstChild("Wooden Axe") == nil then
                         if Backpack:FindFirstChild("Iron Axe") == nil then
                             if Backpack:FindFirstChild("Gold Axe") == nil then
-                                print("Please get a wooden axe first!")
-                                FarmTrees = false
+                                if Backpack:FindFirstChild("Diamond Axe") == nil then
+                                    print("Please get a wooden axe first!")
+                                    FarmTrees = false
+                                end
                             end
                         end
                     end
                 end
                 if treeType == "Maple" then
-                    if Backpack:FindFirstChild("Gold Axe") == nil then
-                        if Backpack:FindFirstChild("Iron Axe") == nil then
-                            print("Please get a iron axe via donating to the Elder first!")
-                            FarmTrees = false
+                    if Backpack:FindFirstChild("Diamond Axe") == nil then
+                        if Backpack:FindFirstChild("Gold Axe") == nil then
+                            if Backpack:FindFirstChild("Iron Axe") == nil then
+                                print("Please get a iron axe via donating to the Elder first!")
+                                FarmTrees = false
+                            end
                         end
                     end
                 end
                 if treeType == "Aspen" then
-                    if Backpack:FindFirstChild("Gold Axe") == nil then
-                        print("Please get a gold axe via donating to the Elder first!")
+                    if Backpack:FindFirstChild("Diamond Axe") == nil then
+                        if Backpack:FindFirstChild("Gold Axe") == nil then
+                            print("Please get a gold axe via donating to the Elder first!")
+                            FarmTrees = false
+                        end
+                    end
+                end
+                if treeType == "Enchanted" then
+                    if Backpack:FindFirstChild("Diamond Axe") == nil then
+                        print("Please get a diamond axe via donating to the Elder first!")
                         FarmTrees = false
                     end
                 end
                 if FarmTrees == true then
-                    if Backpack:FindFirstChild("Gold Axe") then
-                        Humanoid:EquipTool(Backpack["Gold Axe"])
-                        axeUsing = "Gold Axe"
+                    if Backpack:FindFirstChild("Diamond Axe") then
+                        Humanoid:EquipTool(Backpack["Diamond Axe"])
+                        axeUsing = "Diamond Axe"
                     end
-                    if Backpack:FindFirstChild("Gold Axe") == nil then
-                        if Backpack:FindFirstChild("Iron Axe") then
-                            Humanoid:EquipTool(Backpack["Iron Axe"])
-                            axeUsing = "Iron Axe"
+                    if Backpack:FindFirstChild("Diamond Axe") == nil then
+                        if Backpack:FindFirstChild("Gold Axe") then
+                            Humanoid:EquipTool(Backpack["Gold Axe"])
+                            axeUsing = "Gold Axe"
                         end
                     end
-                    if Backpack:FindFirstChild("Gold Axe") == nil then
-                        if Backpack:FindFirstChild("Iron Axe") == nil then
-                            if Backpack:FindFirstChild("Wooden Axe") then
-                                Humanoid:EquipTool(Backpack["Wooden Axe"])
-                                axeUsing = "Wooden Axe"
+                    if Backpack:FindFirstChild("Diamond Axe") == nil then
+                        if Backpack:FindFirstChild("Gold Axe") == nil then
+                            if Backpack:FindFirstChild("Iron Axe") then
+                                Humanoid:EquipTool(Backpack["Iron Axe"])
+                                axeUsing = "Iron Axe"
+                            end
+                        end
+                    end
+                    if Backpack:FindFirstChild("Diamond Axe") == nil then
+                        if Backpack:FindFirstChild("Gold Axe") == nil then
+                            if Backpack:FindFirstChild("Iron Axe") == nil then
+                                if Backpack:FindFirstChild("Wooden Axe") then
+                                    Humanoid:EquipTool(Backpack["Wooden Axe"])
+                                    axeUsing = "Wooden Axe"
+                                end
                             end
                         end
                     end
@@ -583,7 +626,19 @@ if gameId == 3601201039 then --autofarm not done
                                         ["textureId"] = "rbxassetid://3655229878"
                                     }
                                 end
-
+                                if axeUsing == "Diamond Axe" then
+                                    local ohTable2 = {
+                                        ["description"] = "Testing",
+                                        ["axe"] = true,
+                                        ["id"] = "Diamond Axe",
+                                        ["stackTag"] = "axe",
+                                        ["textureId"] = "rbxassetid://3659044314",
+                                        ["chopStrength"] = 4,
+                                        ["stackable"] = false,
+                                        ["cooldownWaitTime"] = 0.8,
+                                        ["damage"] = 50
+                                    }
+                                end
                                 game:GetService("ReplicatedStorage").Trees.TreeHitRequest:InvokeServer(ohInstance1, ohTable2)
                                 wait(0.1)
                             end
@@ -608,6 +663,9 @@ if gameId == 3601201039 then --autofarm not done
             if treeType == "Aspen" then
                 axeNeeded = "Gold Axe"
             end
+            if treeType == "Enchanted" then
+                axeNeeded = "Gold Axe"
+            end
         end
     })
 
@@ -619,17 +677,31 @@ if gameId == 3601201039 then --autofarm not done
     
             if AutoFish then
                 Humanoid:UnequipTools()
-                if Backpack:FindFirstChild("Bamboo Rod") then
-                    Humanoid:EquipTool(Backpack["Bamboo Rod"])
-                    while AutoFish == true do
-                        if char["Bamboo Rod"].Casting.Value == false then
-                            castRod(plotDir.WaterSource.CFrame)
+                if Backpack:FindFirstChild("Gold Rod") == nil then
+                    if Backpack:FindFirstChild("Fiberglass Rod") == nil then
+                        if Backpack:FindFirstChild("Bamboo Rod") == nil then
+                            print("Please get a bamboo rod first!")
+                            AutoFish = false
                         end
-                        wait(0.1)
                     end
                 end
-                if Backpack:FindFirstChild("Bamboo Rod") == nil then
-                    print("Please get a bamboo rod first!")
+                if Backpack:FindFirstChild("Fiberglass Rod") then
+                    Humanoid:EquipTool(Backpack["Fiberglass Rod"])
+                end
+                if Backpack:FindFirstChild("Fiberglass Rod") == nil then
+                    if Backpack:FindFirstChild("Gold Rod") then
+                        Humanoid:EquipTool(Backpack["Gold Rod"])
+                    end
+                end
+                if Backpack:FindFirstChild("Fiberglass Rod") == nil then
+                    if Backpack:FindFirstChild("Gold Rod") == nil then
+                        if Backpack:FindFirstChild("Bamboo Rod") then
+                            Humanoid:EquipTool(Backpack["Bamboo Rod"])
+                        end
+                    end
+                end
+                while AutoFish == true do
+                    game:GetService("ReplicatedStorage").Items.CastFishingRodRequest:InvokeServer(plotDir.WaterSource.CFrame)
                 end
             end
         end
