@@ -775,10 +775,9 @@ if gameId == 3601201039 then --autofarm not done
     })
 
     local Button = Section:Button({
-        Name = "Dupe Sell Hand", -- String
+        Name = "Dupe Sell Hand (Rejoin When Done)", -- String
         Callback = function()
-            local Humanoid = char.Humanoid
-            Humanoid.Health = 0
+            game.Players.LocalPlayer.Character.Head:Destroy()
             wait(0.5)
             local elapsed = 0
             local connection
