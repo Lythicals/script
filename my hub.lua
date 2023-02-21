@@ -357,7 +357,18 @@ if gameId == 3601201039 then --autofarm not done
             end
         end
         if temp > 0 then
-            print("Picked up " .. temp .. " products")
+            print("Picked up " .. temp .. " products from the animal pen")
+        end
+        local temp = 0
+        for i, v in pairs(plotDir.LargeAnimalPen.DroppedProducts:GetChildren()) do
+            if v.Hitbox:FindFirstChild("TouchInterest") then
+                firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 0)
+                firetouchinterest(localplayer.Character.HumanoidRootPart, v.Hitbox, 1)
+                temp = temp + 1
+            end
+        end
+        if temp > 0 then
+            print("Picked up " .. temp .. " products from the large animal pen")
         end
     end
 
@@ -545,9 +556,15 @@ if gameId == 3601201039 then --autofarm not done
             AnimalStuff = Bool
     
             if AnimalStuff then
+                game:GetService("Players").Swagicals.PlayerScripts.AnimalInfo.RequestHandler.Enabled = false
+                game:GetService("Players").Swagicals.PlayerScripts.AnimalInfo.RequestHandler.Disabled = true
                 while AnimalStuff == true do
                     animalStuff()
                     wait(1)
+                    if AnimalStuff == false then
+                        game:GetService("Players").Swagicals.PlayerScripts.AnimalInfo.RequestHandler.Enabled = true
+                        game:GetService("Players").Swagicals.PlayerScripts.AnimalInfo.RequestHandler.Disabled = false
+                    end
                 end
             end
         end
@@ -775,7 +792,7 @@ if gameId == 3601201039 then --autofarm not done
     })
 
     local Button = Section:Button({
-        Name = "Dupe Sell Hand (Rejoin When Done)", -- String
+        Name = "Dupe Sell Hand (Reload When Done)", -- String
         Callback = function()
             game.Players.LocalPlayer.Character.Head:Destroy()
             wait(0.5)
