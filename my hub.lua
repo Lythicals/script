@@ -131,10 +131,9 @@ if gameId == 3601201039 then --autofarm not done
     local treeType = "Basic"
     local axeNeeded = "Wooden Axe"
     local axeUsing = "Wooden Axe"
-    local rodEquipped = "Bamboo Rod"
-    local egg = "Small"
-    local eggPrice = 1000
-    local eggAmount = 1
+    local rollItem = "smallPen"
+    local rollPrice = 1000
+    local rollAmount
     local animalDir = Workspace.SpawnedAnimals[userid]
     local wateringCan = "Watering Can"
     local unsellables = {
@@ -364,9 +363,18 @@ if gameId == 3601201039 then --autofarm not done
 
     function fastRoll()
         local gold = localplayer.leaderstats.Gold.Value
-        for i = 1, eggAmount do
-            local eggName = string.lower(egg) .. "Pen"
-            game:GetService("ReplicatedStorage").Roll.RollCrateRequest:InvokeServer("smallPen")
+        if rollAmount ~= nil then
+            totalPrice = rollPrice * rollAmount
+            print("Price of rolls is " .. totalPrice)
+            if totalPrice < gold then
+                for i = 1, rollAmount do
+                    game:GetService("ReplicatedStorage").Roll.RollCrateRequest:InvokeServer(rollItem)
+                end
+            else
+                print("Not enough gold")
+            end
+        else
+            print("Enter a roll amount")
         end
     end
 
@@ -745,24 +753,34 @@ if gameId == 3601201039 then --autofarm not done
     })
 
     local Dropdown = Section:Dropdown({
-        Name = "Roll Type", -- String
-        Items = {"Small", "Large"}, -- Table
+        Name = "Roll Item", -- String
+        Items = {"Small Egg", "Large Egg", "Cheap Furniture Box", "Quality Furniture Box"}, -- Table
         Callback = function(item)
-            egg = item
-            if egg == "Small" then
-                eggPrice = 1000
+            rollItem = item
+            if rollItem == "Small Egg" then
+                rollItem = "smallPen"
+                rollPrice = 1000
             end
-            if egg == "Large" then
-                eggPrice = 10000
+            if rollItem == "Large Egg" then
+                rollItem = "largePen"
+                rollPrice = 10000
+            end
+            if rollItem == "Cheap Furniture Box" then
+                rollItem = "cheapFurniture"
+                rollPrice = 800
+            end
+            if rollItem == "Quality Furniture Box" then
+                rollItem = "qualityFurniture"
+                rollPrice = 5000
             end
         end
-    })
+        })
 
     local SmallTextbox = Section:SmallTextbox({
         Name = "Roll Amount", -- String
         Default = "Number", -- String
         Callback = function(Text)
-            eggAmount = tonumber(Text)
+            rollAmount = tonumber(Text)
         end
     })
 end
