@@ -3,6 +3,7 @@
 --// Variables
 local Workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
 local localplayer = game.Players.LocalPlayer
 local char = localplayer.Character
 local Humanoid = char.Humanoid
@@ -137,6 +138,7 @@ if gameId == 3601201039 then --autofarm not done
     local rollAmount
     local animalDir = Workspace.SpawnedAnimals[userid]
     local wateringCan = "Watering Can"
+    local desiredMoney = 100000
     local unsellables = {
         "Bamboo Rod",
         "Fiberglass Rod",
@@ -170,9 +172,9 @@ if gameId == 3601201039 then --autofarm not done
         elseif Backpack:FindFirstChild("Gold Watering Can") then
             Humanoid:EquipTool(Backpack:FindFirstChild("Gold Watering Can"))
             wateringCan = "Gold Watering Can"
-        elseif Backpack:FindFirstChild("Diamond Watering Can") then
-            Humanoid:EquipTool(Backpack:FindFirstChild("Diamond Watering Can"))
-            wateringCan = "Diamond Watering Can"
+        elseif Backpack:FindFirstChild("Diamond Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Diamond Can"))
+            wateringCan = "Diamond Can"
         elseif Backpack:FindFirstChild("Enchanted Can") then
             Humanoid:EquipTool(Backpack:FindFirstChild("Enchanted Can"))
             wateringCan = "Enchanted Can"
@@ -197,7 +199,7 @@ if gameId == 3601201039 then --autofarm not done
         local amountOwned = 0
         local amountNeeded = 0
         Humanoid:UnequipTools()
-        for i = 1, 3 do
+        for i = 1, 2 do
             if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
                 for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
                     if v:IsA("Part") then
@@ -229,7 +231,7 @@ if gameId == 3601201039 then --autofarm not done
         if amountPossible > 0 then
             Humanoid:EquipTool(Backpack[crop .. " Seeds"])
         end
-        for i = 1, 3 do
+        for i = 1, 2 do
             local temp = false
             if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
                 print("Planting CropSquares-" .. tostring(i))
@@ -264,7 +266,7 @@ if gameId == 3601201039 then --autofarm not done
 
     function waterCrops()
         Humanoid:UnequipTools()
-        for i = 1, 3 do
+        for i = 1, 2 do
             local temp = false
             if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
                 print("Watering CropSquares-" .. tostring(i))
@@ -299,7 +301,7 @@ if gameId == 3601201039 then --autofarm not done
 
     function harvestCrops()
         Humanoid:UnequipTools()
-        for i = 1, 3 do
+        for i = 1, 2 do
             local temp = false
             if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
                 print("CropSquares-" .. tostring(i))
@@ -364,7 +366,6 @@ if gameId == 3601201039 then --autofarm not done
     end
 
     function sellAll()
-        teleportTo(plotDir.Bin.SellTitle.CFrame)
         for i, v in pairs(Backpack:GetChildren()) do
             if table.find(unsellables, v.Name) == nil then
                 print("Selling " .. v.Amount.Value .. " " .. v.Name)
@@ -770,6 +771,24 @@ if gameId == 3601201039 then --autofarm not done
         Default = "Number", -- String
         Callback = function(Text)
             rollAmount = tonumber(Text)
+        end
+    })
+
+    local Button = Section:Button({
+        Name = "Dupe Sell Hand", -- String
+        Callback = function()
+            local Humanoid = char.Humanoid
+            Humanoid.Health = 0
+            wait(0.5)
+            local elapsed = 0
+            local connection
+            connection = RunService.Stepped:Connect(function(_, dt)
+                elapsed = elapsed + dt
+                if elapsed > 3 then
+                    connection:Disconnect()
+                end
+                game:GetService("ReplicatedStorage").Items.SellItemRequest:InvokeServer(plotDir:WaitForChild("Bin"))
+            end)
         end
     })
 end
