@@ -124,6 +124,7 @@ end
 if gameId == 3601201039 then --autofarm not done
     local plot = ("FarmPlot-" .. userid)
     local plotDir = Workspace[plot]
+    local cropSquare = "CropSquares-1"
     local crop = "Wheat"
     local cropPrice = 5
     local cropRenewable = false
@@ -179,12 +180,15 @@ if gameId == 3601201039 then --autofarm not done
         local amountPossible = math.floor(gold/cropPrice)
         local amountOwned = 0
         local amountNeeded = 0
-        local temp = false
         Humanoid:UnequipTools()
-        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-            if v:IsA("Part") then
-                if v.Occupied.Value == false then
-                    emptySlots = emptySlots + 1
+        for i = 1, 3 do
+            if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Occupied.Value == false then
+                            emptySlots = emptySlots + 1
+                        end
+                    end
                 end
             end
         end
@@ -209,86 +213,105 @@ if gameId == 3601201039 then --autofarm not done
         if amountPossible > 0 then
             Humanoid:EquipTool(Backpack[crop .. " Seeds"])
         end
-        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-            if v:IsA("Part") then
-                if v.Occupied.Value == false then
-                    if temp == false then
-                        teleportTo(v.CFrame)
-                        temp = true
-                    end
-                end
-            end
-        end
-        wait(1)
-        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-            if v:IsA("Part") then
-                if v.Occupied.Value == false then
-                    if char:FindFirstChild(crop .. " Seeds") then
-                        if char[crop .. " Seeds"].Amount.Value > 0 then
-                            teleportTo(v.CFrame)
-                            local cropSeeds = string.lower(crop .. "_seeds")
-                            game:GetService("ReplicatedStorage").Crops.PlantSeedRequest:InvokeServer(v, cropSeeds)
+        for i = 1, 3 do
+            local temp = false
+            if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
+                print("Planting CropSquares-" .. tostring(i))
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Occupied.Value == false then
+                            if temp == false then
+                                teleportTo(v.CFrame)
+                                temp = true
+                            end
                         end
                     end
                 end
+                wait(1)
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Occupied.Value == false then
+                            if char:FindFirstChild(crop .. " Seeds") then
+                                if char[crop .. " Seeds"].Amount.Value > 0 then
+                                    teleportTo(v.CFrame)
+                                    local cropSeeds = string.lower(crop .. "_seeds")
+                                    game:GetService("ReplicatedStorage").Crops.PlantSeedRequest:InvokeServer(v, cropSeeds)
+                                end
+                            end
+                        end
+                    end
+                end
+                print("CropSquares-" .. tostring(i)  .. " Done")
             end
         end
     end
 
     function waterCrops()
-        local temp = false
         Humanoid:UnequipTools()
-        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-            if v:IsA("Part") then
-                if v.Watered.Value == false then
-                    if temp == false then
-                        teleportTo(v.CFrame)
-                        temp = true
+        for i = 1, 3 do
+            local temp = false
+            if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
+                print("Watering CropSquares-" .. tostring(i))
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Watered.Value == false then
+                            if temp == false then
+                                teleportTo(v.CFrame)
+                                temp = true
+                            end
+                        end
                     end
                 end
-            end
-        end
-        wait(1)
-        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-            if v:IsA("Part") then
-                if v.Watered.Value == false then
-                    print(v.Index.Value .. " is not watered")
-                    equipWateringCan()
-                    teleportTo(v.CFrame)
-                    if char[wateringCan].WaterLevel.Value == 0 then
-                        getWater()
+                wait(1)
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.Watered.Value == false then
+                            print(v.Index.Value .. " is not watered")
+                            equipWateringCan()
+                            teleportTo(v.CFrame)
+                            if char[wateringCan].WaterLevel.Value == 0 then
+                                getWater()
+                            end
+                            game:GetService("ReplicatedStorage").Crops.PlaceWaterRequest:InvokeServer(v)
+                        end
                     end
-                    game:GetService("ReplicatedStorage").Crops.PlaceWaterRequest:InvokeServer(v)
                 end
+                print("CropSquares-" .. tostring(i) .. " Done")
             end
         end
     end
 
     function harvestCrops()
         Humanoid:UnequipTools()
-        local temp = false
-        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-            if v:IsA("Part") then
-                if v:FindFirstChild("Crop") then
-                    if v.Crop.Harvestable.Value == true then
-                        if temp == false then
-                            teleportTo(v.CFrame)
-                            temp = true
+        for i = 1, 3 do
+            local temp = false
+            if plotDir.CropField["CropSquares-" .. tostring(i)].Unlocked.Value then
+                print("CropSquares-" .. tostring(i))
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v:FindFirstChild("Crop") then
+                            if v.Crop.Harvestable.Value == true then
+                                if temp == false then
+                                    teleportTo(v.CFrame)
+                                    temp = true
+                                end
+                            end
                         end
                     end
                 end
-            end
-        end
-        wait(1)
-        for i, v in pairs(plotDir.CropField["CropSquares-1"]:GetChildren()) do
-            if v:IsA("Part") then
-                if v:FindFirstChild("Crop") then
-                    if v.Crop.Harvestable.Value == true then
-                        print(v.Index.Value .. " is harvestable")
-                        teleportTo(v.CFrame)
-                        game:GetService("ReplicatedStorage").Crops.HarvestCropRequest:InvokeServer(v, false)
+                wait(1)
+                for i, v in pairs(plotDir.CropField["CropSquares-" .. tostring(i)]:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v:FindFirstChild("Crop") then
+                            if v.Crop.Harvestable.Value == true then
+                                print(v.Index.Value .. " is harvestable")
+                                teleportTo(v.CFrame)
+                                game:GetService("ReplicatedStorage").Crops.HarvestCropRequest:InvokeServer(v, false)
+                            end
+                        end
                     end
                 end
+                print("CropSquares-1 Done")
             end
         end
     end
