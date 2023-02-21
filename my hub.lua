@@ -742,7 +742,6 @@ if gameId == 3601201039 then --autofarm not done
             eggAmount = tonumber(Text)
         end
     })
-
 end
 
 if gameId == 10198661638 then --unfinished
