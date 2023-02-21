@@ -136,6 +136,7 @@ if gameId == 3601201039 then --autofarm not done
     local rollItem = "smallPen"
     local rollPrice = 1000
     local rollAmount
+    local freeAnimal = "Alligator"
     local animalDir = Workspace.SpawnedAnimals[userid]
     local wateringCan = "Watering Can"
     local desiredMoney = 100000
@@ -179,6 +180,7 @@ if gameId == 3601201039 then --autofarm not done
             Humanoid:EquipTool(Backpack:FindFirstChild("Enchanted Can"))
             wateringCan = "Enchanted Can"
         end
+        print("Equipped " .. wateringCan)
     end
 
     function getWater()
@@ -791,16 +793,22 @@ if gameId == 3601201039 then --autofarm not done
         end
     })
 
+    local SmallTextbox = Section:SmallTextbox({
+        Name = "Get Animal", -- String
+        Default = "Name", -- String
+        Callback = function(Text)
+            game:GetService("ReplicatedStorage").Animals.BuyAnimalRequest:InvokeServer(string.lower(Text))
+        end
+    })
+
     local Button = Section:Button({
-        Name = "Dupe Sell Hand (Reload When Done)", -- String
+        Name = "Dupe Sell Hand (Reload Script When Done Duping)", -- String
         Callback = function()
             game.Players.LocalPlayer.Character.Head:Destroy()
             wait(0.5)
-            local elapsed = 0
             local connection
-            connection = RunService.Stepped:Connect(function(_, dt)
-                elapsed = elapsed + dt
-                if elapsed > 3 then
+            connection = RunService.Stepped:Connect(function()
+                if game.Players.LocalPlayer.Character:FindFirstChild("Head") then
                     connection:Disconnect()
                 end
                 game:GetService("ReplicatedStorage").Items.SellItemRequest:InvokeServer(plotDir:WaitForChild("Bin"))
