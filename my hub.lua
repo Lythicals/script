@@ -129,7 +129,8 @@ if gameId == 3601201039 then --autofarm not done
     local cropPrice = 5
     local cropRenewable = false
     local treeType = "Basic"
-    local axeNeeded = "Wooden Axe"
+    local axeLevel = 0
+    local axeMinLevel = 1
     local axeUsing = "Wooden Axe"
     local rollItem = "smallPen"
     local rollPrice = 1000
@@ -159,6 +160,15 @@ if gameId == 3601201039 then --autofarm not done
         elseif Backpack:FindFirstChild("Iron Watering Can") then
             Humanoid:EquipTool(Backpack:FindFirstChild("Iron Watering Can"))
             wateringCan = "Iron Watering Can"
+        elseif Backpack:FindFirstChild("Gold Watering Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Gold Watering Can"))
+            wateringCan = "Gold Watering Can"
+        elseif Backpack:FindFirstChild("Diamond Watering Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Diamond Watering Can"))
+            wateringCan = "Diamond Watering Can"
+        elseif Backpack:FindFirstChild("Enchanted Can") then
+            Humanoid:EquipTool(Backpack:FindFirstChild("Enchanted Can"))
+            wateringCan = "Enchanted Can"
         end
     end
 
@@ -540,138 +550,108 @@ if gameId == 3601201039 then --autofarm not done
         Default = false, -- Boolean
         Callback = function(Bool)
             FarmTrees = Bool
-    
             if FarmTrees then
-
+                print("Farming Trees")
+                axeLevel = 0
                 Humanoid:UnequipTools()
-                if treeType == "Basic" then
-                    if Backpack:FindFirstChild("Wooden Axe") == nil then
-                        if Backpack:FindFirstChild("Iron Axe") == nil then
-                            if Backpack:FindFirstChild("Gold Axe") == nil then
-                                if Backpack:FindFirstChild("Diamond Axe") == nil then
-                                    print("Please get a wooden axe first!")
-                                    FarmTrees = false
-                                end
-                            end
-                        end
-                    end
+                if Backpack:FindFirstChild("Wooden Axe") then
+                    Humanoid:EquipTool(Backpack["Wooden Axe"])
+                    axeLevel = 1
+                    axeUsing = "Wooden Axe"
                 end
-                if treeType == "Maple" then
-                    if Backpack:FindFirstChild("Diamond Axe") == nil then
-                        if Backpack:FindFirstChild("Gold Axe") == nil then
-                            if Backpack:FindFirstChild("Iron Axe") == nil then
-                                print("Please get a iron axe via donating to the Elder first!")
-                                FarmTrees = false
-                            end
-                        end
-                    end
+                if Backpack:FindFirstChild("Iron Axe") then
+                    Humanoid:EquipTool(Backpack["Iron Axe"])
+                    axeLevel = 2
+                    axeUsing = "Iron Axe"
                 end
-                if treeType == "Aspen" then
-                    if Backpack:FindFirstChild("Diamond Axe") == nil then
-                        if Backpack:FindFirstChild("Gold Axe") == nil then
-                            print("Please get a gold axe via donating to the Elder first!")
-                            FarmTrees = false
-                        end
-                    end
+                if Backpack:FindFirstChild("Gold Axe") then
+                    Humanoid:EquipTool(Backpack["Gold Axe"])
+                    axeLevel = 3
+                    axeUsing = "Gold Axe"
                 end
-                if treeType == "Enchanted" then
-                    if Backpack:FindFirstChild("Diamond Axe") == nil then
-                        print("Please get a diamond axe via donating to the Elder first!")
-                        FarmTrees = false
-                    end
+                if Backpack:FindFirstChild("Diamond Axe") then
+                    Humanoid:EquipTool(Backpack["Diamond Axe"])
+                    axeLevel = 4
+                    axeUsing = "Diamond Axe"
                 end
-                if FarmTrees == true then
-                    if Backpack:FindFirstChild("Diamond Axe") then
-                        Humanoid:EquipTool(Backpack["Diamond Axe"])
-                        axeUsing = "Diamond Axe"
-                    end
-                    if Backpack:FindFirstChild("Diamond Axe") == nil then
-                        if Backpack:FindFirstChild("Gold Axe") then
-                            Humanoid:EquipTool(Backpack["Gold Axe"])
-                            axeUsing = "Gold Axe"
-                        end
-                    end
-                    if Backpack:FindFirstChild("Diamond Axe") == nil then
-                        if Backpack:FindFirstChild("Gold Axe") == nil then
-                            if Backpack:FindFirstChild("Iron Axe") then
-                                Humanoid:EquipTool(Backpack["Iron Axe"])
-                                axeUsing = "Iron Axe"
-                            end
-                        end
-                    end
-                    if Backpack:FindFirstChild("Diamond Axe") == nil then
-                        if Backpack:FindFirstChild("Gold Axe") == nil then
-                            if Backpack:FindFirstChild("Iron Axe") == nil then
-                                if Backpack:FindFirstChild("Wooden Axe") then
-                                    Humanoid:EquipTool(Backpack["Wooden Axe"])
-                                    axeUsing = "Wooden Axe"
-                                end
-                            end
-                        end
-                    end
+                if Backpack:FindFirstChild("Enchanted Axe") then
+                    Humanoid:EquipTool(Backpack["Enchanted Axe"])
+                    axeLevel = 5
+                    axeUsing = "Enchanted Axe"
                 end
-                while FarmTrees == true do
-                    for i, v in pairs(game:GetService("Workspace").Forest.SpawnPoints:GetDescendants()) do
-                        if FarmTrees then
-                            if v:FindFirstChild(treeType) then
-                                -- This one is hard so I'm using a Hydroxide generated remote
-                                local ohInstance1 = v[treeType].Trunk
-                                if axeUsing == "Wooden Axe" then
-                                    local ohTable2 = {
-                                        ["description"] = "Chop Trees",
-                                        ["axe"] = true,
-                                        ["id"] = "Wooden Axe",
-                                        ["storeCategory"] = "Tools",
-                                        ["stackTag"] = "axe",
-                                        ["textureId"] = "rbxassetid://3637797344",
-                                        ["damage"] = 20,
-                                        ["chopStrength"] = 1,
-                                        ["stackable"] = false,
-                                        ["cooldownWaitTime"] = 0.8,
-                                        ["buyPrice"] = 500,
-                                        ["singleOnly"] = true
-                                    }
+                if axeLevel == 0 then
+                    print("You need an axe to farm trees")
+                    FarmTrees = false
+                end
+                if axeLevel < axeMinLevel then
+                    print("You need a higher level axe to farm these trees")
+                    FarmTrees = false
+                end
+                if FarmTrees then
+                    print(axeUsing, axeLevel, treeType)
+                    while FarmTrees == true do
+                        for i, v in pairs(game:GetService("Workspace").Forest.SpawnPoints:GetDescendants()) do
+                            if FarmTrees then
+                                if v:FindFirstChild(treeType) then
+                                    -- This one is hard so I'm using a Hydroxide generated remote
+                                    local ohInstance1 = v[treeType].Trunk
+                                    if axeUsing == "Wooden Axe" then
+                                        local ohTable2 = {
+                                            ["description"] = "Chop Trees",
+                                            ["axe"] = true,
+                                            ["id"] = "Wooden Axe",
+                                            ["storeCategory"] = "Tools",
+                                            ["stackTag"] = "axe",
+                                            ["textureId"] = "rbxassetid://3637797344",
+                                            ["damage"] = 20,
+                                            ["chopStrength"] = 1,
+                                            ["stackable"] = false,
+                                            ["cooldownWaitTime"] = 0.8,
+                                            ["buyPrice"] = 500,
+                                            ["singleOnly"] = true
+                                        }
+                                    end
+                                    if axeUsing == "Iron Axe" then
+                                        local ohTable2 = {
+                                            ["axe"] = true,
+                                            ["id"] = "Iron Axe",
+                                            ["stackTag"] = "axe",
+                                            ["textureId"] = "rbxassetid://3603588083",
+                                            ["chopStrength"] = 2,
+                                            ["buyPrice"] = 1,
+                                            ["cooldownWaitTime"] = 0.8,
+                                            ["stackable"] = false,
+                                            ["damage"] = 30
+                                        }
+                                    end
+                                    if axeUsing == "Gold Axe" then
+                                        local ohTable2 = {
+                                            ["axe"] = true,
+                                            ["cooldownWaitTime"] = 0.8,
+                                            ["damage"] = 40,
+                                            ["chopStrength"] = 3,
+                                            ["id"] = "Gold Axe",
+                                            ["stackable"] = false,
+                                            ["stackTag"] = "axe",
+                                            ["textureId"] = "rbxassetid://3655229878"
+                                        }
+                                    end
+                                    if axeUsing == "Diamond Axe" then
+                                        local ohTable2 = {
+                                            ["description"] = "Testing",
+                                            ["axe"] = true,
+                                            ["id"] = "Diamond Axe",
+                                            ["stackTag"] = "axe",
+                                            ["textureId"] = "rbxassetid://3659044314",
+                                            ["chopStrength"] = 4,
+                                            ["stackable"] = false,
+                                            ["cooldownWaitTime"] = 0.8,
+                                            ["damage"] = 50
+                                        }
+                                    end
+                                    game:GetService("ReplicatedStorage").Trees.TreeHitRequest:InvokeServer(ohInstance1, ohTable2)
+                                    wait(0.1)
                                 end
-                                if axeUsing == "Iron Axe" then
-                                    local ohTable2 = {
-                                        ["axe"] = true,
-                                        ["id"] = "Iron Axe",
-                                        ["stackTag"] = "axe",
-                                        ["textureId"] = "rbxassetid://3603588083",
-                                        ["chopStrength"] = 2,
-                                        ["buyPrice"] = 1,
-                                        ["cooldownWaitTime"] = 0.8,
-                                        ["stackable"] = false,
-                                        ["damage"] = 30
-                                    }
-                                end
-                                if axeUsing == "Gold Axe" then
-                                    local ohTable2 = {
-                                        ["axe"] = true,
-                                        ["cooldownWaitTime"] = 0.8,
-                                        ["damage"] = 40,
-                                        ["chopStrength"] = 3,
-                                        ["id"] = "Gold Axe",
-                                        ["stackable"] = false,
-                                        ["stackTag"] = "axe",
-                                        ["textureId"] = "rbxassetid://3655229878"
-                                    }
-                                end
-                                if axeUsing == "Diamond Axe" then
-                                    local ohTable2 = {
-                                        ["description"] = "Testing",
-                                        ["axe"] = true,
-                                        ["id"] = "Diamond Axe",
-                                        ["stackTag"] = "axe",
-                                        ["textureId"] = "rbxassetid://3659044314",
-                                        ["chopStrength"] = 4,
-                                        ["stackable"] = false,
-                                        ["cooldownWaitTime"] = 0.8,
-                                        ["damage"] = 50
-                                    }
-                                end
-                                game:GetService("ReplicatedStorage").Trees.TreeHitRequest:InvokeServer(ohInstance1, ohTable2)
-                                wait(0.1)
                             end
                         end
                     end
@@ -686,16 +666,16 @@ if gameId == 3601201039 then --autofarm not done
         Callback = function(item)
             treeType = item
             if treeType == "Basic" then
-                axeNeeded = "Wooden Axe"
+                axeMinLevel = 1
             end
             if treeType == "Maple" then
-                axeNeeded = "Iron Axe"
+                axeMinLevel = 2
             end
             if treeType == "Aspen" then
-                axeNeeded = "Gold Axe"
+                axeMinLevel = 3
             end
             if treeType == "Enchanted" then
-                axeNeeded = "Gold Axe"
+                axeMinLevel = 4
             end
         end
     })
@@ -708,28 +688,30 @@ if gameId == 3601201039 then --autofarm not done
     
             if AutoFish then
                 Humanoid:UnequipTools()
-                if Backpack:FindFirstChild("Gold Rod") == nil then
-                    if Backpack:FindFirstChild("Fiberglass Rod") == nil then
-                        if Backpack:FindFirstChild("Bamboo Rod") == nil then
-                            print("Please get a bamboo rod first!")
-                            AutoFish = false
-                        end
-                    end
+                local found = false
+                if Backpack:FindFirstChild("Bamboo Rod") then
+                    Humanoid:EquipTool(Backpack["Bamboo Rod"])
+                    found = true
                 end
                 if Backpack:FindFirstChild("Fiberglass Rod") then
                     Humanoid:EquipTool(Backpack["Fiberglass Rod"])
+                    found = true
                 end
-                if Backpack:FindFirstChild("Fiberglass Rod") == nil then
-                    if Backpack:FindFirstChild("Gold Rod") then
-                        Humanoid:EquipTool(Backpack["Gold Rod"])
-                    end
+                if Backpack:FindFirstChild("Gold Rod") then
+                    Humanoid:EquipTool(Backpack["Gold Rod"])
+                    found = true
                 end
-                if Backpack:FindFirstChild("Fiberglass Rod") == nil then
-                    if Backpack:FindFirstChild("Gold Rod") == nil then
-                        if Backpack:FindFirstChild("Bamboo Rod") then
-                            Humanoid:EquipTool(Backpack["Bamboo Rod"])
-                        end
-                    end
+                if Backpack:FindFirstChild("Diamond Rod") then
+                    Humanoid:EquipTool(Backpack["Diamond Rod"])
+                    found = true
+                end
+                if Backpack:FindFirstChild("Enchanted Rod") then
+                    Humanoid:EquipTool(Backpack["Enchanted Rod"])
+                    found = true
+                end
+                if found == false then
+                    print("Please purchase a wooden rod from the shop")
+                    AutoFish = false
                 end
                 while AutoFish == true do
                     game:GetService("ReplicatedStorage").Items.CastFishingRodRequest:InvokeServer(plotDir.WaterSource.CFrame)
