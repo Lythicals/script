@@ -564,7 +564,7 @@ else
                     localplayer.PlayerScripts.AnimalInfo.RequestHandler.Disabled = true
                     while AnimalStuff == true do
                         animalStuff()
-                        wait(1)
+                        wait(0.1)
                         if AnimalStuff == false then
                             localplayer.PlayerScripts.AnimalInfo.RequestHandler.Enabled = true
                             localplayer.PlayerScripts.AnimalInfo.RequestHandler.Disabled = false
@@ -1216,6 +1216,10 @@ else
     if gameId == 8549934015 then
         local rarities = {"Zeniths", "Unfathomables", "Enigmatics", "Transcendents", "Exotics", "Mythics", "Surreals", "Masters", "Rares", "Uncommons", "Commons"}
         local minTier = 10
+        local range = 10
+        localplayer = game:GetService("Workspace").Debris.Plr.Swagicals
+        HumanoidRootPart = localplayer.HumanoidRootPart
+        
         local Toggle = Section:Toggle({
             Name = "Ore Snipe", -- String
             Default = false, -- Boolean
@@ -1227,6 +1231,7 @@ else
                         for i, v in pairs(game:GetService("Workspace").Mine:GetChildren()) do
                             if v.Tier.Value <= minTier then
                                 game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
+                                wait(0.2) --lower works but yk i wanna avoid future detection lol
                             end
                         end
                         wait(0)
@@ -1262,6 +1267,41 @@ else
                 end
             end
         })
+
+        local Toggle = Section:Toggle({
+            Name = "Vertical Miner", -- String
+            Default = false, -- Boolean
+            Callback = function(Bool)
+                VerticalMiner = Bool
+        
+                if VerticalMiner then
+                    while VerticalMiner == true do
+                        local currentLevel = HumanoidRootPart.Position.Y
+                        for i, v in pairs(game:GetService("Workspace").Mine:GetChildren()) do
+                            if v.Position.Y > currentLevel - 1 and v.Position.Y < currentLevel + 1 then
+                                local distance = (HumanoidRootPart.Position - v.Position).Magnitude
+                                if distance < range and VerticalMiner then
+                                    game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
+                                end
+                            end
+                        end
+                        wait(0)
+                    end
+                end
+            end
+        })
+
+        local Slider = Section:Slider({
+            Name = "Vertical Miner Range", -- String
+            Max = 1000, -- Integer
+            Min = 10, -- Integer
+            Default = 10, -- Integer
+            Callback = function(Value)
+                    range = Value
+              end
+        })
+
+        Slider:SetValue(10) -- Integer
 
         local Button = Section:Button({
             Name = "Sell All", -- String
