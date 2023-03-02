@@ -1229,6 +1229,7 @@ else
                                 game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
                             end
                         end
+                        wait(0)
                     end
                 end
             end
