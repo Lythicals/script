@@ -26,8 +26,8 @@ local supportedGames = {
     6767503821, --Underground Bunker Tycoon
     3601201039, -- Farm Life
     10198661638, -- Farm Factory Tycoon
-    11877743732, -- Zombie Battle Tycoon (In Progress)
-    11636413564 -- Meme Mergers (Just Starting)
+    11877743732, -- Zombie Battle Tycoon (Still Learning How To Code For This One)
+    11636413564 -- Meme Mergers
 }
 
 --// Main 
