@@ -1292,7 +1292,7 @@ else
         })
 
         local Toggle = Section:Toggle({
-            Name = "Vertical Miner Optimized (DONT USE YET)", -- String
+            Name = "Vertical Miner Optimized (DONT USE YET, MIGHT BAN)", -- String
             Default = false, -- Boolean
             Callback = function(Bool)
                 VerticalMiner = Bool
