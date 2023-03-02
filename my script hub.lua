@@ -1217,8 +1217,8 @@ else
         local rarities = {"Zeniths", "Unfathomables", "Enigmatics", "Transcendents", "Exotics", "Mythics", "Surreals", "Masters", "Rares", "Uncommons", "Commons"}
         local minTier = 10
         local range = 10
-        localplayer = game:GetService("Workspace").Debris.Plr.Swagicals
-        HumanoidRootPart = localplayer.HumanoidRootPart
+        Character = game:GetService("Workspace").Debris.Plr.Swagicals
+        HumanoidRootPart = Character.HumanoidRootPart
         
         local Toggle = Section:Toggle({
             Name = "Ore Snipe", -- String
@@ -1287,6 +1287,35 @@ else
                         end
                         wait(0)
                     end
+                end
+            end
+        })
+
+        local Toggle = Section:Toggle({
+            Name = "Vertical Miner Optimized (DONT USE YET)", -- String
+            Default = false, -- Boolean
+            Callback = function(Bool)
+                VerticalMiner = Bool
+        
+                if VerticalMiner then
+                    game:GetService("Workspace").Mine.ChildAdded:connect(function(child)
+                        if child.Position.Y > HumanoidRootPart.Position.Y - 1 and child.Position.Y < HumanoidRootPart.Position.Y + 1 then
+                            local distance = (HumanoidRootPart.Position - child.Position).Magnitude
+                            if distance < range and VerticalMiner then
+                                game:GetService("ReplicatedStorage").MineOre:InvokeServer(child)
+                                wait(0.1)
+                            end
+                            if distance > range then
+                                child.CanCollide = false
+                                HumanoidRootPart.CFrame = CFrame.new(child.Position.X, HumanoidRootPart.Position.Y, child.Position.Z)
+                                game:GetService("ReplicatedStorage").MineOre:InvokeServer(child)
+                                wait(0.1)
+                            end
+                        end
+                        if VerticalMiner == false then
+                            return
+                        end
+                    end)
                 end
             end
         })
