@@ -12,7 +12,6 @@ local HumanoidRootPart = Character.HumanoidRootPart
 local userid = localplayer.UserId
 local pPosition = localplayer.Character.HumanoidRootPart.Position
 local pCFrame = localplayer.Character.HumanoidRootPart.CFrame
-local pHead = localplayer.Character.Head
 local pName = localplayer.Name
 local gameId = game.PlaceId
 local pTeam = localplayer.Team
@@ -27,7 +26,8 @@ local supportedGames = {
     3601201039, -- Farm Life
     10198661638, -- Farm Factory Tycoon
     11877743732, -- Zombie Battle Tycoon (Still Learning How To Code For This One)
-    11636413564 -- Meme Mergers
+    11636413564, -- Meme Mergers
+    12299415668 -- Aggressive Multiplayer
 }
 
 --// Main 
@@ -114,8 +114,8 @@ else
         
                 if LoopCollectCash then
                     while LoopCollectCash == true do
-                        firetouchinterest(pHead, tycoonDir.tycoonThings.CollectorParts.cashCollector.CollectCash, 0)
-                        firetouchinterest(pHead, tycoonDir.tycoonThings.CollectorParts.cashCollector.CollectCash, 1)
+                        firetouchinterest(HumanoidRootPart, tycoonDir.tycoonThings.CollectorParts.cashCollector.CollectCash, 0)
+                        firetouchinterest(HumanoidRootPart, tycoonDir.tycoonThings.CollectorParts.cashCollector.CollectCash, 1)
                         wait(1)
                     end
                 end
@@ -123,7 +123,7 @@ else
         })
     end
 
-    if gameId == 3601201039 then --fully done :)
+    if gameId == 3601201039 then
         local plot = ("FarmPlot-" .. userid)
         local plotDir = Workspace[plot]
         local cropSquare = "CropSquares-1"
@@ -1154,6 +1154,59 @@ else
             Callback = function()
                 for i, v in pairs(codes) do
                     game:GetService("ReplicatedStorage").RemoteEvents.Code:FireServer(v)
+                end
+            end
+        })
+    end
+
+    if gameId == 12299415668 then
+
+        local Toggle = Section:Toggle({
+            Name = "Eat All Blocks", -- String
+            Default = false, -- Boolean
+            Callback = function(Bool)
+                EatBlocks = Bool
+
+                if EatBlocks then
+                    while EatBlocks == true do
+                        for i, v in pairs(game:GetService("Workspace").Parts:GetChildren()) do
+                            if v:FindFirstChild("TouchInterest") then
+                                if game:GetService("Workspace")[pName].ActualSize.Value > v.BlockSize.Value and EatBlocks then
+                                    firetouchinterest(game:GetService("Workspace")[pName].HumanoidRootPart, v, 0)
+                                    firetouchinterest(game:GetService("Workspace")[pName].HumanoidRootPart, v, 1)
+                                end
+                                wait(0)
+                            end
+                        end
+                        wait(0)
+                    end
+                end
+            end
+        })
+
+        local Toggle = Section:Toggle({
+            Name = "Recolor Weaker Players", -- String
+            Default = false, -- Boolean
+            Callback = function(Bool)
+                RecolorBlocks = Bool
+
+                if RecolorBlocks then
+                    while RecolorBlocks == true do
+                        for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                            if v:IsA("Model") then
+                                if v:FindFirstChild("HumanoidRootPart") then
+                                    if v:FindFirstChild("ActualSize") then
+                                        if game:GetService("Workspace")[pName].ActualSize.Value > v.ActualSize.Value then
+                                            v.HumanoidRootPart.Color = Color3.fromRGB(0, 255, 0)
+                                        else
+                                            v.HumanoidRootPart.Color = Color3.fromRGB(255, 0, 0)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                        wait(0)
+                    end
                 end
             end
         })
