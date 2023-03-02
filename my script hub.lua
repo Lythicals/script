@@ -560,14 +560,14 @@ else
                 AnimalStuff = Bool
         
                 if AnimalStuff then
-                    game:GetService("Players").Swagicals.PlayerScripts.AnimalInfo.RequestHandler.Enabled = false
-                    game:GetService("Players").Swagicals.PlayerScripts.AnimalInfo.RequestHandler.Disabled = true
+                    localplayer.PlayerScripts.AnimalInfo.RequestHandler.Enabled = false
+                    localplayer.PlayerScripts.AnimalInfo.RequestHandler.Disabled = true
                     while AnimalStuff == true do
                         animalStuff()
                         wait(1)
                         if AnimalStuff == false then
-                            game:GetService("Players").Swagicals.PlayerScripts.AnimalInfo.RequestHandler.Enabled = true
-                            game:GetService("Players").Swagicals.PlayerScripts.AnimalInfo.RequestHandler.Disabled = false
+                            localplayer.PlayerScripts.AnimalInfo.RequestHandler.Enabled = true
+                            localplayer.PlayerScripts.AnimalInfo.RequestHandler.Disabled = false
                         end
                     end
                 end
