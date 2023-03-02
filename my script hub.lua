@@ -27,7 +27,8 @@ local supportedGames = {
     10198661638, -- Farm Factory Tycoon
     11877743732, -- Zombie Battle Tycoon (Still Learning How To Code For This One)
     11636413564, -- Meme Mergers
-    12299415668 -- Aggressive Multiplayer
+    12299415668, -- Aggressive Multiplayer
+    8549934015 -- REx: Reincarnated
 }
 
 --// Main 
@@ -1208,6 +1209,74 @@ else
                         wait(0)
                     end
                 end
+            end
+        })
+    end
+
+    if gameId == 8549934015 then
+        local rarities = {"Zeniths", "Unfathomables", "Enigmatics", "Transcendents", "Exotics", "Mythics", "Surreals", "Masters", "Rares", "Uncommons", "Commons"}
+        local minTier = 10
+        local Toggle = Section:Toggle({
+            Name = "Ore Snipe", -- String
+            Default = false, -- Boolean
+            Callback = function(Bool)
+                OreSnipe = Bool
+        
+                if OreSnipe then
+                    while OreSnipe == true do
+                        for i, v in pairs(game:GetService("Workspace").Mine:GetChildren()) do
+                            if v.Tier.Value <= minTier then
+                                game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
+                            end
+                        end
+                    end
+                end
+            end
+        })
+
+        local Dropdown = Section:Dropdown({
+            Name = "Minimum Rarity To Snipe", -- String
+            Items = {"Uncommons", "Rares", "Masters", "Surreals", "Mythics", "Exotics", "Transcendents", "Enigmatics", "Unfathomables", "Zeniths"}, -- Table
+            Callback = function(item)
+                if item == "Uncommons" then
+                    minTier = 10
+                elseif item == "Rares" then
+                    minTier = 9
+                elseif item == "Masters" then
+                    minTier = 8
+                elseif item == "Surreals" then
+                    minTier = 7
+                elseif item == "Mythics" then
+                    minTier = 6
+                elseif item == "Exotics" then
+                    minTier = 5
+                elseif item == "Transcendents" then
+                    minTier = 4
+                elseif item == "Enigmatics" then
+                    minTier = 3
+                elseif item == "Unfathomables" then
+                    minTier = 2
+                elseif item == "Zeniths" then
+                    minTier = 1
+                end
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Sell All", -- String
+            Callback = function()
+                for i, v in pairs(localplayer.Ores:GetChildren()) do
+                    if v.Value > 0 then
+                        game:GetService("ReplicatedStorage").SellOre:InvokeServer(v.Name, v.Value)
+                    end
+                end
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Go To Private Server", -- String
+            Callback = function()
+                game:GetService("ReplicatedStorage"):WaitForChild("VIPSERVER"):FireServer(pName)
             end
         })
     end
