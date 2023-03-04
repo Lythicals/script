@@ -28,7 +28,8 @@ local supportedGames = {
     11877743732, -- Zombie Battle Tycoon (Still Learning How To Code For This One)
     11636413564, -- Meme Mergers
     12299415668, -- Aggressive Multiplayer
-    8549934015 -- REx: Reincarnated
+    8549934015, -- REx: Reincarnated
+    10925589760 -- Merge Simulator
 }
 
 --// Main 
@@ -1217,7 +1218,7 @@ else
         local rarities = {"Zeniths", "Unfathomables", "Enigmatics", "Transcendents", "Exotics", "Mythics", "Surreals", "Masters", "Rares", "Uncommons", "Commons"}
         local minTier = 10
         local range = 10
-        Character = game:GetService("Workspace").Debris.Plr[pName]
+        Character = game:GetService("Workspace").Debris.Plr.Swagicals
         HumanoidRootPart = Character.HumanoidRootPart
         
         local Toggle = Section:Toggle({
@@ -1338,6 +1339,78 @@ else
                 game:GetService("ReplicatedStorage"):WaitForChild("VIPSERVER"):FireServer(pName)
             end
         })
+    end
+
+    if gameId == 10925589760 then
+        local plotDir
+        local biggestBlockValue = 0
+        local biggestBlock
+
+        function getBiggestBlock()
+            for i, v in pairs(plotDir.Blocks:GetChildren()) do
+                if tonumber(getValue(v.Front.Number.Text)) > biggestBlockValue then
+                    biggestBlockValue = tonumber(getValue(v.Front.Number.Text))
+                    biggestBlock = v
+                end
+            end
+        end
+
+        function getValue(x)
+            x = string.gsub(x, "%$", "")
+            x = string.gsub(x, ",", "")
+            x = string.gsub(x, "%.", "")
+            x = string.gsub(x, "k", "00")
+            x = string.gsub(x, "m", "00000")
+            x = string.gsub(x, "b", "00000000")
+            return tonumber(x)
+        end
+
+        for i, v in pairs(game:GetService("Workspace").Plots:GetChildren()) do
+            if v.Name == pName then
+                plotDir = v
+            end
+        end
+
+        local Toggle = Section:Toggle({
+            Name = "Merge Blocks", -- String
+            Default = false, -- Boolean
+            Callback = function(Bool)
+                MergeBlocks = Bool
+
+                if MergeBlocks then
+                    while MergeBlocks == true do
+                        for i, v in pairs(plotDir.Blocks:GetChildren()) do
+                            for i2, v2 in pairs(plotDir.Blocks:GetChildren()) do
+                                if v.Front.Number.Text == v2.Front.Number.Text and v ~= v2 then
+                                    firetouchinterest(v, v2, 0)
+                                end
+                            end
+                        end
+                        wait(0)
+                    end
+                end
+            end
+        })
+
+        local Toggle = Section:Toggle({
+            Name = "Click Biggest Block", -- String
+            Default = false, -- Boolean
+            Callback = function(Bool)
+                ClickBlocks = Bool
+
+                if ClickBlocks then
+                    while ClickBlocks == true do
+                        biggestBlockValue = 0
+                        getBiggestBlock()
+                        game:GetService("ReplicatedStorage").Functions.Tap:FireServer(biggestBlock)
+                        wait(0)
+                    end
+                end
+            end
+        })
+
+        
+
     end
 
     local Tab = Window:Tab({
