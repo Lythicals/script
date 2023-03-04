@@ -1218,7 +1218,7 @@ else
         local rarities = {"Zeniths", "Unfathomables", "Enigmatics", "Transcendents", "Exotics", "Mythics", "Surreals", "Masters", "Rares", "Uncommons", "Commons"}
         local minTier = 10
         local range = 10
-        Character = game:GetService("Workspace").Debris.Plr.Swagicals
+        Character = game:GetService("Workspace").Debris.Plr[pName]
         HumanoidRootPart = Character.HumanoidRootPart
         
         local Toggle = Section:Toggle({
