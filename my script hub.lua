@@ -1218,6 +1218,7 @@ else
         local rarities = {"Zeniths", "Unfathomables", "Enigmatics", "Transcendents", "Exotics", "Mythics", "Surreals", "Masters", "Rares", "Uncommons", "Commons"}
         local minTier = 10
         local range = 10
+        local maxMiningRange = 450
         Character = game:GetService("Workspace").Debris.Plr[pName]
         HumanoidRootPart = Character.HumanoidRootPart
         
@@ -1231,8 +1232,11 @@ else
                     while OreSnipe == true do
                         for i, v in pairs(game:GetService("Workspace").Mine:GetChildren()) do
                             if v.Tier.Value <= minTier then
-                                game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
-                                wait(0.2) --lower works but yk i wanna avoid future detection lol
+                                local distance = (HumanoidRootPart.Position - child.Position).Magnitude
+                                if distance <= maxMiningRange then
+                                    game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
+                                    wait(0.2) --lower works but yk i wanna avoid future detection lol
+                                end
                             end
                         end
                         wait(0)
@@ -1270,7 +1274,7 @@ else
         })
 
         local Toggle = Section:Toggle({
-            Name = "Horizontal Miner", -- String
+            Name = "Vertical Miner", -- String
             Default = false, -- Boolean
             Callback = function(Bool)
                 VerticalMiner = Bool
@@ -1293,24 +1297,22 @@ else
         })
 
         local Toggle = Section:Toggle({
-            Name = "Horizontal Miner Optimized (DONT USE YET, MIGHT BAN)", -- String
+            Name = "Vertical Miner Optimized (DONT USE YET, MIGHT BAN)", -- String
             Default = false, -- Boolean
             Callback = function(Bool)
                 VerticalMiner = Bool
         
                 if VerticalMiner then
                     game:GetService("Workspace").Mine.ChildAdded:connect(function(child)
+                        wait(1)
                         if child.Position.Y > HumanoidRootPart.Position.Y - 1 and child.Position.Y < HumanoidRootPart.Position.Y + 1 then
                             local distance = (HumanoidRootPart.Position - child.Position).Magnitude
                             if distance < range and VerticalMiner then
                                 game:GetService("ReplicatedStorage").MineOre:InvokeServer(child)
-                                wait(0.1)
-                            end
-                            if distance > range then
+                            elseif distance > range then
                                 child.CanCollide = false
                                 HumanoidRootPart.CFrame = CFrame.new(child.Position.X, HumanoidRootPart.Position.Y, child.Position.Z)
                                 game:GetService("ReplicatedStorage").MineOre:InvokeServer(child)
-                                wait(0.1)
                             end
                         end
                         if VerticalMiner == false then
@@ -1332,6 +1334,8 @@ else
         })
 
         Slider:SetValue(10) -- Integer
+
+
 
         local Button = Section:Button({
             Name = "Go To Private Server", -- String
