@@ -1231,7 +1231,7 @@ else
                 if OreSnipe then
                     while OreSnipe == true do
                         for i, v in pairs(game:GetService("Workspace").Mine:GetChildren()) do
-                            if v.Tier.Value <= minTier then
+                            if v:WaitForChild("Tier").Value <= minTier then
                                 local distance = (HumanoidRootPart.Position - v.Position).Magnitude
                                 if distance <= maxMiningRange then
                                     game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
