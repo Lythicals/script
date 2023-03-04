@@ -1235,6 +1235,7 @@ else
                                 local distance = (HumanoidRootPart.Position - child.Position).Magnitude
                                 if distance <= maxMiningRange then
                                     game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
+                                    print("Mining " .. v.Name .. " with a rarity of " .. rarities[v.Tier.Value])
                                     wait(0.2) --lower works but yk i wanna avoid future detection lol
                                 end
                             end
