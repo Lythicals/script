@@ -1232,7 +1232,7 @@ else
                     while OreSnipe == true do
                         for i, v in pairs(game:GetService("Workspace").Mine:GetChildren()) do
                             if v.Tier.Value <= minTier then
-                                local distance = (HumanoidRootPart.Position - child.Position).Magnitude
+                                local distance = (HumanoidRootPart.Position - v.Position).Magnitude
                                 if distance <= maxMiningRange then
                                     game:GetService("ReplicatedStorage").MineOre:InvokeServer(v)
                                     print("Mining " .. v.Name .. " with a rarity of " .. rarities[v.Tier.Value])
