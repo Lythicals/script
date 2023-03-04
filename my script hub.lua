@@ -1333,17 +1333,6 @@ else
         Slider:SetValue(10) -- Integer
 
         local Button = Section:Button({
-            Name = "Sell All", -- String
-            Callback = function()
-                for i, v in pairs(localplayer.Ores:GetChildren()) do
-                    if v.Value > 0 then
-                        game:GetService("ReplicatedStorage").SellOre:InvokeServer(v.Name, v.Value)
-                    end
-                end
-            end
-        })
-
-        local Button = Section:Button({
             Name = "Go To Private Server", -- String
             Callback = function()
                 game:GetService("ReplicatedStorage"):WaitForChild("VIPSERVER"):FireServer(pName)
