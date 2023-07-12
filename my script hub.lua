@@ -29,7 +29,9 @@ local supportedGames = {
     11636413564, -- Meme Mergers
     12299415668, -- Aggressive Multiplayer
     8549934015, -- REx: Reincarnated
-    10925589760 -- Merge Simulator
+    10925589760, -- Merge Simulator,
+    12862122490, -- Confined Isolation (IN GAME)
+    12687163923 -- Confined Isolation Lobby
 }
 
 --// Main 
@@ -1415,6 +1417,155 @@ else
         })
 
         
+
+    end
+
+    if gameId == 12862122490 then
+        local abilitySelected = "None"
+
+        local Button = Section:Button({
+            Name = "Send Skip Vote", -- String
+            Callback = function()
+                game:GetService("ReplicatedStorage").RemoteData.CutsceneRemotes.SkipCutscene:FireServer()
+            end
+        })
+
+        local Dropdown = Section:Dropdown({
+            Name = "Ability Selection", -- String
+            Items = {"Guardian", "Healer", "Shadow Walker"}, -- Table
+            Callback = function(item)
+                if item == "Guardian" then
+                    abilitySelected = "Guardian"
+                elseif item == "Healer" then
+                    abilitySelected = "Healer"
+                elseif item == "Shadow Walker" then
+                    abilitySelected = "Shadow Walker"
+                end
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Use Ability", -- String
+            Callback = function()
+                if abilitySelected == "None" then
+                    print("Select an ability first")
+                elseif abilitySelected == "Guardian" then
+                    game:GetService("ReplicatedStorage").RemoteData.AbilityRemotes.Guardian:FireServer()
+                elseif abilitySelected == "Healer" then
+                    game:GetService("ReplicatedStorage").RemoteData.AbilityRemotes.Healer:FireServer()
+                elseif abilitySelected == "Shadow Walker" then
+                    game:GetService("ReplicatedStorage").RemoteData.AbilityRemotes.ShadowWalker:FireServer()
+                end
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Complete Zone", -- String
+            Callback = function()
+                if workspace.GeneratedRooms:FindFirstChild("Checkpoint1") and workspace.GeneratedRooms:FindFirstChild("Checkpoint2") then
+                    print("Completing Zone 2 Rooms")
+                    for i, v in pairs(workspace.GeneratedRooms:GetChildren()) do
+                        if v.Name ~= "Checkpoint1" and v.Name ~= "Checkpoint2" then
+                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.RoomCLEAR, 0)
+                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.RoomCLEAR, 1)
+                            wait(0)
+                        end
+                    end
+                    print("Teleporting To Checkpoint 2")
+                    wait(1)
+                    teleportTo(workspace.GeneratedRooms.Checkpoint2.RoomCHECKPOINT)
+                elseif workspace.GeneratedRooms:FindFirstChild("Checkpoint1") then
+                    print("Completing Zone 1 Rooms")
+                    for i, v in pairs(workspace.GeneratedRooms:GetChildren()) do
+                        if v.Name ~= "Checkpoint1" then
+                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.RoomCLEAR, 0)
+                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.RoomCLEAR, 1)
+                            wait(0)
+                        end
+                    end
+                    print("Teleporting To Checkpoint 1")
+                    wait(1)
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, workspace.GeneratedRooms.Checkpoint1.RoomCLEAR, 0)
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, workspace.GeneratedRooms.Checkpoint1.RoomCLEAR, 1)
+                end
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Trigger All Traps", -- String
+            Callback = function()
+                for i, v in pairs(workspace.GeneratedRooms:GetChildren()) do
+                    
+                end
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Safe Isolation :)", -- String
+            Callback = function()
+                for i, v in pairs(workspace.GeneratedRooms:GetDescendants()) do
+                    if V.Name == "ShotgunTrap" or v.Name == "Saw" or v.Name == "Turret" or v.Name == "LaserTop" or v.Name == "LaserBottom" or v.Name == "MannequinTrap" or v.Name == "BarbedWires" or v.Name == "KillZone" or v.Name == "WallTrap" or v.Name == "Spikes" or v.Name == "SpikeDeath" then
+                        v:Destroy()
+                    end
+                end
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Level Up", -- String
+            Callback = function()
+                game:GetService("ReplicatedStorage").RemoteData.PlayerDataRemotes.LevelUp:FireServer()
+            end
+        })
+
+        local Toggle = Section:Toggle({
+            Name = "Level Spam (PRESTIGE AFTER JUST IN CASE)", -- String
+            Default = false, -- Boolean
+            Callback = function(Bool)
+                LevelSpam = Bool
+
+                if LevelSpam then
+                    while LevelSpam == true do
+                        game:GetService("ReplicatedStorage").RemoteData.PlayerDataRemotes.LevelUp:FireServer()
+                        wait(0)
+                    end
+                end
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Prestige Up", -- String
+            Callback = function()
+                game:GetService("ReplicatedStorage").RemoteData.PlayerDataRemotes.PrestigeUp:FireServer()
+            end
+        })
+
+    end
+
+    if gameId == 12687163923 then
+        local playerCash
+        local cashAddition
+        local SmallTextbox = Section:SmallTextbox({ --LOOTBOX METHOD
+            Name = "Set Money", -- String
+            Default = "0", -- String
+            Callback = function(Text)
+                local playerCash = tonumber(game:GetService("Players").LocalPlayer.PlayerData.Cash.Value)
+                print(playerCash)
+                cashAddition = (tonumber(Text) - playerCash) * -1
+                game:GetService("ReplicatedStorage").RemoteData.ServerRemotes.LootboxPurchase:FireServer(cashAddition,"!")
+            end
+        })
+
+        local Button = Section:Button({
+            Name = "Give All Items (WILL ANNOUNCE IN CHAT)", -- String
+            Callback = function()
+                for i, v in pairs(game:GetService("ReplicatedStorage").CosmeticFolder:GetChildren()) do
+                    if v.Rarity.Value ~= "Exclusive" then --EXCLUSIVES ARE ANNOYING BECAUSE U CANT SELL OR GET RID OF THEM
+                        game:GetService("ReplicatedStorage").RemoteData.ServerRemotes.LootboxPurchase:FireServer(0,v.Name)
+                    end
+                end
+            end
+        })
 
     end
 
