@@ -1,4 +1,5 @@
 repeat wait() until game:IsLoaded()
+wait(1)
 
 --[[
     ==================
@@ -549,8 +550,9 @@ elseif ID == 6205205961 then
     rootpart.CFrame = workspace.Folder.Model.HitBox.CFrame
     wait(2)
     game:GetService("TeleportService"):Teleport(6364879587, game.Players.LocalPlayer)
-    -- Escape Running Head 2
+-- Escape Running Head 2
 elseif ID == 6364879587 then
+    queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/autohunt.lua'))()")
     console()
     print("Game Detected: Escape Running Head 2")
     rootpart.CFrame = workspace.Model.HitBox.CFrame
