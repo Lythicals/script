@@ -1161,7 +1161,6 @@ elseif ID == 16537295657 then
     console()
     print("Game Detected: Hunt Hub")
     if not hasBadge(4135484921332210) then gameTeleport(11329389795)
-end
 
 
 
