@@ -1,3 +1,5 @@
+repeat wait() until game:IsLoaded()
+
 --[[
     ==================
          The Hunt
