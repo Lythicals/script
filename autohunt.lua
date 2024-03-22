@@ -1154,7 +1154,7 @@ elseif ID == 16700725713 then
     wait(1)
     game:GetService("ReplicatedStorage").QuestAssets.MainEvent:FireServer("FinishMoonlight")
     wait(1)
-    if hasBadge(4135484921332210) then game.Players.LocalPlayer:Kick("Completed, please rejoin hub.") end
+    --if hasBadge(4135484921332210) then game.Players.LocalPlayer:Kick("Completed, please rejoin hub.") end
 
 
 
@@ -1168,11 +1168,14 @@ elseif ID == 16537295657 then
     if not hasBadge(3183430629084179) then gameTeleport(15479016377) end -- Snowboard Obby
     if not hasBadge(1058787539781134) then gameTeleport(6205205961) end -- Escape Running Head
     if not hasBadge(1832660142626803) then gameTeleport(6243699076) end -- The Mimic
+    if not hasBadge(3604048216530746) then gameTeleport(15520513462) end -- Carry A Friend
+
 
     -- BELOW ARE THE SEMI AUTOMATIC GAMES
     if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
     if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
+    wait(3)
     print("If you see this message, it probably means all supported games are completed.")
     print("Thanks for using our script and have a great day :)")
 
