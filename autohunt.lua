@@ -151,6 +151,7 @@ local function tryAllAreas()
 end
 
 local function queueteleport()
+    clear_teleport_queue()
     queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/autohunt.lua'))()")
 end
 
@@ -1168,7 +1169,7 @@ elseif ID == 16537295657 then
     if not hasBadge(3183430629084179) then gameTeleport(15479016377) end -- Snowboard Obby
     if not hasBadge(1058787539781134) then gameTeleport(6205205961) end -- Escape Running Head
     if not hasBadge(1832660142626803) then gameTeleport(6243699076) end -- The Mimic
-    if not hasBadge(3604048216530746) then gameTeleport(15520513462) end -- Carry A Friend
+    if not hasBadge(3604048216530746) then gameTeleport(14448662003) end -- Carry A Friend
 
 
     -- BELOW ARE THE SEMI AUTOMATIC GAMES
