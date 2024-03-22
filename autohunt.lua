@@ -1055,6 +1055,7 @@ elseif ID == 6939657427 then
 
 -- Club Roblox
 elseif ID == 3457390032 then
+    queueteleport()
     Game:GetService("ReplicatedStorage").ReplicatedTeleport.RemoteEvents.remoteTeleport:FireServer("T079")
 elseif ID == 16711937403 then
     console()
@@ -1177,10 +1178,11 @@ elseif ID == 16537295657 then
 
 
     -- BELOW ARE THE SEMI AUTOMATIC GAMES
+    if not hasBadge(343455186930821) then gameTeleport(3457390032) end -- Club Roblox
     if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
     if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
-    wait(3)
+    wait(1)
     print("If you see this message, it probably means all supported games are completed.")
     print("Thanks for using our script and have a great day :)")
 
