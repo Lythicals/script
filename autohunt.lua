@@ -1055,6 +1055,7 @@ elseif ID == 6939657427 then
 
 -- Club Roblox
 elseif ID == 3457390032 then
+    wait(3)
     gameTeleport(16711937403)
     --Game:GetService("ReplicatedStorage").ReplicatedTeleport.RemoteEvents.remoteTeleport:FireServer("T079")
 elseif ID == 16711937403 then
