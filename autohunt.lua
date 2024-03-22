@@ -603,6 +603,10 @@ elseif ID == 15479016377 then
         wait(0.5)
         teleportTo(workspace.Map["Level-1 Easy"]["01"].SavePoint.SpawnLocation.CFrame)
         wait(0.1)
+        teleportTo(workspace.Map["Level-1 Easy"]["02"].SavePoint.SpawnLocation.CFrame)
+        wait(0.1)
+        teleportTo(workspace.Map["Level-1 Easy"]["03"].SavePoint.SpawnLocation.CFrame)
+        wait(1)
         game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("EasterEventRE"):FireServer("ClaimEasterTaskReward")
         wait(0.1)
     end
