@@ -155,6 +155,7 @@ end
 
 local function gameTeleport(desiredGame)
     queueteleport()
+    print("Teleporting to game: " .. desiredGame)
     wait(1)
     game:GetService("TeleportService"):Teleport(desiredGame, game.Players.LocalPlayer)
 end
