@@ -1,5 +1,5 @@
 repeat wait() until game:IsLoaded()
-wait(1)
+wait(3)
 
 --[[
     ==================
