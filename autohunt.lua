@@ -155,6 +155,9 @@ local function queueteleport()
 end
 
 local function gameTeleport(desiredGame)
+    print()
+    print("Teleporting...")
+    print()
     queueteleport()
     wait(1)
     game:GetService("TeleportService"):Teleport(desiredGame, game.Players.LocalPlayer)
@@ -1087,7 +1090,7 @@ elseif ID == 4639625707 then
         Character.HumanoidRootPart.CFrame = CFrame.new(71, 101, 189) --Rendering Crates
         wait(0.2)
     end
-    print("Completed")
+    if hasBadge(3165988561890156) then backToHub() end
 
 
 
@@ -1146,6 +1149,7 @@ elseif ID == 16750505007 then
 
 -- Astro Renaissance
 elseif ID == 11329389795 then
+    wait(1)
     if hasBadge(4135484921332210) then backToHub() end
     gameTeleport(16700725713)
 elseif ID == 16700725713 then
@@ -1154,7 +1158,7 @@ elseif ID == 16700725713 then
     wait(1)
     game:GetService("ReplicatedStorage").QuestAssets.MainEvent:FireServer("FinishMoonlight")
     wait(1)
-    --if hasBadge(4135484921332210) then game.Players.LocalPlayer:Kick("Completed, please rejoin hub.") end
+    if hasBadge(4135484921332210) then game.Players.LocalPlayer:Kick("Completed, please rejoin hub.") end
 
 
 
@@ -1169,6 +1173,7 @@ elseif ID == 16537295657 then
     if not hasBadge(1058787539781134) then gameTeleport(6205205961) end -- Escape Running Head
     if not hasBadge(1832660142626803) then gameTeleport(6243699076) end -- The Mimic
     if not hasBadge(3604048216530746) then gameTeleport(14448662003) end -- Carry A Friend
+    if not hasBadge(3165988561890156) then gameTeleport(4639625707) end -- War Tycoon
 
 
     -- BELOW ARE THE SEMI AUTOMATIC GAMES
