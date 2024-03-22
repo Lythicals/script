@@ -155,7 +155,6 @@ end
 
 local function gameTeleport(desiredGame)
     queueteleport()
-    print("Teleporting to game: " .. desiredGame)
     wait(1)
     game:GetService("TeleportService"):Teleport(desiredGame, game.Players.LocalPlayer)
 end
@@ -982,6 +981,7 @@ elseif ID == 16445368294 then
 
 -- SCP: Roleplay
 elseif ID == 5041144419 then
+    queueteleport()
     Game:GetService("ReplicatedStorage").Remotes.Update:FireServer("<SCP-093 Mission")
 elseif ID == 6939657427 then
     if workspace:FindFirstChild("House") == nil then
@@ -990,6 +990,8 @@ elseif ID == 6939657427 then
     end
     console()
     print("Game Detected: SCP: Roleplay")
+    print("Waiting 25 seconds for loading...")
+    wait(25)
     print("Opening Bunker Door 1...")
     Character.HumanoidRootPart.CFrame = CFrame.new(-326, -8, 343)
     wait(1)
