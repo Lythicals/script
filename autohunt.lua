@@ -597,24 +597,14 @@ elseif ID == 6364881161 then
 elseif ID == 15479016377 then
     console()
     print("Game Detected: Snowboard Obby")
-    print("Waiting for game to load...")
-    wait(10)
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("EasterEventRE"):FireServer("StartEasterTask")
     while not badgeService:UserHasBadgeAsync(localplayer.UserId, 3183430629084179) do
         game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("GamePlayerRE"):FireServer("ResetAllPassLevel")
         wait(0.5)
         teleportTo(workspace.Map["Level-1 Easy"]["01"].SavePoint.SpawnLocation.CFrame)
         wait(0.1)
-        teleportTo(workspace.Map["Level-1 Easy"]["02"].SavePoint.SpawnLocation.CFrame)
-        wait(0.1)
-        teleportTo(workspace.Map["Level-1 Easy"]["03"].SavePoint.SpawnLocation.CFrame)
-        wait(0.1)
-        teleportTo(workspace.Map["Level-1 Easy"]["04"].SavePoint.SpawnLocation.CFrame)
-        wait(0.1)
-        teleportTo(workspace.Map["Level-1 Easy"]["05"].SavePoint.SpawnLocation.CFrame)
-        wait(0.1)
         game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("EasterEventRE"):FireServer("ClaimEasterTaskReward")
-        wait()
+        wait(0.1)
     end
     backToHub()
 
