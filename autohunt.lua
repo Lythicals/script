@@ -587,7 +587,7 @@ elseif ID == 6364881161 then
     rootpart.CFrame = workspace.Model.HitBox.CFrame
     wait(2)
     if badgeService:UserHasBadgeAsync(localplayer.UserId, 1058787539781134) then
-        
+        backToHub()
     end
 
 
@@ -1166,7 +1166,9 @@ elseif ID == 16537295657 then
     console()
     print("Game Detected: Hunt Hub")
     if not hasBadge(3183430629084179) then gameTeleport(15479016377) end -- Snowboard Obby
+    if not hasBadge(1058787539781134) then gameTeleport(6205205961) end -- Escape Running Head
     if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
+
 
 
 
