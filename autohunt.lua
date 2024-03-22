@@ -1094,11 +1094,12 @@ elseif ID == 4639625707 then
 
 
 -- Carry A Friend
-elseif ID == 14448662003 then
-    game:GetService("TeleportService"):Teleport(15520513462, game.Players.LocalPlayer)
+elseif ID == 14448662003 then gameTeleport(15520513462)
 elseif ID == 15520513462 then
     console()
     print("Game Detected: Carry A Friend")
+    print("Pairing self...")
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.PairService.RF.AcceptRequest:InvokeServer(game:GetService("Players").LocalPlayer)
     for i, v in pairs(workspace["2 Player:"]["Level 14: The Hunt"]["Egg Locations"].Locations:GetChildren()) do
         print("Collecting " .. v.Name)
         for j = 1, 5 do
@@ -1112,8 +1113,8 @@ elseif ID == 15520513462 then
         workspace["2 Player:"]["Level 14: The Hunt"].LevelCheck.RotCaptchaCheck:Destroy()
     end
     teleportTo(workspace["2 Player:"]["Level 14: The Hunt"].Jumps.ToLobby.CFrame)
+    queueteleport()
     wait(2)
-    print("Collecting failed, please get a partner and try again!")
 
 
 
@@ -1173,7 +1174,8 @@ elseif ID == 16537295657 then
     if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
     if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
-
+    print("If you see this message, it probably means all supported games are completed.")
+    print("Thanks for using our script and have a great day :)")
 
 
 
