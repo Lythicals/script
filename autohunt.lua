@@ -1160,7 +1160,7 @@ elseif ID == 16700725713 then
 elseif ID == 16537295657 then
     console()
     print("Game Detected: Hunt Hub")
-    if not hasBadge(4135484921332210) then gameTeleport(11329389795)
+    if not hasBadge(4135484921332210) then gameTeleport(11329389795) -- Astro Rennaisance
 
 
 
