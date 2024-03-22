@@ -599,10 +599,18 @@ elseif ID == 15479016377 then
         wait(0.5)
         teleportTo(workspace.Map["Level-1 Easy"]["01"].SavePoint.SpawnLocation.CFrame)
         wait(0.1)
+        teleportTo(workspace.Map["Level-1 Easy"]["02"].SavePoint.SpawnLocation.CFrame)
+        wait(0.1)
+        teleportTo(workspace.Map["Level-1 Easy"]["03"].SavePoint.SpawnLocation.CFrame)
+        wait(0.1)
+        teleportTo(workspace.Map["Level-1 Easy"]["04"].SavePoint.SpawnLocation.CFrame)
+        wait(0.1)
+        teleportTo(workspace.Map["Level-1 Easy"]["05"].SavePoint.SpawnLocation.CFrame)
+        wait(0.1)
         game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("EasterEventRE"):FireServer("ClaimEasterTaskReward")
         wait()
     end
-    print("Completed")
+    backToHub()
 
 
 
@@ -1157,6 +1165,7 @@ elseif ID == 16700725713 then
 elseif ID == 16537295657 then
     console()
     print("Game Detected: Hunt Hub")
+    if not hasBadge(3183430629084179) then gameTeleport(15479016377) end -- Snowboard Obby
     if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
 
