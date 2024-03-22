@@ -1150,6 +1150,7 @@ elseif ID == 11329389795 then
 elseif ID == 16700725713 then
     console()
     print("Game Detected: Astro Renaissance")
+    wait(1)
     game:GetService("ReplicatedStorage").QuestAssets.MainEvent:FireServer("FinishMoonlight")
     wait(1)
     if hasBadge(4135484921332210) then game.Players.LocalPlayer:Kick("Completed, please rejoin hub.") end
@@ -1165,7 +1166,7 @@ elseif ID == 16537295657 then
     -- BELOW ARE THE AUTOMATIC GAMES
     if not hasBadge(3183430629084179) then gameTeleport(15479016377) end -- Snowboard Obby
     if not hasBadge(1058787539781134) then gameTeleport(6205205961) end -- Escape Running Head
-    if not hasBadge(3183430629084179) then gameTeleport(6243699076) end -- The Mimic
+    if not hasBadge(1832660142626803) then gameTeleport(6243699076) end -- The Mimic
 
     -- BELOW ARE THE SEMI AUTOMATIC GAMES
     if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
