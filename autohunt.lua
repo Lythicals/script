@@ -1124,13 +1124,10 @@ elseif ID == 15520513462 then
 
 -- The Mimic
 elseif ID == 6243699076 then
-    game:GetService("TeleportService"):Teleport(16750505007, game.Players.LocalPlayer)
+    gameTeleport(16750505007)
 elseif ID == 16750505007 then
     console()
     print("Game Detected: The Mimic")
-    if badgeService:UserHasBadgeAsync(localplayer.UserId, 1832660142626803) then
-        print("Badge owned, collecting gold. Feel free to rerun the script to collect more gold.")
-    end
     repeat
         for i, v in pairs(workspace.TheEvent.Eggs:GetChildren()) do
             teleportTo(v.CFrame)
@@ -1171,6 +1168,7 @@ elseif ID == 16537295657 then
     if not hasBadge(3183430629084179) then gameTeleport(15479016377) end -- Snowboard Obby
     if not hasBadge(1058787539781134) then gameTeleport(6205205961) end -- Escape Running Head
     if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
+    if not hasBadge(3183430629084179) then gameTeleport(6243699076) end -- The Mimic
     if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
 
