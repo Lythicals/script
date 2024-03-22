@@ -155,11 +155,13 @@ end
 
 local function backToHub()
     queueteleport()
+    wait(1)
     game:GetService("TeleportService"):Teleport(16537295657, game.Players.LocalPlayer)
 end
 
 local function gameTeleport(desiredGame)
     queueteleport()
+    wait(1)
     game:GetService("TeleportService"):Teleport(desiredGame, game.Players.LocalPlayer)
 end
 
