@@ -1131,18 +1131,36 @@ elseif ID == 16750505007 then
     console()
     print("Game Detected: The Mimic")
     print("Its black but tbh should be fine")
-    repeat
-        for i, v in pairs(workspace.TheEvent.Eggs:GetChildren()) do
-            teleportTo(v.CFrame)
-            wait(0.2)
-            if v:FindFirstChild("ProximityPrompt") then
-                fireproximityprompt(v.ProximityPrompt)
+    if not hasBadge(1832660142626803) then
+        repeat
+            for i, v in pairs(workspace.TheEvent.Eggs:GetChildren()) do
+                game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v.CFrame
+                wait(0.2)
+                if v:FindFirstChild("ProximityPrompt") then
+                    fireproximityprompt(v.ProximityPrompt)
+                end
+                firetouchinterest(workspace.TheEvent.SellSpots:FindFirstChild("Sell"),game.Players.LocalPlayer.Character.HumanoidRootPart,0)
+                firetouchinterest(workspace.TheEvent.SellSpots:FindFirstChild("Sell"),game.Players.LocalPlayer.Character.HumanoidRootPart,1)
             end
-            firetouchinterest(workspace.TheEvent.SellSpots:FindFirstChild("Sell"),localplayer.Character.HumanoidRootPart,0)
-            firetouchinterest(workspace.TheEvent.SellSpots:FindFirstChild("Sell"),localplayer.Character.HumanoidRootPart,1)
+            game:GetService("ReplicatedStorage"):WaitForChild("TheHunt"):WaitForChild("TheMarket"):InvokeServer(1)
+        until hasBadge(1832660142626803)
+    else
+        print("Badge owned, gathering extra gold...")
+        if tonumber(game:GetService("Players").LocalPlayer.PlayerGui.Collect.Container.Gold.Amount.ContentText) >= 7500 then
+            print("Idk why you'd want more gold but here you go...")
         end
-        game:GetService("ReplicatedStorage"):WaitForChild("TheHunt"):WaitForChild("TheMarket"):InvokeServer(1)
-    until badgeService:UserHasBadgeAsync(localplayer.UserId, 1832660142626803)
+        repeat
+            for i, v in pairs(workspace.TheEvent.Eggs:GetChildren()) do
+                game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v.CFrame
+                wait(0.2)
+                if v:FindFirstChild("ProximityPrompt") then
+                    fireproximityprompt(v.ProximityPrompt)
+                end
+                firetouchinterest(workspace.TheEvent.SellSpots:FindFirstChild("Sell"),game.Players.LocalPlayer.Character.HumanoidRootPart,0)
+                firetouchinterest(workspace.TheEvent.SellSpots:FindFirstChild("Sell"),game.Players.LocalPlayer.Character.HumanoidRootPart,1)
+            end
+        until tonumber(game:GetService("Players").LocalPlayer.PlayerGui.Collect.Container.Gold.Amount.ContentText) >= 7500
+    end
     backToHub()
 
 
@@ -1179,7 +1197,6 @@ elseif ID == 16537295657 then
 
 
     -- BELOW ARE THE SEMI AUTOMATIC GAMES
-    if not hasBadge(343455186930821) then gameTeleport(3457390032) end -- Club Roblox
     if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
     if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
