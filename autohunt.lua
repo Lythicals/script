@@ -1125,6 +1125,7 @@ elseif ID == 6243699076 then
 elseif ID == 16750505007 then
     console()
     print("Game Detected: The Mimic")
+    print("Its black but tbh should be fine")
     repeat
         for i, v in pairs(workspace.TheEvent.Eggs:GetChildren()) do
             teleportTo(v.CFrame)
