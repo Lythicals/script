@@ -151,7 +151,6 @@ local function tryAllAreas()
 end
 
 local function queueteleport()
-    clear_teleport_queue()
     queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/autohunt.lua'))()")
 end
 
