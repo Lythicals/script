@@ -1102,19 +1102,18 @@ elseif ID == 15520513462 then
     game:GetService("ReplicatedStorage").Packages.Knit.Services.PairService.RF.AcceptRequest:InvokeServer(game:GetService("Players").LocalPlayer)
     for i, v in pairs(workspace["2 Player:"]["Level 14: The Hunt"]["Egg Locations"].Locations:GetChildren()) do
         print("Collecting " .. v.Name)
-        for j = 1, 5 do
-            Character.HumanoidRootPart.CFrame = v.CFrame
-            fireproximityprompt(v.ProximityPrompt)
-            wait(0.1)
-        end
+        Character.HumanoidRootPart.CFrame = v.CFrame
+        wait(0.1)
+        fireproximityprompt(v.ProximityPrompt)
+        wait(1)
     end
     wait(0.2)
     if workspace["2 Player:"]["Level 14: The Hunt"].LevelCheck:FindFirstChild("RotCaptchaCheck") then
         workspace["2 Player:"]["Level 14: The Hunt"].LevelCheck.RotCaptchaCheck:Destroy()
     end
     teleportTo(workspace["2 Player:"]["Level 14: The Hunt"].Jumps.ToLobby.CFrame)
-    queueteleport()
-    wait(2)
+    repeat wait() until hasBadge(3604048216530746)
+    backToHub()
 
 
 
