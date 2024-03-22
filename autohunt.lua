@@ -153,12 +153,6 @@ local function queueteleport()
     queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/autohunt.lua'))()")
 end
 
-local function backToHub()
-    queueteleport()
-    wait(1)
-    game:GetService("TeleportService"):Teleport(16537295657, game.Players.LocalPlayer)
-end
-
 local function gameTeleport(desiredGame)
     queueteleport()
     wait(1)
@@ -589,7 +583,7 @@ elseif ID == 6364881161 then
     rootpart.CFrame = workspace.Model.HitBox.CFrame
     wait(2)
     if badgeService:UserHasBadgeAsync(localplayer.UserId, 1058787539781134) then
-        backToHub()
+        
     end
 
 
@@ -1145,13 +1139,15 @@ elseif ID == 16750505007 then
 
 
 -- Astro Renaissance
-elseif ID == 11329389795 then gameTeleport(16700725713)
+elseif ID == 11329389795 then
+    if hasBadge(4135484921332210) then backToHub() end
+    gameTeleport(16700725713)
 elseif ID == 16700725713 then
     console()
     print("Game Detected: Astro Renaissance")
     game:GetService("ReplicatedStorage").QuestAssets.MainEvent:FireServer("FinishMoonlight")
     wait(1)
-    if hasBadge(4135484921332210) then backToHub() end
+    if hasBadge(4135484921332210) then gameTeleport(11329389795) end
 
 
 
