@@ -159,6 +159,10 @@ local function gameTeleport(desiredGame)
     game:GetService("TeleportService"):Teleport(desiredGame, game.Players.LocalPlayer)
 end
 
+local function backToHub()
+    gameTeleport(16537295657)
+end
+
 local function hasBadge(badgeid)
     if badgeService:UserHasBadgeAsync(localplayer.UserId, badgeid) then
         return true
