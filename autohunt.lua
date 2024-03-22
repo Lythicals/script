@@ -1045,7 +1045,9 @@ elseif ID == 6939657427 then
     game:GetService("ReplicatedStorage"):WaitForChild("Event"):FireServer("Relic")
     wait(5)
     teleportTo(workspace.Bunker.Mirror.Mirror.Part.CFrame)
-    print("Completed")
+    if hasBadge(3889590126352151) then
+        backToHub()
+    end
     
     
 
@@ -1168,6 +1170,7 @@ elseif ID == 16537295657 then
     print("Game Detected: Hunt Hub")
     if not hasBadge(3183430629084179) then gameTeleport(15479016377) end -- Snowboard Obby
     if not hasBadge(1058787539781134) then gameTeleport(6205205961) end -- Escape Running Head
+    if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
     if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
 
