@@ -597,6 +597,8 @@ elseif ID == 6364881161 then
 elseif ID == 15479016377 then
     console()
     print("Game Detected: Snowboard Obby")
+    print("Waiting for game to load...")
+    wait(10)
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("EasterEventRE"):FireServer("StartEasterTask")
     while not badgeService:UserHasBadgeAsync(localplayer.UserId, 3183430629084179) do
         game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("GamePlayerRE"):FireServer("ResetAllPassLevel")
