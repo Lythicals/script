@@ -1,3 +1,4 @@
+-- NOTE: THIS SCRIPT WILL DO THE FAST/FULLY AUTOMATIC GAMES FIRST, SOME GAMES AFTER THAT REQUIRE MINIMAL INPUT/JOINING BACK TO THE HUB
 repeat wait() until game:IsLoaded()
 wait(3)
 
@@ -982,16 +983,10 @@ elseif ID == 16445368294 then
 -- SCP: Roleplay
 elseif ID == 5041144419 then
     queueteleport()
+    wait(1)
     Game:GetService("ReplicatedStorage").Remotes.Update:FireServer("<SCP-093 Mission")
 elseif ID == 6939657427 then
-    if workspace:FindFirstChild("House") == nil then
-        Game:GetService("ReplicatedStorage").Remotes.Update:FireServer("<SCP-093 Mission")
-        wait(10)
-    end
     console()
-    print("Game Detected: SCP: Roleplay")
-    print("Waiting 25 seconds for loading...")
-    wait(25)
     print("Opening Bunker Door 1...")
     Character.HumanoidRootPart.CFrame = CFrame.new(-326, -8, 343)
     wait(1)
@@ -1142,7 +1137,7 @@ elseif ID == 16750505007 then
         end
         game:GetService("ReplicatedStorage"):WaitForChild("TheHunt"):WaitForChild("TheMarket"):InvokeServer(1)
     until badgeService:UserHasBadgeAsync(localplayer.UserId, 1832660142626803)
-    print("Completed")
+    backToHub()
 
 
 
@@ -1157,7 +1152,7 @@ elseif ID == 16700725713 then
     print("Game Detected: Astro Renaissance")
     game:GetService("ReplicatedStorage").QuestAssets.MainEvent:FireServer("FinishMoonlight")
     wait(1)
-    if hasBadge(4135484921332210) then gameTeleport(11329389795) end
+    if hasBadge(4135484921332210) then game.Players.LocalPlayer:Kick("Completed, please rejoin hub.") end
 
 
 
@@ -1167,12 +1162,14 @@ elseif ID == 16700725713 then
 elseif ID == 16537295657 then
     console()
     print("Game Detected: Hunt Hub")
+    -- BELOW ARE THE AUTOMATIC GAMES
     if not hasBadge(3183430629084179) then gameTeleport(15479016377) end -- Snowboard Obby
     if not hasBadge(1058787539781134) then gameTeleport(6205205961) end -- Escape Running Head
-    if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
     if not hasBadge(3183430629084179) then gameTeleport(6243699076) end -- The Mimic
-    if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
+    -- BELOW ARE THE SEMI AUTOMATIC GAMES
+    if not hasBadge(3889590126352151) then gameTeleport(5041144419) end -- SCP: Roleplay
+    if not hasBadge(4135484921332210) then gameTeleport(11329389795) end -- Astro Rennaisance
 
 
 
