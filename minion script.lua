@@ -27,7 +27,7 @@ Da Hood:
 local owner = 'Swagicals'
 local prefix = '?'
 local WhisperToOwner = game:GetService('RobloxReplicatedStorage').ExperienceChat.WhisperChat:InvokeServer(game.Players[owner].UserId)
-WhisperToOwner:SendAsync("Connected")
+WhisperToOwner:SendAsync("Connected!")
 
 --// Functions
 
