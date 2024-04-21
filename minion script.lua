@@ -27,7 +27,7 @@ Da Hood:
 local owner = 'Swagicals'
 local prefix = '?'
 local WhisperToOwner = game:GetService('RobloxReplicatedStorage').ExperienceChat.WhisperChat:InvokeServer(game.Players[owner].UserId)
-WhisperToOwner:SendAsync("Connected")
+WhisperToOwner:SendAsync("Connected!")
 
 --// Functions
 
@@ -51,14 +51,13 @@ OnOwnerChat = game.Players[owner].Chatted:Connect(function(msg) -- runs once the
             chat(string.sub(msg, 6))
         elseif msg == prefix.."summon" then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[owner].Character.HumanoidRootPart.CFrame
-        elseif msg == prefix.."reload" then
-            OnOwnerChat:Disconnect()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Lythicals/script/main/minion%20script.lua"))()
+        elseif msg == prefix.."reset" then
+            game.Players.LocalPlayer.Character.Head:Destroy()
         elseif msg == prefix.."rejoin" then
             queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion%20script.lua'))()")
             game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId, game.Players.LocalPlayer)
         else
-            chatToOwner("Invalid command")
+            chatToOwner("Invalid command!")
         end
     end
 end)
