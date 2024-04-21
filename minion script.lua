@@ -1,3 +1,5 @@
+repeat wait() until game:IsLoaded()
+
 -- my minion script :)
 
 --// Commands
