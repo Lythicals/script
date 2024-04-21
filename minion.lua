@@ -57,6 +57,7 @@ OnOwnerChat = game.Players[owner].Chatted:Connect(function(msg) -- runs once the
             queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion.lua'))()")
             game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId, game.Players.LocalPlayer)
         elseif msg == prefix.."disconnect" then
+            chatToOwner("Disconnected!")
             OnOwnerChat:Disconnect()
         else
             chatToOwner("Invalid command!")
