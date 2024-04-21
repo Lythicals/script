@@ -26,7 +26,7 @@ Da Hood:
 --// Variables
 
 local Players = game:GetService("Players")
-local Player = Players.LocalPlayer
+local Player = Player
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 
@@ -48,10 +48,10 @@ end
 local function follow()
     task.spawn(function()
         while following do
-            if (Players.LocalPlayer.Character.HumanoidRootPart.Position - Players[getgenv().owner].Character.HumanoidRootPart.Position).Magnitude > 10 then
-                Players.LocalPlayer.Character.Humanoid.WalkToPoint = Players[getgenv().owner].Character.HumanoidRootPart.Position
+            if (Player.Character.HumanoidRootPart.Position - Players[getgenv().owner].Character.HumanoidRootPart.Position).Magnitude > 10 then
+                Player.Character.Humanoid.WalkToPoint = Players[getgenv().owner].Character.HumanoidRootPart.Position
             else
-                Players.LocalPlayer.Character.Humanoid.WalkToPoint = Players.LocalPlayer.Character.HumanoidRootPart.Position
+                Player.Character.Humanoid.WalkToPoint = Player.Character.HumanoidRootPart.Position
             end
             task.wait()
         end
@@ -73,10 +73,10 @@ OnOwnerChat = Players[getgenv().owner].Chatted:Connect(function(msg)
                 chat(string.sub(msg, 6))
 
             elseif msg == prefix.."summon" then
-                Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Players[getgenv().owner].Character.HumanoidRootPart.CFrame
+                Player.Character.HumanoidRootPart.CFrame = Players[getgenv().owner].Character.HumanoidRootPart.CFrame
 
             elseif msg == prefix.."reset" then
-                Players.LocalPlayer.Character.Head:Destroy()
+                Player.Character.Head:Destroy()
 
             elseif string.sub(msg, 1, 7) == prefix.."prefix" then
                 print(string.sub(msg, 9, 9))
@@ -104,8 +104,8 @@ OnOwnerChat = Players[getgenv().owner].Chatted:Connect(function(msg)
                 loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion.lua'))()
 
             elseif msg == prefix.."rejoin" then
-                --queue_on_teleport([[loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion.lua'))()]])
-                game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId, Players.LocalPlayer)
+                queue_on_teleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion.lua'))())
+                game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId, Player)
 
             elseif msg == prefix.."disconnect" then
                 chatToOwner("Disconnected!")
