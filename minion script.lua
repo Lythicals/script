@@ -27,12 +27,16 @@ Da Hood:
 local owner = 'Swagicals'
 local prefix = '?'
 local WhisperToOwner = game:GetService('RobloxReplicatedStorage').ExperienceChat.WhisperChat:InvokeServer(game.Players[owner].UserId)
-WhisperToOwner:SendAsync("Connected!")
+WhisperToOwner:SendAsync("Connected")
 
 --// Functions
 
-local function chat(msg,channel)
-    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, channel)
+local function chatToOwner(msg)
+    WhisperToOwner:SendAsync(msg)
+end
+
+local function chat(msg)
+    game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
 end
 
 --// Setup
@@ -44,7 +48,7 @@ end
 OnOwnerChat = game.Players[owner].Chatted:Connect(function(msg) -- runs once the player that joined chats a message
     if string.sub(msg, 1, 1) == prefix then
         if string.sub(msg, 2, 4) == "msg" then
-            chat(string.sub(msg, 6), chatchannel)
+            chat(string.sub(msg, 6))
         elseif msg == prefix.."summon" then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[owner].Character.HumanoidRootPart.CFrame
         elseif msg == prefix.."reload" then
