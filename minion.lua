@@ -59,6 +59,9 @@ OnOwnerChat = game.Players[owner].Chatted:Connect(function(msg) -- runs once the
         elseif msg == prefix.."disconnect" then
             chatToOwner("Disconnected!")
             OnOwnerChat:Disconnect()
+        elseif msg == prefix.."prefix" then
+            prefix = string.sub(msg, 9, 9)
+            chatToOwner("Prefix set to "..prefix)
         else
             chatToOwner("Invalid command!")
         end
