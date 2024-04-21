@@ -205,10 +205,11 @@ OnOwnerChat = Players[getgenv().owner].Chatted:Connect(function(msg)
 
             elseif msg == prefix.."punch" then
                 if daHood() then
+                    Players.LocalPlayer.Character.Humanoid:UnequipTools()
                     if not Players.LocalPlayer.Character:FindFirstChild("Combat") then
                         Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack.Combat)
                     end
-                    Players.LocalPlayer.Character.Combat:Activate()
+                    Players.LocalPlayer.Character:WaitForChild("Combat"):Activate()
                 end
 
 
