@@ -13,7 +13,7 @@ Universal:
 
 Da Hood:
 
-- money [user] - Shows the amount of money a user has
+- money [user] - Says the amount of money a user has
 
 --]]
 --// Credits
@@ -30,19 +30,18 @@ local Player = Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 
-getgenv().owner = 'Swagicals'
-local prefix = '?'
-local WhisperToOwner = game:GetService('RobloxReplicatedStorage').ExperienceChat.WhisperChat:InvokeServer(Players[owner].UserId)
-WhisperToOwner:SendAsync("Connected!")
+getgenv().owner = "Swagicals" -- Change this to the owner's username
+local prefix = "?" -- Change this to whatever you want
 local following = false
+
 --// Functions
 
 local function chatToOwner(msg)
-    WhisperToOwner:SendAsync(msg)
+    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/w "..getgenv().owner.." "..msg, "All")
 end
 
 local function chat(msg)
-    game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
 end
 
 local function follow()
@@ -64,6 +63,8 @@ local function Stop(OnOwnerChat)
     following = false
     OnOwnerChat:Disconnect()
 end
+
+chatToOwner("Connected!")
 
 local OnOwnerChat
 OnOwnerChat = Players[getgenv().owner].Chatted:Connect(function(msg)
