@@ -7,14 +7,13 @@ repeat wait() until game:IsLoaded()
 
 Universal:
 
-- money [user] - Shows the amount of money a user has
 - summon - Teleports minion to you
-- followme - Minion follows you
-- unfollowme - Minion stops following you
+- follow - Minion follows you
+- unfollow - Minion stops following you
 
 Da Hood:
 
-
+- money [user] - Shows the amount of money a user has
 
 --]]
 --// Credits
@@ -43,13 +42,13 @@ end
 
 OnOwnerChat = game.Players[owner].Chatted:Connect(function(msg) -- runs once the player that joined chats a message
     if string.sub(msg, 1, 1) == prefix then
-        if msg == "asd" then -- create your conditions
-            print("hi")
+        if string.sub(msg, 2, 4) == "msg" then
+            chat(string.sub(msg, 6), chatchannel)
         elseif msg == prefix.."summon" then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[owner].Character.HumanoidRootPart.CFrame
         elseif msg == prefix.."reload" then
             OnOwnerChat:Disconnect()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Lythicals/script/main/minion%20script.lua"))()
         elseif msg == prefix.."disconnect" then
             OnOwnerChat:Disconnect()
         else
