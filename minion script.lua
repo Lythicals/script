@@ -47,14 +47,6 @@ OnOwnerChat = game.Players[owner].Chatted:Connect(function(msg) -- runs once the
             print("hi")
         elseif msg == prefix.."summon" then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[owner].Character.HumanoidRootPart.CFrame
-        elseif msg == prefix.."followme" then
-            followme = true
-            repeat
-                game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                game.Players.LocalPlayer.Character.Humanoid.WalkToPoint = game.Players[owner].Character.HumanoidRootPart.Position
-            until followme = false or game:GetService("Players")[owner] == nil or not game.Players.LocalPlayer.Character:FindFirstChild("Character"):FindFirstChild("HumanoidRootPart")
-        elseif msg == prefix.."unfollowme" then
-            followme = false
         elseif msg == prefix.."reload" then
             OnOwnerChat:Disconnect()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
