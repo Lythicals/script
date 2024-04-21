@@ -1,7 +1,5 @@
 repeat wait() until game:IsLoaded()
 
--- my minion script :)
-
 --// Commands
 --[[
 
@@ -27,13 +25,16 @@ Da Hood:
 --]]
 --// Variables
 
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
 getgenv().owner = 'Swagicals'
 local prefix = '?'
-local WhisperToOwner = game:GetService('RobloxReplicatedStorage').ExperienceChat.WhisperChat:InvokeServer(game.Players[owner].UserId)
+local WhisperToOwner = game:GetService('RobloxReplicatedStorage').ExperienceChat.WhisperChat:InvokeServer(Players[owner].UserId)
 WhisperToOwner:SendAsync("Connected!")
 local following = false
-local previousstate = nil
-
 --// Functions
 
 local function chatToOwner(msg)
@@ -44,80 +45,71 @@ local function chat(msg)
     game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
 end
 
-local function stop()
-    following = false
-    OnOwnerChat:Disable()
-    OnOwnerChat:Disconnect()
-end
-
 local function follow()
-    coroutine.wrap(function()
+    task.spawn(function()
         while following do
-            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - game.Players[getgenv().owner].Character.HumanoidRootPart.Position).Magnitude > 10 then
-                game.Players.LocalPlayer.Character.Humanoid.WalkToPoint = game.Players[getgenv().owner].Character.HumanoidRootPart.Position
+            if (Players.LocalPlayer.Character.HumanoidRootPart.Position - Players[getgenv().owner].Character.HumanoidRootPart.Position).Magnitude > 10 then
+                Players.LocalPlayer.Character.Humanoid.WalkToPoint = Players[getgenv().owner].Character.HumanoidRootPart.Position
             else
-                game.Players.LocalPlayer.Character.Humanoid.WalkToPoint = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                Players.LocalPlayer.Character.Humanoid.WalkToPoint = Players.LocalPlayer.Character.HumanoidRootPart.Position
             end
-            wait()
+            task.wait()
         end
-    end)()
+    end)
 end
-
---// Setup
-
-
 
 --// Main
 
+local function Stop(OnOwnerChat)
+    following = false
+    OnOwnerChat:Disconnect()
+end
+
 local OnOwnerChat
-OnOwnerChat = game.Players[getgenv().owner].Chatted:Connect(function(msg)
+OnOwnerChat = Players[getgenv().owner].Chatted:Connect(function(msg)
     if OnOwnerChat.Connected then
         if string.sub(msg, 1, 1) == prefix then
             if string.sub(msg, 1, 4) == prefix.."msg" then
                 chat(string.sub(msg, 6))
 
             elseif msg == prefix.."summon" then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[getgenv().owner].Character.HumanoidRootPart.CFrame
+                Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Players[getgenv().owner].Character.HumanoidRootPart.CFrame
 
             elseif msg == prefix.."reset" then
-                game.Players.LocalPlayer.Character.Head:Destroy()
+                Players.LocalPlayer.Character.Head:Destroy()
 
             elseif string.sub(msg, 1, 7) == prefix.."prefix" then
                 print(string.sub(msg, 9, 9))
                 prefix = string.sub(msg, 9, 9)
                 chatToOwner("Prefix set to "..prefix)
-
             elseif msg == prefix.."follow" then
                 chatToOwner("Following...")
                 following = true
                 follow()
-
             elseif msg == prefix.."unfollow" then
                 chatToOwner("No longer following.")
                 following = false
-
             elseif string.sub(msg, 1, 6) == prefix.."owner" then
-                if game.Players:FindFirstChild(string.sub(msg, 8)) then
+                if Players:FindFirstChild(string.sub(msg, 8)) then
                     chatToOwner("Owner is now ".. string.sub(msg, 8))
                     getgenv().owner = string.sub(msg, 8)
-                    stop()
+                    Stop(OnOwnerChat)
                 else
                     chatToOwner("Invalid user!")
                 end
 
             elseif msg == prefix.."reload" then
                 chatToOwner("Reloading...")
-                stop()
+                Stop(OnOwnerChat)
                 loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion.lua'))()
 
             elseif msg == prefix.."rejoin" then
                 --queue_on_teleport([[loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion.lua'))()]])
-                game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId, game.Players.LocalPlayer)
+                game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId, Players.LocalPlayer)
 
             elseif msg == prefix.."disconnect" then
                 chatToOwner("Disconnected!")
-                stop()
-
+                Stop(OnOwnerChat)
             else
                 chatToOwner("Invalid command!")
             end
