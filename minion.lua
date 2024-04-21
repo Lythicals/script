@@ -53,6 +53,10 @@ OnOwnerChat = game.Players[owner].Chatted:Connect(function(msg) -- runs once the
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[owner].Character.HumanoidRootPart.CFrame
         elseif msg == prefix.."reset" then
             game.Players.LocalPlayer.Character.Head:Destroy()
+        elseif msg == prefix.."reload" then
+            chatToOwner("Reloading...")
+            OnOwnerChat:Disconnect()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion.lua'))()
         elseif msg == prefix.."rejoin" then
             queue_on_teleport([[loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion.lua'))()]])
             game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId, game.Players.LocalPlayer)
