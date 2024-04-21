@@ -54,10 +54,11 @@ OnOwnerChat = game.Players[owner].Chatted:Connect(function(msg) -- runs once the
         elseif msg == prefix.."reload" then
             OnOwnerChat:Disconnect()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Lythicals/script/main/minion%20script.lua"))()
-        elseif msg == prefix.."disconnect" then
-            OnOwnerChat:Disconnect()
+        elseif msg == prefix.."rejoin" then
+            queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Lythicals/script/main/minion%20script.lua'))()")
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId, game.Players.LocalPlayer)
         else
-            print("Command not found")
+            chatToOwner("Invalid command")
         end
     end
 end)
