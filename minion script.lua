@@ -26,7 +26,8 @@ Da Hood:
 
 local owner = 'Swagicals'
 local prefix = '?'
-local chatchannel = 'All' -- chat to 'All' channel by default
+local WhisperToOwner = game:GetService('RobloxReplicatedStorage').ExperienceChat.WhisperChat:InvokeServer(game.Players[owner].UserId)
+WhisperToOwner:SendAsync("Connected")
 
 --// Functions
 
