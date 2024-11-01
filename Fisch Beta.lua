@@ -1,3 +1,2 @@
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/Lythicals/script/main/Fisch%20Beta.lua",true))()
--- Join my new discord server @ discord.gg/lyth :) hope to see you there!
+-- No longer public beta, just what is pushed to stable
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lythicals/script/main/Fisch.lua",true))()
