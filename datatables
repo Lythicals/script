@@ -1,4 +1,4 @@
---Data updated on: 2024-11-03 16:03:12
+--Data updated on: 2024-11-03 17:27:46
 
 return {
     FishRarityData = {
@@ -192,6 +192,7 @@ return {
         'Mosaic',
         'Sandy',
         'Glossy',
+        'Midas',
         'Translucent',
         'Sinister',
         'Albino',
