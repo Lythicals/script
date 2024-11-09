@@ -1,4 +1,4 @@
---Data updated on: 2024-11-09 09:36:17
+--Data updated on: 2024-11-09 11:38:27
 
 return {
     FishRarityData = {
@@ -210,7 +210,6 @@ return {
         'Albino',
         'Darkened',
         'Negative',
-        'Sunken',
         'Ghastly',
         'Hexed',
         'Frozen',
