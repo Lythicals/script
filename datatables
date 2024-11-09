@@ -1,4 +1,4 @@
---Data updated on: 2024-11-09 09:32:02
+--Data updated on: 2024-11-09 09:36:17
 
 return {
     FishRarityData = {
@@ -16,7 +16,7 @@ return {
         ['Trout'] = 'Common',
         ['Rabbitfish'] = 'Legendary',
         ['Swamp Bass'] = 'Common',
-        ['Captain's Goldfish'] = 'Mythical',
+        ['Captain\'s Goldfish'] = 'Mythical',
         ['Largemouth Bass'] = 'Common',
         ['Trumpetfish'] = 'Unusual',
         ['Brine Phantom'] = 'Legendary',
