@@ -1,4 +1,4 @@
---Data updated on: 2024-11-12 00:34:20
+--Data updated on: 2024-11-12 18:49:02
 
 return {
     FishRarityData = {
@@ -405,5 +405,20 @@ return {
         'Storming',
         'Blessed',
         'Ghastly',
+    },
+    LocationData = {
+        'Roslit',
+        'Forsaken Shores',
+        'Terrapin',
+        'Brine Pool',
+        'Roslit Volcano',
+        'Desolate Deep',
+        'Ocean',
+        'Snowcap',
+        'Mushgrove',
+        'Moosewood',
+        'Keepers Altar',
+        'Vertigo',
+        'Sunstone',
     }
 }
