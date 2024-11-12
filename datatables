@@ -1,4 +1,4 @@
---Data updated on: 2024-11-12 00:28:27
+--Data updated on: 2024-11-12 00:34:20
 
 return {
     FishRarityData = {
@@ -384,7 +384,7 @@ return {
         ['Axolotl'] = 'Roslit Pond Seaweed',
         ['Chub'] = 'Roslit Pond',
     },
-    EnchantsData = {
+    EnchantData = {
         'Sea King',
         'Lucky',
         'Scrapper',
