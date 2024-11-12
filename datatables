@@ -1,4 +1,4 @@
---Data updated on: 2024-11-10 12:54:13
+--Data updated on: 2024-11-12 00:28:27
 
 return {
     FishRarityData = {
@@ -383,5 +383,27 @@ return {
         ['Suckermouth Catfish'] = 'Roslit Pond Seaweed',
         ['Axolotl'] = 'Roslit Pond Seaweed',
         ['Chub'] = 'Roslit Pond',
+    },
+    EnchantsData = {
+        'Sea King',
+        'Lucky',
+        'Scrapper',
+        'Divine',
+        'Long',
+        'Swift',
+        'Steady',
+        'Noir',
+        'Controlled',
+        'Mutated',
+        'Quality',
+        'Unbreakable',
+        'Hasty',
+        'Insight',
+        'Wormhole',
+        'Breezed',
+        'Resilient',
+        'Storming',
+        'Blessed',
+        'Ghastly',
     }
 }
