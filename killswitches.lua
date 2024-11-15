@@ -1,6 +1,6 @@
 return {
   lite = {
-    switch = true,
+    switch = false,
     version = 1
   }
 }
