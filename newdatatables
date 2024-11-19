@@ -1,4 +1,4 @@
---Data updated on: 2024-11-19 17:24:32
+--Data updated on: 2024-11-19 17:29:47
 
 return {
     FishData = {
@@ -37,7 +37,7 @@ return {
         ['Burbot'] = {Rarity = 'Uncommon', Weight = '35', Price = 16/7, Zone = 'Snowcap Pond'},
         ['Butterflyfish'] = {Rarity = 'Uncommon', Weight = '15', Price = 22/3, Zone = 'Roslit Bay'},
         ['Candy Fish'] = {Rarity = 'Limited', Weight = '10', Price = 20,},
-        ['Captain's Goldfish'] = {Rarity = 'Mythical', Weight = '25', Price = 68,},
+        ['Captain\'s Goldfish'] = {Rarity = 'Mythical', Weight = '25', Price = 68,},
         ['Carbon Crate'] = {Rarity = 'Rare', Weight = '160', Price = 7/8, Zone = 'Mushgrove Water'},
         ['Carp'] = {Rarity = 'Uncommon', Weight = '50', Price = 11/5, Zone = 'Moosewood Pond'},
         ['Catfish'] = {Rarity = 'Rare', Weight = '150', Price = 2, Zone = 'Mushgrove Water'},
