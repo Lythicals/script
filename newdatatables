@@ -1,4 +1,4 @@
---Data updated on: 2024-11-19 18:01:44
+--Data updated on: 2024-11-22 14:06:04
 
 return {
     FishData = {
@@ -216,17 +216,17 @@ return {
         ['Zombiefish'] = {Rarity = 'Limited', Weight = '30', Price = 20/3,},
     },
     Rarities = {
-        'Common',
-        'Divine',
-        'Exotic',
-        'Legendary',
-        'Limited',
-        'Mythical',
-        'Rare',
-        'Relic',
         'Trash',
+        'Common',
         'Uncommon',
         'Unusual',
+        'Rare',
+        'Legendary',
+        'Mythical',
+        'Divine',
+        'Limited',
+        'Relic',
+        'Exotic',
     },
     AppraisalMutations = {
         'Abyssal',
