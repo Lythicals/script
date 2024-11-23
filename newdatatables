@@ -1,4 +1,4 @@
---Data updated on: 2024-11-22 14:06:04
+--Data updated on: 2024-11-23 08:32:30
 
 return {
     FishData = {
@@ -9,6 +9,8 @@ return {
         ['Anchovy'] = {Rarity = 'Common', Weight = '3', Price = 10, Zone = 'Moosewood Ocean Mythical'},
         ['Ancient Depth Serpent'] = {Rarity = 'Exotic', Weight = '10000', Price = 4/5, Zone = 'The Depths - Serpent'},
         ['Ancient Eel'] = {Rarity = 'Legendary', Weight = '2000', Price = 3/4, Zone = 'The Depths'},
+        ['Ancient Serpent Skull'] = {Rarity = 'Mythical', Weight = '100', Price = 12,},
+        ['Ancient Serpent Spine'] = {Rarity = 'Mythical', Weight = '80', Price = 10,},
         ['Angelfish'] = {Rarity = 'Unusual', Weight = '20', Price = 6, Zone = 'Roslit Bay'},
         ['Anglerfish'] = {Rarity = 'Rare', Weight = '20', Price = 23/2, Zone = 'Deep Ocean'},
         ['Arapaima'] = {Rarity = 'Rare', Weight = '2000', Price = 1/8, Zone = 'Roslit Pond Seaweed'},
@@ -18,6 +20,7 @@ return {
         ['Banditfish'] = {Rarity = 'Rare', Weight = '200', Price = 5/4, Zone = 'Desolate Deep'},
         ['Barbed Shark'] = {Rarity = 'Legendary', Weight = '9500', Price = 83/95, Zone = 'Desolate Deep'},
         ['Barracuda'] = {Rarity = 'Uncommon', Weight = '110', Price = 15/11, Zone = 'Moosewood Ocean Mythical'},
+        ['Barracuda\'s Spine'] = {Rarity = 'Uncommon', Weight = '50', Price = 1,},
         ['Barreleye Fish'] = {Rarity = 'Mythical', Weight = '150', Price = 30, Zone = 'The Depths'},
         ['Basalt'] = {Rarity = 'Trash', Weight = '210', Price = 1/14, Zone = 'Lava'},
         ['Black Dragon Fish'] = {Rarity = 'Rare', Weight = '400', Price = 5/4, Zone = 'The Depths'},
@@ -44,6 +47,7 @@ return {
         ['Chinfish'] = {Rarity = 'Uncommon', Weight = '40', Price = 17/8, Zone = 'Sunstone'},
         ['Chinook Salmon'] = {Rarity = 'Unusual', Weight = '400', Price = 23/40, Zone = 'Roslit Bay Ocean'},
         ['Chub'] = {Rarity = 'Common', Weight = '30', Price = 4/3, Zone = 'Roslit Pond'},
+        ['Claw Gill'] = {Rarity = 'Uncommon', Weight = '30', Price = 2,},
         ['Clownfish'] = {Rarity = 'Uncommon', Weight = '6', Price = 15, Zone = 'Roslit Bay'},
         ['Cockatoo Squid'] = {Rarity = 'Unusual', Weight = '20', Price = 10, Zone = 'Desolate Deep'},
         ['Cod'] = {Rarity = 'Uncommon', Weight = '100', Price = 9/10, Zone = 'Roslit Bay Ocean'},
@@ -75,6 +79,7 @@ return {
         ['Fish Barrel'] = {Rarity = 'Uncommon', Weight = '150', Price = 8/15, Zone = 'Moosewood Ocean Mythical'},
         ['Flounder'] = {Rarity = 'Unusual', Weight = '55', Price = 24/11, Zone = 'Moosewood Ocean Mythical'},
         ['Flying Fish'] = {Rarity = 'Legendary', Weight = '50', Price = 24, Zone = 'Roslit Bay Ocean'},
+        ['Fossil Fan'] = {Rarity = 'Uncommon', Weight = '50', Price = 6/5,},
         ['Frilled Shark'] = {Rarity = 'Unusual', Weight = '90', Price = 5/3, Zone = 'The Depths'},
         ['Fungal Cluster'] = {Rarity = 'Trash', Weight = '9', Price = 1, Zone = 'Mushgrove Water'},
         ['Galleon Goliath'] = {Rarity = 'Uncommon', Weight = '200', Price = 19/20, Zone = 'Forsaken Shores Ocean'},
@@ -126,6 +131,7 @@ return {
         ['Napoleonfish'] = {Rarity = 'Rare', Weight = '350', Price = 4/7, Zone = 'Sunstone'},
         ['Nautilus'] = {Rarity = 'Legendary', Weight = '800', Price = 5/4, Zone = 'The Depths'},
         ['Nessie'] = {Rarity = 'Limited', Weight = '40000', Price = 13/80,},
+        ['Nessie\'s Spine'] = {Rarity = 'Legendary', Weight = '80', Price = 25/8,},
         ['Night Shrimp'] = {Rarity = 'Common', Weight = '2', Price = 55/2,},
         ['Nurse Shark'] = {Rarity = 'Unusual', Weight = '1500', Price = 2/15, Zone = 'Roslit Bay Ocean'},
         ['Oarfish'] = {Rarity = 'Mythical', Weight = '2500', Price = 8/5, Zone = 'Deep Ocean'},
@@ -171,6 +177,7 @@ return {
         ['Sea Turtle'] = {Rarity = 'Mythical', Weight = '1500', Price = 4/3, Zone = 'Terrapin Ocean'},
         ['Sea Urchin'] = {Rarity = 'Rare', Weight = '9', Price = 320/9,},
         ['Seaweed'] = {Rarity = 'Trash', Weight = '3', Price = 3, Zone = 'Moosewood Ocean Mythical'},
+        ['Shark Fang'] = {Rarity = 'Unusual', Weight = '50', Price = 27/10,},
         ['Shipwreck Barracuda'] = {Rarity = 'Legendary', Weight = '300', Price = 4, Zone = 'Forsaken Shores Ocean'},
         ['Shortfin Mako Shark'] = {Rarity = 'Common', Weight = '1000', Price = 19/100, Zone = 'Forsaken Shores Ocean'},
         ['Shrimp'] = {Rarity = 'Common', Weight = '2', Price = 45/2,},
@@ -184,6 +191,9 @@ return {
         ['Spectral Serpent'] = {Rarity = 'Mythical', Weight = '130000', Price = 9/130, Zone = 'Brine Pool Water'},
         ['Spider Crab'] = {Rarity = 'Rare', Weight = '250', Price = 11/5, Zone = 'The Depths'},
         ['Spiderfish'] = {Rarity = 'Common', Weight = '10', Price = 3, Zone = 'Vertigo'},
+        ['Spine Blade'] = {Rarity = 'Unusual', Weight = '60', Price = 5/3,},
+        ['Spine Bone'] = {Rarity = 'Unusual', Weight = '60', Price = 4/3,},
+        ['Spined Fin'] = {Rarity = 'Legendary', Weight = '50', Price = 6,},
         ['Squid'] = {Rarity = 'Unusual', Weight = '25', Price = 28/5, Zone = 'Roslit Bay Ocean'},
         ['Stalactite'] = {Rarity = 'Trash', Weight = '130', Price = 7/26, Zone = 'Desolate Deep'},
         ['Stingray'] = {Rarity = 'Rare', Weight = '300', Price = 23/30, Zone = 'Deep Ocean'},
@@ -250,6 +260,7 @@ return {
         ['Atlantean'] = {PriceMultiply = 3, Chance = 0},
         ['Aurora'] = {PriceMultiply = 6.5, Chance = 0},
         ['Blessed'] = {PriceMultiply = 10, Chance = 0},
+        ['Celestial'] = {PriceMultiply = 6, Chance = 0},
         ['Darkened'] = {PriceMultiply = 1.3, Chance = 30},
         ['Electric'] = {PriceMultiply = 1.45, Chance = 15},
         ['Frozen'] = {PriceMultiply = 1.3, Chance = 10},
@@ -294,6 +305,7 @@ return {
         'Wormhole',
     },
     Locations = {
+        'Archeological Site',
         'Brine Pool',
         'Desolate Deep',
         'Forsaken Shores',
