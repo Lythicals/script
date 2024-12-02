@@ -1,4 +1,4 @@
---Data updated on: 2024-12-02 01:43:05
+--Data updated on: 2024-12-02 01:44:03
 
 return {
     FishData = {
@@ -406,7 +406,6 @@ return {
         ['Fast Rod'] = {Price = 4500, Type = 'Rod'},
         ['Firework'] = {Price = 130, Type = 'Item'},
         ['Fish Radar'] = {Price = 8000, Type = 'Item'},
-        ['Flimsy Rod'] = {Price = 0, Type = 'Rod'},
         ['Flippers'] = {Price = 9000, Type = 'Item'},
         ['Fortune Rod'] = {Price = 12750, Type = 'Rod'},
         ['GPS'] = {Price = 100, Type = 'Item'},
