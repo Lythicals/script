@@ -1,4 +1,4 @@
---Data updated on: 2024-11-30 10:11:55
+--Data updated on: 2024-12-01 20:35:52
 
 return {
     FishData = {
@@ -182,7 +182,7 @@ return {
         ['Pearl'] = {Rarity = 'Common', Weight = '4', Price = 15, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
         ['Perch'] = {Rarity = 'Common', Weight = '12', Price = 35/6, Zone = 'Roslit Pond Seaweed', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Worm',},
         ['Phanerorhynchus'] = {Rarity = 'Rare', Weight = '1400', Price = 9/28, Zone = 'Ancient Archives', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Deep Coral',},
-        ['Phantom Megalodon'] = {Rarity = 'Exotic', Weight = '70000', Price = 2/7, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Shark Head',},
+        ['Phantom Megalodon'] = {Rarity = 'Limited', Weight = '70000', Price = 2/7, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Shark Head',},
         ['Phantom Ray'] = {Rarity = 'Uncommon', Weight = '60', Price = 7/3, Zone = 'Desolate Deep', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Weird Algae',},
         ['Pike'] = {Rarity = 'Unusual', Weight = '35', Price = 46/7, Zone = 'Moosewood Pond', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Insect',},
         ['Piranha'] = {Rarity = 'Common', Weight = '50', Price = 17/10, Zone = 'Ancient Isle Waterfall', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Squid',},
@@ -284,11 +284,11 @@ return {
         'Legendary',
         'Mythical',
         'Divine',
-        'Limited',
-        'Relic',
         'Exotic',
+        'Relic',
         'Fragment',
         'Gemstone',
+        'Limited',
     },
     AppraisalMutations = {
         'Abyssal',
@@ -349,6 +349,7 @@ return {
         'Abyssal',
         'Blessed',
         'Breezed',
+        'Clever',
         'Controlled',
         'Divine',
         'Ghastly',
