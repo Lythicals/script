@@ -1,4 +1,4 @@
---Data updated on: 2024-12-02 09:30:15
+--Data updated on: 2024-12-02 23:04:28
 
 return {
     FishData = {
@@ -13,7 +13,7 @@ return {
         ['Ancient Depth Serpent'] = {Rarity = 'Exotic', Weight = '10000', Price = 4/5, Zone = 'The Depths - Serpent', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Truffle Worm',},
         ['Ancient Eel'] = {Rarity = 'Legendary', Weight = '2000', Price = 3/4, Zone = 'The Depths', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Coal',},
         ['Ancient Fragment'] = {Rarity = 'Fragment', Weight = '1', Price = 500, Zone = 'Ancient Isle Ocean', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
-        ['Ancient Megalodon'] = {Rarity = 'Exotic', Weight = '70000', Price = 8/35, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Shark Head',},
+        ['Ancient Megalodon'] = {Rarity = 'Exotic', Weight = '700000', Price = 4/175, Zone = 'Megalodon Default', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Shark Head',},
         ['Ancient Serpent Skull'] = {Rarity = 'Limited', Weight = '100', Price = 12, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
         ['Ancient Serpent Spine'] = {Rarity = 'Limited', Weight = '80', Price = 10, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
         ['Ancient Wood'] = {Rarity = 'Legendary', Weight = '2', Price = 225, Zone = 'Sunstone', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
@@ -151,11 +151,11 @@ return {
         ['Mauve Pearl'] = {Rarity = 'Rare', Weight = '4', Price = 50, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
         ['Meg\'s Fang'] = {Rarity = 'Mythical', Weight = '20', Price = 75, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
         ['Meg\'s Spine'] = {Rarity = 'Mythical', Weight = '50', Price = 30, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
-        ['Megalodon'] = {Rarity = 'Exotic', Weight = '70000', Price = 1/7, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Shark Head',},
+        ['Megalodon'] = {Rarity = 'Exotic', Weight = '670000', Price = 1/67, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Shark Head',},
         ['Midnight Axolotl'] = {Rarity = 'Legendary', Weight = '30', Price = 110/3, Zone = 'Desolate Deep', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Insect',},
         ['Minnow'] = {Rarity = 'Common', Weight = '6', Price = 15/2, Zone = 'Roslit Pond Seaweed', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Bagel',},
         ['Molten Banshee'] = {Rarity = 'Exotic', Weight = '5500', Price = 13/11, Zone = 'Lava', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Truffle Worm',},
-        ['Moon Wood'] = {Rarity = 'Legendary', Weight = '2', Price = 225, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
+        ['Moon Wood'] = {Rarity = 'Legendary', Weight = '2', Price = 225, Zone = 'Snowcap Ocean', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
         ['Moonfish'] = {Rarity = 'Legendary', Weight = '5000', Price = 9/25, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Minnow',},
         ['Moonstone'] = {Rarity = 'Gemstone', Weight = '28', Price = 250/7, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
         ['Mosasaurus'] = {Rarity = 'Mythical', Weight = '140000', Price = 3/56, Zone = 'Ancient Isle Ocean', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Truffle Worm',},
@@ -182,7 +182,7 @@ return {
         ['Pearl'] = {Rarity = 'Common', Weight = '4', Price = 15, Zone = nil, CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'None',},
         ['Perch'] = {Rarity = 'Common', Weight = '12', Price = 35/6, Zone = 'Roslit Pond Seaweed', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Worm',},
         ['Phanerorhynchus'] = {Rarity = 'Rare', Weight = '1400', Price = 9/28, Zone = 'Ancient Archives', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Deep Coral',},
-        ['Phantom Megalodon'] = {Rarity = 'Limited', Weight = '70000', Price = 2/7, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Shark Head',},
+        ['Phantom Megalodon'] = {Rarity = 'Limited', Weight = '670000', Price = 2/67, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Shark Head',},
         ['Phantom Ray'] = {Rarity = 'Uncommon', Weight = '60', Price = 7/3, Zone = 'Desolate Deep', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Weird Algae',},
         ['Pike'] = {Rarity = 'Unusual', Weight = '35', Price = 46/7, Zone = 'Moosewood Pond', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Insect',},
         ['Piranha'] = {Rarity = 'Common', Weight = '50', Price = 17/10, Zone = 'Ancient Isle Waterfall', CrabCages = false, FavoriteTime = 'None', FavoriteBait = 'Squid',},
