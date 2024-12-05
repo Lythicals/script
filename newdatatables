@@ -1,4 +1,4 @@
---Data updated on: 2024-12-05 16:15:20
+--Data updated on: 2024-12-05 16:25:46
 
 return {
     FishData = {
@@ -469,7 +469,6 @@ return {
         ['Training Rod'] = {Passive = false, Price = 300, From = nil, Developer = false, Type = 'Rod'},
         ['Trident Rod'] = {Passive = false, Price = 150000, From = nil, Developer = false, Type = 'Rod'},
         ['Ultratech Rod'] = {Passive = false, Price = 1e999, From = nil, Developer = true, Type = 'Rod'},
-        ['UnRegistered'] = {Passive = false, Price = nil, From = nil, Developer = false, Type = 'Rod'},
         ['Voyager Rod'] = {Passive = false, Price = 1e999, From = nil, Developer = false, Type = 'Rod'},
         ['Wisdom Rod'] = {Passive = true, Price = 1e999, From = nil, Developer = false, Type = 'Rod'},
     }
