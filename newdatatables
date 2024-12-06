@@ -1,4 +1,4 @@
---Data updated on: 2024-12-06 01:23:53
+--Data updated on: 2024-12-06 03:06:35
 
 return {
     FishData = {
@@ -402,13 +402,11 @@ return {
         ['Coral Geode'] = {Price = 600, Type = 'Fish'},
         ['Crab Cage'] = {Price = 45, Type = 'Item'},
         ['Eclipse Totem'] = {Price = 250000, Type = 'Item'},
-        ['Fillionaire'] = {Price = 1e999, Type = 'Item'},
         ['Firework'] = {Price = 130, Type = 'Item'},
         ['Fish Radar'] = {Price = 8000, Type = 'Item'},
         ['Flippers'] = {Price = 9000, Type = 'Item'},
         ['GPS'] = {Price = 100, Type = 'Item'},
         ['Glider'] = {Price = 900, Type = 'Item'},
-        ['Handwritten Note'] = {Price = 1e999, Type = 'Item'},
         ['Lunar Thread'] = {Price = 1e999, Type = 'Item'},
         ['Magic Thread'] = {Price = 1e999, Type = 'Item'},
         ['Meteor Totem'] = {Price = 75000, Type = 'Item'},
@@ -419,7 +417,6 @@ return {
         ['Super Flippers'] = {Price = 30000, Type = 'Item'},
         ['Tempest Totem'] = {Price = 2000, Type = 'Item'},
         ['Tidebreaker'] = {Price = 80000, Type = 'Item'},
-        ['Treasure Map'] = {Price = 1e999, Type = 'Item'},
         ['Volcanic Geode'] = {Price = 600, Type = 'Fish'},
         ['Windset Totem'] = {Price = 2000, Type = 'Item'},
         ['Witches Ingredient'] = {Price = 10000, Type = 'Item'},
