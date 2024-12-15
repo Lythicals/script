@@ -1,4 +1,4 @@
---Data updated on: 2024-12-14 10:02:39
+--Data updated on: 2024-12-15 12:50:36
 
 return {
     FishData = {
@@ -540,5 +540,10 @@ return {
         ['Truffle Worm'] = {LureSpeed = -10, PreferredLuck = 300, UniversalLuck = 0, Resilience = 0},
         ['Weird Algae'] = {LureSpeed = -35, PreferredLuck = 0, UniversalLuck = 200, Resilience = 0},
         ['Worm'] = {LureSpeed = 15, PreferredLuck = 25, UniversalLuck = 0, Resilience = 0},
+    },
+    Crates = {
+        ['Ancient'] = {Price = 175000
+        ['Desolate'] = {Price = 75000
+        ['Moosewood'] = {Price = 25000
     },
 }
