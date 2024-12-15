@@ -1,4 +1,4 @@
---Data updated on: 2024-12-15 12:58:27
+--Data updated on: 2024-12-15 13:00:34
 
 return {
     FishData = {
@@ -542,8 +542,8 @@ return {
         ['Worm'] = {LureSpeed = 15, PreferredLuck = 25, UniversalLuck = 0, Resilience = 0},
     },
     Crates = {
-        ['Ancient'] = {Price = 175000,
-        ['Desolate'] = {Price = 75000,
-        ['Moosewood'] = {Price = 25000,
+        ['Ancient'] = {Price = 175000},
+        ['Desolate'] = {Price = 75000},
+        ['Moosewood'] = {Price = 25000},
     },
 }
