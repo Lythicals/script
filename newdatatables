@@ -1,4 +1,4 @@
---Data updated on: 2024-12-15 13:00:34
+--Data updated on: 2024-12-15 20:42:33
 
 return {
     FishData = {
@@ -545,5 +545,27 @@ return {
         ['Ancient'] = {Price = 175000},
         ['Desolate'] = {Price = 75000},
         ['Moosewood'] = {Price = 25000},
+    },
+    Boats = {
+        ['Holiday Themed - Speedboat'] = {Price = -1, Level = 1},
+        ['Snowmobile Jetski'] = {Price = -1, Level = 60},
+        ['Archaeological Boat'] = {Price = 20000, Level = 30},
+        ['Jetski'] = {Price = 50000, Level = 60},
+        ['Rowboat'] = {Price = 700, Level = 0},
+        ['Coral Cruiser Boat'] = {Price = -1, Level = 0},
+        ['The Pearl'] = {Price = 50000, Level = 90},
+        ['Flying Dutchman'] = {Price = -1, Level = 0},
+        ['Sleigh'] = {Price = -1, Level = 1},
+        ['Quack Cruiser'] = {Price = 5000, Level = 35},
+        ['Speedboat'] = {Price = 15000, Level = 20},
+        ['Luxury Speedboat'] = {Price = 20000, Level = 50},
+        ['Pontoon'] = {Price = 20000, Level = 30},
+        ['Titan'] = {Price = 5000, Level = 40},
+        ['Pirate Ship'] = {Price = 20000, Level = 30},
+        ['Reindeer Cruiser'] = {Price = -1, Level = 1},
+        ['Surfboard'] = {Price = 1500, Level = 7},
+        ['Fishing Boat'] = {Price = 20000, Level = 25},
+        ['Hovercraft'] = {Price = 7000, Level = 15},
+        ['Bass Boat'] = {Price = 6000, Level = 10},
     },
 }
