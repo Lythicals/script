@@ -1,3 +1,3 @@
 return {
-  'newandreformedlyth',
+  ['newandreformedlyth'] = 'hahahahaahahaha sigma',
 }
