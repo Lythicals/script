@@ -1,3 +1,3 @@
 return {
-  ['newandreformedlyth'] = 'hahahahaahahaha sigma',
+  ['d87gsd'] = 'manual override',
 }
