@@ -1,4 +1,4 @@
---Data updated on: 2024-12-21 08:18:30
+--Data updated on: 2024-12-22 01:42:19
 
 return {
     FishData = {
@@ -107,18 +107,18 @@ return {
         ['Flounder'] = {Rarity = 'Unusual', Weight = '55', Price = 24/11, Zone = 'Moosewood Ocean Mythical', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Squid',},
         ['Flying Fish'] = {Rarity = 'Legendary', Weight = '50', Price = 24, Zone = 'Megalodon Ancient', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Minnow',},
         ['Fossil Fan'] = {Rarity = 'Limited', Weight = '50', Price = 6/5, Zone = nil, CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
-        ['Frigid Antlers'] = {Rarity = 'Legendary', Weight = '1000', Price = 2, Zone = nil, CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
+        ['Frigid Antlers'] = {Rarity = 'Legendary', Weight = '1000', Price = 6/5, Zone = nil, CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
         ['Frigid Crab'] = {Rarity = 'Unusual', Weight = '35', Price = 60/7, Zone = nil, CrabCages = false, FavoriteTime = nil, FavoriteBait = 'Fish Head',},
+        ['Frigid Mammoth Tusk'] = {Rarity = 'Mythical', Weight = '5000', Price = 3/5, Zone = nil, CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
         ['Frigid Shrimp'] = {Rarity = 'Uncommon', Weight = '8', Price = 175/8, Zone = 'Frigid Cavern', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Flakes',},
+        ['Frigid Taco'] = {Rarity = 'Rare', Weight = '250', Price = 12/5, Zone = nil, CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
         ['Frilled Shark'] = {Rarity = 'Unusual', Weight = '90', Price = 5/3, Zone = 'The Depths', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Fish Head',},
         ['Frost Minnow'] = {Rarity = 'Uncommon', Weight = '16', Price = 75/8, Zone = 'Cryogenic Canal', CrabCages = false, FavoriteTime = 'Day', FavoriteBait = 'Worm',},
         ['Frostbite Flounder'] = {Rarity = 'Rare', Weight = '300', Price = 5/2, Zone = 'Glacial Grotto', CrabCages = false, FavoriteTime = nil, FavoriteBait = 'Squid',},
         ['Frostjaw Cod'] = {Rarity = 'Legendary', Weight = '1000', Price = 2, Zone = 'Cryogenic Canal', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Fish Head',},
         ['Frostling Goby'] = {Rarity = 'Uncommon', Weight = '28', Price = 45/7, Zone = 'Glacial Grotto', CrabCages = false, FavoriteTime = 'Day', FavoriteBait = 'Insect',},
-        ['Frozen Mammoth Tusk'] = {Rarity = 'Mythical', Weight = '5000', Price = 7/5, Zone = 'Frigid Cavern', CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
         ['Frozen Pike'] = {Rarity = 'Rare', Weight = '250', Price = 13/5, Zone = 'Cryogenic Canal', CrabCages = false, FavoriteTime = nil, FavoriteBait = 'Fish Head',},
-        ['Frozen Taco'] = {Rarity = 'Rare', Weight = '250', Price = 12/5, Zone = 'Frigid Cavern', CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
-        ['Frozen Walnut'] = {Rarity = 'Mythical', Weight = '4000', Price = 3/2, Zone = 'Overgrowth Caves', CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
+        ['Frozen Walnut'] = {Rarity = 'Mythical', Weight = '4000', Price = 5/8, Zone = 'Overgrowth Caves', CrabCages = false, FavoriteTime = nil, FavoriteBait = nil,},
         ['Fungal Cluster'] = {Rarity = 'Trash', Weight = '9', Price = 1, Zone = 'Mushgrove Water', CrabCages = true, FavoriteBait = 'Magnet',},
         ['Galleon Goliath'] = {Rarity = 'Uncommon', Weight = '200', Price = 19/20, Zone = 'Forsaken Shores Ocean', CrabCages = false, FavoriteTime = 'Day', FavoriteBait = 'Squid',},
         ['Gazerfish'] = {Rarity = 'Common', Weight = '140', Price = 19/14, Zone = 'Brine Pool Water', CrabCages = false, FavoriteTime = 'Day', FavoriteBait = 'Worm',},
@@ -130,7 +130,7 @@ return {
         ['Glacier Pike'] = {Rarity = 'Unusual', Weight = '35', Price = 46/7, Zone = 'Snowcap Pond', CrabCages = false, FavoriteBait = 'Insect',},
         ['Glacier Swordfish'] = {Rarity = 'Rare', Weight = '450', Price = 20/9, Zone = 'Glacial Grotto', CrabCages = false, FavoriteTime = nil, FavoriteBait = 'Fish Head',},
         ['Glacierfish'] = {Rarity = 'Mythical', Weight = '600', Price = 4/3, Zone = 'Snowcap Ocean', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Truffle Worm',},
-        ['Glass Diamond'] = {Rarity = 'Mythical', Weight = '50', Price = 30, Zone = 'The Summit Ocean', CrabCages = false, FavoriteBait = nil,},
+        ['Glass Diamond'] = {Rarity = 'Mythical', Weight = '50', Price = 30, Zone = 'Overgrowth Caves', CrabCages = false, FavoriteBait = nil,},
         ['Glass of Milk'] = {Rarity = 'Limited', Weight = '6', Price = 10/3, Zone = 'Fischmas24', CrabCages = false, FavoriteBait = 'Peppermint Worm',},
         ['Glassfish'] = {Rarity = 'Common', Weight = '4', Price = 45/4, Zone = 'Sunstone', CrabCages = false, FavoriteBait = 'Flakes',},
         ['Globe Jellyfish'] = {Rarity = 'Unusual', Weight = '240', Price = 5/4, Zone = 'Brine Pool Water', CrabCages = false, FavoriteBait = nil,},
@@ -232,7 +232,7 @@ return {
         ['Polar Alligator'] = {Rarity = 'Legendary', Weight = '1500', Price = 2, Zone = 'Frigid Cavern', CrabCages = false, FavoriteTime = 'Night', FavoriteBait = 'Fish Head',},
         ['Pollock'] = {Rarity = 'Common', Weight = '50', Price = 7/5, Zone = 'Snowcap Ocean', CrabCages = false, FavoriteBait = nil,},
         ['Pond Emperor'] = {Rarity = 'Legendary', Weight = '2500', Price = 9/25, Zone = 'Snowcap Pond', CrabCages = false, FavoriteBait = 'Squid',},
-        ['Porgy'] = {Rarity = 'Common', Weight = '30', Price = 3, Zone = 'The Summit Ocean', CrabCages = false, FavoriteTime = 'Day', FavoriteBait = 'Shrimp',},
+        ['Porgy'] = {Rarity = 'Common', Weight = '30', Price = 3, Zone = 'Snowcap Ocean', CrabCages = false, FavoriteTime = 'Day', FavoriteBait = 'Shrimp',},
         ['Prawn'] = {Rarity = 'Uncommon', Weight = '5', Price = 9, Zone = nil, CrabCages = true, FavoriteTime = 'Night', FavoriteBait = nil,},
         ['Pufferfish'] = {Rarity = 'Rare', Weight = '20', Price = 23/2, Zone = 'Roslit Bay Ocean', CrabCages = false, FavoriteBait = 'Seaweed',},
         ['Pumpkinseed'] = {Rarity = 'Uncommon', Weight = '5', Price = 18, Zone = 'Roslit Pond Seaweed', CrabCages = false, FavoriteBait = 'Minnow',},
