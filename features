@@ -1,4 +1,54 @@
 Fisch:
+Auto Cast 
+Auto Shake (Fast)
+Auto Reel (Super fast)
+Freeze Character
+
+Auto Cast Delay
+Shake Delay
+Snap Chance
+Perfect Catch Chance
+
+Zone Cast Toggle
+Zone cast location
+Event overrides (Will TP you to an event and fish at the event and TP back)
+Auto Angler
+Auto Beastiary (Requires Reinforced Rod)
+
+Sell Hand
+Sell All
+Auto Sell
+Calculate Held Item Value
+Calculate Inventory Value
+
+Desired Appraisal
+Weight Requirement
+Require Shiny/Sparkling
+Auto Appraise
+
+Desired Enchant
+Auto Enchant
+
+Auto Totem
+Auto Repair and Collect Treasure Maps
+
+Teleport Area (Teleport to any spot)
+Interactable Teleport (Teleport to any item)
+Teleport to merchant boat
+Force Open Depths Gate
+Force Open Depths Maze
+
+Mod Detection (Auto leave if staff joins)
+No Drowning
+Walk on Water
+Disable UIs and Potato Graphics (FPS boost)
+Protect Identity
+
+Playerlist (Gift certain player)
+Loop Gift Item in Hand
+Gift All Items
+Ignore Favorites
+Auto Accept Items
 
 Booga Booga:
 
