@@ -6,5 +6,4 @@ local games = {
     [3808223175] = "https://api.luarmor.net/files/v3/loaders/01e70601843794a1346a62e3ea6b981e.lua" -- Jujutsu Infinite
 }
 
-
 loadstring(game:HttpGet(games[game_id]))()
