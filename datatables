@@ -666,7 +666,7 @@ return {
           ['Bass Boat'] = {Price = 6000, Level = 10, Unpurchasable = false},
           ['Celestial Cruiser'] = {Price = -1, Level = 1, Unpurchasable = true},
           ['Coral Cruiser Boat'] = {Price = -1, Level = 0, Unpurchasable = true},
-          ['Dr. Glimmerfin's Boat'] = {Price = -1, Level = 75, Unpurchasable = false},
+          ['Dr. Glimmerfin\'s Boat'] = {Price = -1, Level = 75, Unpurchasable = false},
           ['Fischmas Jetski'] = {Price = -1, Level = 1, Unpurchasable = true},
           ['Fischmas Speedboat'] = {Price = -1, Level = 1, Unpurchasable = true},
           ['Fishing Boat'] = {Price = 20000, Level = 25, Unpurchasable = false},
