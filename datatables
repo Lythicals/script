@@ -627,7 +627,7 @@ return {
           ['Wisdom Rod'] = {Price = 1e999, Dev = false, Unpurchasable = true, Passive = true, Requirements = false, From = 'nil'},
           ['Zeus Rod'] = {Price = 1700000, Dev = false, Unpurchasable = false, Passive = true, Requirements = false, From = 'nil'},
      },
-     Bait = {
+     Baits = {
           ['Aurora Bait'] = {LureSpeed = -5, PreferredLuck = 30, UniversalLuck = 100, Rarity = 'Mythical'},
           ['Bagel'] = {LureSpeed = 0, PreferredLuck = 0, UniversalLuck = 25, Rarity = 'Common'},
           ['Coal'] = {LureSpeed = 0, PreferredLuck = 0, UniversalLuck = 45, Rarity = 'Rare'},
