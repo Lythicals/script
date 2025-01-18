@@ -381,7 +381,7 @@ return {
           'Limited',
      },
      Mutations = {
-          ['Abyssal'] = {PriceMultiply = 1, Chance = 5},
+          ['Abyssal'] = {PriceMultiply = 3.5, Chance = 5},
           ['Albino'] = {PriceMultiply = 1.1, Chance = 30},
           ['Amber'] = {PriceMultiply = 0.5, Chance = 8},
           ['Anomalous'] = {PriceMultiply = 2.5, Chance = 0},
