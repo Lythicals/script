@@ -489,7 +489,7 @@ return {
           ['Lightning'] = {PriceMultiply = 1, Chance = 0},
           ['Lunar'] = {PriceMultiply = 2.5, Chance = 20},
           ['Midas'] = {PriceMultiply = 2, Chance = 3},
-          ['Mila's Magic'] = {PriceMultiply = 2.5, Chance = 0},
+          ['Mila\'s Magic'] = {PriceMultiply = 2.5, Chance = 0},
           ['Minty'] = {PriceMultiply = 2.2, Chance = 0},
           ['Mosaic'] = {PriceMultiply = 1.5, Chance = 10},
           ['Mythical'] = {PriceMultiply = 4.5, Chance = 1},
